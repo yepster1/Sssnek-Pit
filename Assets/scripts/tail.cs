@@ -10,7 +10,7 @@ public class tail : MonoBehaviour
     void Start()
     {
         body = new List<Transform>();
-        body.Add(transform);
+           body.Add(transform);
     }
 
     private void add_tail()
