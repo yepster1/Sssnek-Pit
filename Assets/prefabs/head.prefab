@@ -234,6 +234,9 @@ MonoBehaviour:
   body: []
   left: 276
   right: 275
+  points: 0
+  spawnPoint: {fileID: 8562557244084466805, guid: 4e0fa9727ebc44bd6829ca98abbfdba4,
+    type: 3}
 --- !u!114 &-9030160657372613846
 MonoBehaviour:
   m_ObjectHideFlags: 0

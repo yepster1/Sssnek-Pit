@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class movement : MonoBehaviour
 {
-	public float speed = 100f;
+    public float speed = PLAYER_SPEED;
     public float rotationSpeed = 100f;
     public GameObject tailPrefab;
     public List<Transform> body;
@@ -22,26 +22,46 @@ public class movement : MonoBehaviour
         }
         if (collision.gameObject.tag.Equals("snake"))
         {
-            Debug.Log("collided");
+            Debug.Log("I have died");
+            transform.position = gameController.move();
+            points = 0;
+            foreach(Transform part in body)
+            {
+                Destroy(part.gameObject);
+            }
+            body = new List<Transform>();
         }
     }
     // Start is called before the first frame update
     void Start()
     {
+   
         body = new List<Transform>();
-        body.Add(transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        body[0].Translate(transform.forward * speed * Time.smoothDeltaTime, Space.World);
+        transform.Translate(transform.forward * speed * Time.smoothDeltaTime, Space.World);
         if (Input.GetKey(left)){
-            body[0].Rotate(Vector3.up * rotationSpeed * -1);
+            transform.Rotate(Vector3.up * rotationSpeed * -1);
         }
         if (Input.GetKey(right))
         {
-            body[0].Rotate(Vector3.up * rotationSpeed * 1);
+            transform.Rotate(Vector3.up * rotationSpeed * 1);
+        }
+        if(body.Count > 0)
+        {
+            if (Vector3.Distance(transform.position, body[0].position) > 1.3f)
+            {
+                body[0].LookAt(transform);
+                body[0].Translate(body[0].forward * speed * Time.smoothDeltaTime, Space.World);
+            }
+            if (Vector3.Distance(transform.position, body[0].position) < 1.3f && Vector3.Distance(transform.position, body[0].position) > 1)
+            {
+                body[0].LookAt(transform);
+                body[0].Translate(body[0].forward * speed * Time.smoothDeltaTime * 0.8f, Space.World);
+            }
         }
         for (int i = 1; i < body.Count; i++)
         {
@@ -63,7 +83,14 @@ public class movement : MonoBehaviour
 
     private void add_tail()
     {
-        Transform newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
+        Transform newPart;
+        if (body.Count != 0)
+        {
+            newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
+        } else
+        {
+            newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
+        }
         body.Add(newPart);
     }
 }
