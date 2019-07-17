@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class movement : MonoBehaviour
 {
-    public float speed = PLAYER_SPEED;
+    public int playerNumber;
+    public float speed = Config.PLAYER_SPEED;
     public float rotationSpeed = 100f;
     public GameObject tailPrefab;
     public List<Transform> body;
     public KeyCode left;
     public KeyCode right;
     public int points = 0;
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("point"))
@@ -22,8 +23,12 @@ public class movement : MonoBehaviour
         }
         if (collision.gameObject.tag.Equals("snake"))
         {
+            if (body.Contains(collision.transform))
+            {
+                return;
+            }
             Debug.Log("I have died");
-            transform.position = gameController.move();
+            transform.position = gameController.get_random_position();
             points = 0;
             foreach(Transform part in body)
             {
@@ -32,10 +37,26 @@ public class movement : MonoBehaviour
             body = new List<Transform>();
         }
     }
+
+    public void start(int playerNumber)
+    {
+        Debug.Log("player " + playerNumber + " started");
+        this.playerNumber = playerNumber;
+        this.left = Config.playerControls[playerNumber].Left;
+        this.right = Config.playerControls[playerNumber].rigth;
+        setCamara(playerNumber);
+    }
+
+    private void setCamara(int playerNumer)
+    {
+        Camera cam = GetComponentInChildren<Camera>();
+        view view = Config.playerViews[playerNumer];
+        cam.rect = new Rect(view.x, view.y, view.w, view.h);
+        Debug.Log("set view");
+    }
     // Start is called before the first frame update
     void Start()
     {
-   
         body = new List<Transform>();
     }
 
