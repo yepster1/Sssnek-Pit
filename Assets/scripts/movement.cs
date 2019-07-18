@@ -38,21 +38,24 @@ public class movement : MonoBehaviour
         }
     }
 
-    public void start(int playerNumber)
+    public void start(List<int> inputs)
     {
+        int amountOfPlayers = inputs[0];
+        playerNumber = inputs[1];
         Debug.Log("player " + playerNumber + " started");
-        this.playerNumber = playerNumber;
         this.left = Config.playerControls[playerNumber].Left;
         this.right = Config.playerControls[playerNumber].rigth;
-        setCamara(playerNumber);
+        setCamara(amountOfPlayers, playerNumber);
     }
 
-    private void setCamara(int playerNumer)
+    private void setCamara(int amountOfPlayers, int playerNumer)
     {
+        Debug.Log("setting view with amount of players " + amountOfPlayers + " and player number " + playerNumber);
         Camera cam = GetComponentInChildren<Camera>();
-        view view = Config.playerViews[playerNumer];
+        view view = Config.playerViews[amountOfPlayers-1][playerNumer];
+        Debug.Log(" with view " + view);
         cam.rect = new Rect(view.x, view.y, view.w, view.h);
-        Debug.Log("set view");
+        
     }
     // Start is called before the first frame update
     void Start()

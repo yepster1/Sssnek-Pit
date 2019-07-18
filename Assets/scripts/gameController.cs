@@ -14,18 +14,23 @@ public class gameController : MonoBehaviour
     {
         InvokeRepeating("spawn", 0.5f, 0.5f);
         playerList = new List<GameObject>();
-        add_players(2);
+        add_players(4);
     }
 
     void add_players(int numberOfPlayers)
     {
         for (int i = 0; i < numberOfPlayers; i++) {
-            Debug.Log("spawning player " + i);
-            GameObject player = Instantiate(player_prefab, get_random_position(), new Quaternion());
-            Camera cam  = player.GetComponentInChildren< Camera > ();
-            player.SendMessage("start", i);
-            playerList.Add(player);
+            add_player(numberOfPlayers, i);
         }
+    }
+
+    void add_player(int numberOfPlayers, int playerNumber)
+    {
+        Debug.Log("spawning player " + playerNumber);
+        GameObject player = Instantiate(player_prefab, get_random_position(), new Quaternion());
+        Camera cam = player.GetComponentInChildren<Camera>();
+        player.SendMessage("start", new List<int> { numberOfPlayers, playerNumber });
+        playerList.Add(player);
     }
 
     // Update is called once per frame
