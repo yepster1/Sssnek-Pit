@@ -36,7 +36,12 @@ public class movement : MonoBehaviour
             }
             body = new List<Transform>();
         }
+        if(collision.gameObject.tag.Equals("powerup"))
+        {
+
+        }
     }
+
 
     public void start(List<int> inputs)
     {
@@ -53,7 +58,6 @@ public class movement : MonoBehaviour
         Debug.Log("setting view with amount of players " + amountOfPlayers + " and player number " + playerNumber);
         Camera cam = GetComponentInChildren<Camera>();
         view view = Config.playerViews[amountOfPlayers-1][playerNumer];
-        Debug.Log(" with view " + view);
         cam.rect = new Rect(view.x, view.y, view.w, view.h);
         
     }

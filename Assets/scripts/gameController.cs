@@ -14,7 +14,7 @@ public class gameController : MonoBehaviour
     {
         InvokeRepeating("spawn", 0.5f, 0.5f);
         playerList = new List<GameObject>();
-        add_players(4);
+        add_players(1);
     }
 
     void add_players(int numberOfPlayers)
