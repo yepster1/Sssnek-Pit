@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class AIMovement : Movement
 {
-   
 
+    int aiNumber;
     void Start()
     {
         speed = AiConfig.speed;
         rotationSpeed = AiConfig.rotationSpeed;
         body = new List<Transform>();
+    }
+
+    public void start(List<int> inputs)
+    {
+        int amountOfAIs = inputs[0];
+        aiNumber = inputs[1];
+        Debug.Log("AI " + aiNumber + " started");
     }
 
     // Update is called once per frame
@@ -30,5 +37,19 @@ public class AIMovement : Movement
             current.LookAt(previous);
             current.Translate(current.forward * speed * Time.smoothDeltaTime * 0.8f * DistanceTo(previous.position, current.position), Space.World);
         }
+    }
+
+    private void add_tail()
+    {
+        Transform newPart;
+        if (body.Count != 0)
+        {
+            newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
+        }
+        else
+        {
+            newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
+        }
+        body.Add(newPart);
     }
 }

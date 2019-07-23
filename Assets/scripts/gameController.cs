@@ -6,17 +6,34 @@ public class gameController : MonoBehaviour
 {
     public GameObject point_prefab;
     public GameObject player_prefab;
+    public GameObject AI_prefab;
 
     public List<GameObject> playerList;
-
+    public List<GameObject> aiList;
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("Spawn", 0.5f, 0.5f);
         playerList = new List<GameObject>();
+        aiList = new List<GameObject>();
         AddPlayers(1);
     }
 
+    void addAIs(int numberOfAI)
+    {
+        for (int i = 0; i < numberOfAI; i++)
+        {
+            addAI(numberOfAI, i);
+        }
+    }
+
+    void addAI(int numberOfAI, int AINumber)
+    {
+        Debug.Log("spawning AI " + AINumber);
+        GameObject AI = Instantiate(AI_prefab, GetRandomPosition(), new Quaternion());
+        AI.SendMessage("start", new List<int> { numberOfAI, AINumber });
+        aiList.Add(AI);
+    }
     void AddPlayers(int numberOfPlayers)
     {
         for (int i = 0; i < numberOfPlayers; i++) {
