@@ -9,9 +9,12 @@ public class movement : MonoBehaviour
     public float rotationSpeed = 100f;
     public GameObject tailPrefab;
     public List<Transform> body;
+    
+    public GameObject auraPrefab;
+    private Transform auraTransform;
     public KeyCode left;
     public KeyCode right;
-    public int points = 0;
+    public float points = 0;
     
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,6 +23,8 @@ public class movement : MonoBehaviour
             Destroy(collision.gameObject);
             points += 1;
             add_tail();
+            increase_aura();
+
         }
         if (collision.gameObject.tag.Equals("snake"))
         {
@@ -57,6 +62,7 @@ public class movement : MonoBehaviour
     {
         Debug.Log("setting view with amount of players " + amountOfPlayers + " and player number " + playerNumber);
         Camera cam = GetComponentInChildren<Camera>();
+        
         view view = Config.playerViews[amountOfPlayers-1][playerNumer];
         cam.rect = new Rect(view.x, view.y, view.w, view.h);
         
@@ -88,7 +94,7 @@ public class movement : MonoBehaviour
             if (Vector3.Distance(transform.position, body[0].position) < 1.3f && Vector3.Distance(transform.position, body[0].position) > 1)
             {
                 body[0].LookAt(transform);
-                body[0].Translate(body[0].forward * speed * Time.smoothDeltaTime * 0.8f, Space.World);
+                body[0].Translate(body[0].forward * speed * Time.smoothDeltaTime , Space.World);
             }
         }
         for (int i = 1; i < body.Count; i++)
@@ -98,27 +104,47 @@ public class movement : MonoBehaviour
             Transform current = body[i];
             if (Vector3.Distance(previous.position, current.position) > 1.3f) {
                 current.LookAt(previous);
-                current.Translate(current.forward * speed * Time.smoothDeltaTime, Space.World);
+                current.Translate(current.forward * speed * Time.smoothDeltaTime , Space.World);
             }
             if (Vector3.Distance(previous.position, current.position) < 1.3f && Vector3.Distance(previous.position, current.position) > 1)
             {
                 current.LookAt(previous);
-                current.Translate(current.forward * speed * Time.smoothDeltaTime * 0.8f, Space.World);
+                current.Translate(current.forward * speed * Time.smoothDeltaTime , Space.World);
             }
         }
+        if (points > 0){
+            
+            auraTransform.position = transform.position;
+            auraTransform.rotation = transform.rotation;
+        }
+        
         //if(Input.GetButtonDown)
     }
 
     private void add_tail()
     {
         Transform newPart;
+        
         if (body.Count != 0)
-        {
+        {   
+            
             newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
         } else
-        {
+        {   
+            auraTransform = Instantiate(auraPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
             newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
         }
         body.Add(newPart);
+
+    }
+
+    private void increase_aura(){
+        if (points > 0 && auraTransform != null){
+            
+            float size = points * 10 / 100;
+            Debug.Log(size);
+            auraTransform.localScale += new Vector3(size, size, size);
+        }
+        
     }
 }
