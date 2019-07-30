@@ -6,11 +6,14 @@ public class AIMovement : Movement
 {
 
     int aiNumber;
+    BehaviorNode behaviorNode;
     void Start()
     {
         speed = AiConfig.speed;
         rotationSpeed = AiConfig.rotationSpeed;
         body = new List<Transform>();
+        behaviorNode = new BehaviorNode();
+
     }
 
     public void start(List<int> inputs)
@@ -24,6 +27,15 @@ public class AIMovement : Movement
     void Update()
     {
         transform.Translate(transform.forward * speed * Time.smoothDeltaTime, Space.World);
+        Action AIAction = behaviorNode.doAction(null);
+        if (AIAction.Equals(Action.MoveLeft))
+        {
+            transform.Rotate(Vector3.up * rotationSpeed * -1);
+        }
+        if (AIAction.Equals(Action.MoveRight))
+        {
+            transform.Rotate(Vector3.up * rotationSpeed * 1);
+        }
         if (body.Count > 0)
         {
             body[0].LookAt(transform);
@@ -37,6 +49,8 @@ public class AIMovement : Movement
             current.LookAt(previous);
             current.Translate(current.forward * speed * Time.smoothDeltaTime * 0.8f * DistanceTo(previous.position, current.position), Space.World);
         }
+
+
     }
 
     private void add_tail()

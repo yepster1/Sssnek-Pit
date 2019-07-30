@@ -17,6 +17,7 @@ public class gameController : MonoBehaviour
         playerList = new List<GameObject>();
         aiList = new List<GameObject>();
         AddPlayers(1);
+        addAIs(20);
     }
 
     void addAIs(int numberOfAI)

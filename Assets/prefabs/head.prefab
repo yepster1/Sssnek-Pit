@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 3194053791510074703}
   - component: {fileID: 1620788263977576722}
   - component: {fileID: 6771610324488535266}
-  - component: {fileID: 7579820562846868682}
+  - component: {fileID: 3993588487829493004}
   m_Layer: 0
   m_Name: head
   m_TagString: snake
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435e5668caffa4f458887883539b4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7579820562846868682
+--- !u!114 &3993588487829493004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3562449043692327784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 533960045989f456faf8305b5a46e964, type: 3}
+  m_Script: {fileID: 11500000, guid: f948c6f68696d402a956c8162ad2bb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AIPersonality : MonoBehaviour
 {
+    int greediness;
     // Start is called before the first frame update
     void Start()
     {
