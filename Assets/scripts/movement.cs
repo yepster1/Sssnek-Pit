@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +12,7 @@ public class movement : MonoBehaviour
     public KeyCode left;
     public KeyCode right;
     public int points = 0;
+    public float timeLeft = 100f; //for speed powerup
     
     private void OnCollisionEnter(Collision collision)
     {
@@ -78,7 +79,23 @@ public class movement : MonoBehaviour
         {
             transform.Rotate(Vector3.up * rotationSpeed * 1);
         }
-        if(body.Count > 0)
+        //speed powerup
+        timeLeft -= Time.deltaTime;
+        if (Input.GetKey("space"))    
+        {
+            if (timeLeft > 0)
+            {
+                speed = 50f;
+                Debug.Log("Poweup ON. player speed:" + speed +". Time left:" + timeLeft);
+            }
+            else
+            {
+                speed = 20f;
+                Debug.Log("Poweup OFF. player speed:" + speed + ". Time left:" + timeLeft);
+            }
+        }
+        //end of speed powerup 
+        if (body.Count > 0)
         {
             if (Vector3.Distance(transform.position, body[0].position) > 1.3f)
             {
