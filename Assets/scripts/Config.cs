@@ -56,4 +56,5 @@ public class Config
         new List<view> { view.create_view(0, 0, 0.5f, 0.5f), view.create_view(0.5f, 0, 0.5f, 0.5f), view.create_view(0, 0.5f, 0.5f, 1f) },
         new List<view> { view.create_view(0, 0, 0.5f, 0.5f), view.create_view(0.5f, 0, 0.5f, 0.5f), view.create_view(0, 0.5f, 0.5f, 0.5f), view.create_view(0.5f, 0.5f, 0.5f, 0.5f) }
     };
+    
 }
