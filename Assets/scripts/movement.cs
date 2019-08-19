@@ -13,7 +13,8 @@ public class movement : MonoBehaviour
     public KeyCode right;
     public int points = 0;
     public float timeLeft = 100f; //for speed powerup
-    
+
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("point"))
@@ -81,7 +82,7 @@ public class movement : MonoBehaviour
         }
         //speed powerup
         timeLeft -= Time.deltaTime;
-        if (Input.GetKey("space"))    
+        if (Input.GetKey("v"))    
         {
             if (timeLeft > 0)
             {
@@ -95,6 +96,12 @@ public class movement : MonoBehaviour
             }
         }
         //end of speed powerup 
+        // jump powerup
+        if (Input.GetKey("space"))
+        {
+            transform.Translate(transform.up * speed * Time.smoothDeltaTime, Space.World);
+        }
+        //end of jump powerup
         if (body.Count > 0)
         {
             if (Vector3.Distance(transform.position, body[0].position) > 1.3f)
