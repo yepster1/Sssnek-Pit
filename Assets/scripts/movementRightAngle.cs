@@ -10,12 +10,15 @@ public class movementRightAngle : MonoBehaviour
     public GameObject tailPrefab;
     public List<Transform> body;
     
-    public GameObject auraPrefab;
-    private Transform auraTransform;
+    public float timeToTurn; //need this otherwise turning too fast
+    public float maxTimeToTurn = 0.2f; //edit this to define how long between can turn
     public KeyCode left;
     public KeyCode right;
+    public KeyCode powerup;
     
     public float points = 0;
+    public GameObject auraPrefab;
+    private Transform auraTransform;
 
     private Camera cam;
     public GameObject cameraPrefab;
@@ -62,7 +65,7 @@ public class movementRightAngle : MonoBehaviour
         Debug.Log("player " + playerNumber + " started");
         this.left = Config.playerControls[playerNumber].Left;
         this.right = Config.playerControls[playerNumber].rigth;
-       
+        this.powerup = Config.playerControls[playerNumber].powerup;
         setCamara(amountOfPlayers, playerNumber);
     }
 
@@ -88,10 +91,11 @@ public class movementRightAngle : MonoBehaviour
     void Start()
     {
         body = new List<Transform>();
+        timeToTurn = 0.0f;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //modify camera position with offset
         Vector3 temp = this.transform.position;
@@ -102,47 +106,99 @@ public class movementRightAngle : MonoBehaviour
         
 		
         transform.Translate(transform.forward * speed * Time.smoothDeltaTime, Space.World);
-        if (Input.GetKeyDown(left) ){
+        if (Input.GetKeyDown(left) && (timeToTurn > maxTimeToTurn) ){
             
             transform.Rotate(Vector3.up* -90);
+            timeToTurn = 0.0f;
         }
-        if (Input.GetKeyDown(right) )
-        {
+        if (Input.GetKeyDown(right) && (timeToTurn > maxTimeToTurn) ){
             
             transform.Rotate(Vector3.up * 90);
+            timeToTurn = 0.0f;
         }
+        timeToTurn += Time.deltaTime;
+         // jump powerup
+        if (Input.GetKey(powerup))
+        {
+            transform.Translate(transform.up * speed * Time.smoothDeltaTime, Space.World);
+        }
+        //end of jump powerup
+
         if(body.Count > 0)
         {
-            if (Vector3.Distance(transform.position, body[0].position) > 1.3f)
-            {
-                body[0].LookAt(transform);
-                body[0].Translate(body[0].forward * speed * Time.smoothDeltaTime, Space.World);
+            var MaximumDistance = 1.2;
+            var MinimumDistance = 1.0;
+            var MaxSpeed = speed * 1.3;
+            var MinSpeed = speed * 0.7;
+            var bodySpeed = 0.0;
+
+            var dist=Vector3.Distance(body[0].position, transform.position);
+ 
+            if ( dist > MaximumDistance) 
+            { 
+                bodySpeed = MaxSpeed; //to far so max speed
+            } 
+            else if ( dist < MinimumDistance) 
+            { 
+                bodySpeed = MinSpeed; //to close so min speed
+            } 
+            else 
+            { 
+                // bodyPart is between Max/Min distance so give it a proportional speed
+                // between Min and Max speed
+                // This is the % ratio between Max and Min distance
+                var distRatio=(dist - MinimumDistance)/(MaximumDistance - MinimumDistance);
+                // This is the extra speed above min speed he can go up too
+                var diffSpeed = MaxSpeed - MinSpeed;
+                bodySpeed = ( distRatio * diffSpeed) + MinSpeed; // Final calc 
             }
-            if (Vector3.Distance(transform.position, body[0].position) < 1.3f && Vector3.Distance(transform.position, body[0].position) > 1)
-            {
-                body[0].LookAt(transform);
-                body[0].Translate(body[0].forward * speed * Time.smoothDeltaTime , Space.World);
-            }
+            body[0].LookAt(transform);
+            body[0].Translate(body[0].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
         }
         for (int i = 1; i < body.Count; i++)
         {
-            //current follows previous;
-            Transform previous = body[i - 1];
-            Transform current = body[i];
-            if (Vector3.Distance(previous.position, current.position) > 1.3f) {
-                current.LookAt(previous);
-                current.Translate(current.forward * speed * Time.smoothDeltaTime , Space.World);
+            var MaximumDistance = 1.3;
+            var MinimumDistance = 1.0;
+            var MaxSpeed = speed * 1.5;
+            var MinSpeed = speed * 0.8;
+            var bodySpeed = 0.0;
+
+            var dist=Vector3.Distance(body[i].position, body[i-1].position);
+
+            if ( dist > MaximumDistance) 
+            { 
+                bodySpeed = MaxSpeed; //to far so max speed
+            } 
+            else if ( dist < MinimumDistance) 
+            { 
+                bodySpeed = MinSpeed; //to close so min speed
+            } 
+            else 
+            { 
+                // bodyPart is between Max/Min distance so give it a proportional speed
+                // between Min and Max speed
+                // This is the % ratio between Max and Min distance
+                var distRatio=(dist - MinimumDistance)/(MaximumDistance - MinimumDistance);
+            
+                // This is the extra speed above min speed he can go up too
+                var diffSpeed = MaxSpeed - MinSpeed;
+                bodySpeed = ( distRatio * diffSpeed) + MinSpeed; // Final calc 
             }
-            if (Vector3.Distance(previous.position, current.position) < 1.3f && Vector3.Distance(previous.position, current.position) > 1)
-            {
-                current.LookAt(previous);
-                current.Translate(current.forward * speed * Time.smoothDeltaTime , Space.World);
-            }
+            body[i].LookAt(body[i-1]);
+            body[i].Translate(body[i].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
         }
         if (points > 0){
+            // auraTransform.position = transform.position;
+            float auraPos;
+            if (points < 90){
+                auraPos = transform.position.y + (points*10/100);
+            }
+            else{ //want to cap y value
+                auraPos = transform.position.y + 9.0f;
+            }
             
-            auraTransform.position = transform.position;
-            auraTransform.rotation = transform.rotation;
+            auraTransform.position = new Vector3(transform.position.x, auraPos , transform.position.z);
+            auraTransform.rotation = transform.rotation; 
         }
         
        
@@ -169,7 +225,7 @@ public class movementRightAngle : MonoBehaviour
     private void increase_aura(){
         if (points > 0 && auraTransform != null){
 
-            float size = points * 10 / 7500; //change this to modify size faster or slower
+            float size = points * 10 / 1500; //change this to modify size faster or slower
             Debug.Log(size);
             auraTransform.localScale += new Vector3(size, size, size);
         }

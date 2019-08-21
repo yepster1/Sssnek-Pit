@@ -13,7 +13,10 @@ public class movement : MonoBehaviour
     public KeyCode left;
     public KeyCode right;
     public KeyCode powerup;
+    
     public int points = 0;
+    public GameObject auraPrefab;
+    private Transform auraTransform;
 
     public float timeLeft = 100f; //for speed powerup
 
@@ -26,6 +29,7 @@ public class movement : MonoBehaviour
             Destroy(collision.gameObject);
             points += 1;
             add_tail();
+            increase_aura();
         }
         if (collision.gameObject.tag.Equals("snake"))
         {
@@ -87,7 +91,7 @@ public class movement : MonoBehaviour
             transform.Rotate(Vector3.up * rotationSpeed * 1);
         }
         //speed powerup
-        timeLeft -= Time.deltaTime;
+        // timeLeft -= Time.deltaTime;
         // if (Input.GetKey("v"))    
         // {
         //     if (timeLeft > 0)
@@ -112,10 +116,10 @@ public class movement : MonoBehaviour
         float step = speed * Time.deltaTime;
         if (body.Count > 0)
         {   
-            var MaximumDistance = 1.3;
+            var MaximumDistance = 1.2;
             var MinimumDistance = 1.0;
-            var MaxSpeed = speed * 1.5;
-            var MinSpeed = speed * 0.8;
+            var MaxSpeed = speed * 1.3;
+            var MinSpeed = speed * 0.7;
             var bodySpeed = 0.0;
 
             var dist=Vector3.Distance(body[0].position, transform.position);
@@ -172,7 +176,22 @@ public class movement : MonoBehaviour
             }
             body[i].LookAt(body[i-1]);
             body[i].Translate(body[i].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
-        }    
+        }   
+
+        if (points > 0){
+            
+            // auraTransform.position = transform.position;
+            float auraPos;
+            if (points < 90){
+                auraPos = transform.position.y + (points*10/100);
+            }
+            else{ //want to cap y value
+                auraPos = transform.position.y + 9.0f;
+            }
+            
+            auraTransform.position = new Vector3(transform.position.x, auraPos , transform.position.z);
+            auraTransform.rotation = transform.rotation;
+        } 
     }
 
     private void add_tail()
@@ -183,8 +202,19 @@ public class movement : MonoBehaviour
             newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
         } else
         {
+            auraTransform = Instantiate(auraPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
             newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
         }
         body.Add(newPart);
+    }
+
+    private void increase_aura(){
+        if (points > 0 && auraTransform != null){
+            
+            float size = points * 10 / 1500;
+            Debug.Log(size);
+            auraTransform.localScale += new Vector3(size, size, size);
+        }
+        
     }
 }
