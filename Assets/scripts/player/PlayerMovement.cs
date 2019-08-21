@@ -8,7 +8,13 @@ public class PlayerMovement : Movement
     public KeyCode left;
     public KeyCode right;
 
-    public void start(List<int> inputs)
+    public override void CollectPoint()
+    {
+        points += 1;
+        add_tail();
+    }
+
+    public void Start(List<int> inputs)
     {
         int amountOfPlayers = inputs[0];
         playerNumber = inputs[1];

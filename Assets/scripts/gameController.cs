@@ -16,7 +16,7 @@ public class gameController : MonoBehaviour
         InvokeRepeating("Spawn", 0.5f, 0.5f);
         playerList = new List<GameObject>();
         aiList = new List<GameObject>();
-        AddPlayers(1);
+        AddPlayers(2);
         addAIs(20);
     }
 
@@ -32,7 +32,7 @@ public class gameController : MonoBehaviour
     {
         Debug.Log("spawning AI " + AINumber);
         GameObject AI = Instantiate(AI_prefab, GetRandomPosition(), new Quaternion());
-        AI.SendMessage("start", new List<int> { numberOfAI, AINumber });
+        AI.SendMessage("Start", new List<int> { numberOfAI, AINumber });
         aiList.Add(AI);
     }
     void AddPlayers(int numberOfPlayers)
@@ -47,7 +47,7 @@ public class gameController : MonoBehaviour
         Debug.Log("spawning player " + playerNumber);
         GameObject player = Instantiate(player_prefab, GetRandomPosition(), new Quaternion());
         Camera cam = player.GetComponentInChildren<Camera>();
-        player.SendMessage("start", new List<int> { numberOfPlayers, playerNumber });
+        player.SendMessage("Start", new List<int> { numberOfPlayers, playerNumber });
         playerList.Add(player);
     }
 

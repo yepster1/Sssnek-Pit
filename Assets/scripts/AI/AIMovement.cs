@@ -7,6 +7,15 @@ public class AIMovement : Movement
 
     int aiNumber;
     BehaviorNode behaviorNode;
+    Condition condition;
+
+    public override void CollectPoint()
+    {
+        points += 1;
+        add_tail();
+        condition.setMyScore(points);
+    }
+
     void Start()
     {
         speed = AiConfig.speed;
@@ -27,7 +36,7 @@ public class AIMovement : Movement
     void Update()
     {
         transform.Translate(transform.forward * speed * Time.smoothDeltaTime, Space.World);
-        Action AIAction = behaviorNode.doAction(null);
+        Action AIAction = behaviorNode.doAction(condition);
         if (AIAction.Equals(Action.MoveLeft))
         {
             transform.Rotate(Vector3.up * rotationSpeed * -1);
@@ -51,19 +60,5 @@ public class AIMovement : Movement
         }
 
 
-    }
-
-    private void add_tail()
-    {
-        Transform newPart;
-        if (body.Count != 0)
-        {
-            newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
-        }
-        else
-        {
-            newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
-        }
-        body.Add(newPart);
     }
 }
