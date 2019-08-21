@@ -62,9 +62,7 @@ public class gameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
-
     public static Vector3 GetRandomPosition()
     {
         return new Vector3(Random.Range(-Config.MAP_LENGTH + 10, Config.MAP_LENGTH - 10 ), 1, Random.Range(-Config.MAP_WIDTH + 10 , Config.MAP_WIDTH - 10));
