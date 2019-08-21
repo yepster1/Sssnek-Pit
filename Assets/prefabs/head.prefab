@@ -202,8 +202,8 @@ GameObject:
   - component: {fileID: 2365038010300568081}
   - component: {fileID: 3194053791510074703}
   - component: {fileID: 1620788263977576722}
-  - component: {fileID: 728134866905001516}
   - component: {fileID: 6771610324488535266}
+  - component: {fileID: 7579820562846868682}
   m_Layer: 0
   m_Name: head
   m_TagString: snake
@@ -303,27 +303,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &728134866905001516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3562449043692327784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f89d7afd58ead4a4e8341bf4a7fbf9d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNumber: 0
-  speed: 10
-  rotationSpeed: 1
-  tailPrefab: {fileID: 1915043134201272119, guid: 375204ec7e6c24ee297be54eda61be98,
-    type: 3}
-  body: []
-  left: 276
-  right: 275
-  points: 0
 --- !u!114 &6771610324488535266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +315,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435e5668caffa4f458887883539b4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7579820562846868682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562449043692327784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533960045989f456faf8305b5a46e964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  rotationSpeed: 0
+  tailPrefab: {fileID: 1915043134201272119, guid: 375204ec7e6c24ee297be54eda61be98,
+    type: 3}
+  body: []
+  points: 0
+  playerNumber: 0
+  left: 0
+  right: 0
 --- !u!1 &4400280149147299788
 GameObject:
   m_ObjectHideFlags: 0

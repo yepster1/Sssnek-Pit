@@ -48,7 +48,8 @@ public class Config
 {
     public static int MAP_LENGTH = 100;
     public static int MAP_WIDTH = 100;
-    public static float PLAYER_SPEED = 200f;
+    public static float PLAYER_SPEED = 15f;
+    public static float PLAYER_ROTATION = 1f;
     public static List<controls> playerControls = new List<controls> { controls.create_control(KeyCode.A, KeyCode.D), controls.create_control(KeyCode.LeftArrow, KeyCode.RightArrow), controls.create_control(KeyCode.B, KeyCode.N), controls.create_control(KeyCode.O, KeyCode.P) };
     public static List<List<view>> playerViews = new List<List<view>> {
         new List<view> { view.create_view(0, 0, 1, 1) },
