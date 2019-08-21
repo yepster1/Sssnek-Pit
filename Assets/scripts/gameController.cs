@@ -8,7 +8,7 @@ public class gameController : MonoBehaviour
     public GameObject player_prefab;
     public GameObject AI_prefab;
 
-    public List<GameObject> playerList;
+    public static List<GameObject> playerList;
     public List<GameObject> aiList;
     // Start is called before the first frame update
     void Start()
