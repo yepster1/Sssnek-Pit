@@ -32,7 +32,7 @@ public class gameController : MonoBehaviour
     {
         Debug.Log("spawning AI " + AINumber);
         GameObject AI = Instantiate(AI_prefab, GetRandomPosition(), new Quaternion());
-        AI.SendMessage("Start", new List<int> { numberOfAI, AINumber });
+        AI.SendMessage("start", new List<int> { numberOfAI, AINumber });
         aiList.Add(AI);
     }
     void AddPlayers(int numberOfPlayers)
@@ -47,7 +47,7 @@ public class gameController : MonoBehaviour
         Debug.Log("spawning player " + playerNumber);
         GameObject player = Instantiate(player_prefab, GetRandomPosition(), new Quaternion());
         Camera cam = player.GetComponentInChildren<Camera>();
-        player.SendMessage("Start", new List<int> { numberOfPlayers, playerNumber });
+        player.SendMessage("start", new List<int> { numberOfPlayers, playerNumber });
         playerList.Add(player);
     }
 

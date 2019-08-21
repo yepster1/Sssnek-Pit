@@ -40,7 +40,7 @@ public class movementRightAngle : MonoBehaviour
                 return;
             }
             Debug.Log("I have died");
-            transform.position = gameController.get_random_position();
+            transform.position = gameController.GetRandomPosition();
             points = 0;
             foreach(Transform part in body)
             {
