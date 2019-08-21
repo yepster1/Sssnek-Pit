@@ -23,7 +23,27 @@ public class movement : MonoBehaviour
             Destroy(collision.gameObject);
             points += 1;
             add_tail();
-            increase_aura();
+        }
+        if (collision.gameObject.tag.Equals("snake"))
+        {
+            if (body.Contains(collision.transform))
+            {
+                return;
+            }
+            Debug.Log("I have died");
+            transform.position = gameController.GetRandomPosition();
+            points = 0;
+            foreach(Transform part in body)
+            {
+                Destroy(part.gameObject);
+            }
+            body = new List<Transform>();
+        }
+        if(collision.gameObject.tag.Equals("powerup"))
+        {
+
+        }
+    }
 
         }
         if (collision.gameObject.tag.Equals("snake"))
@@ -73,6 +93,11 @@ public class movement : MonoBehaviour
         body = new List<Transform>();
     }
 
+    float DistanceTo(Vector3 first, Vector3 second)
+    {
+        return Vector3.Distance(first, second);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -86,38 +111,17 @@ public class movement : MonoBehaviour
         }
         if(body.Count > 0)
         {
-            if (Vector3.Distance(transform.position, body[0].position) > 1.3f)
-            {
                 body[0].LookAt(transform);
-                body[0].Translate(body[0].forward * speed * Time.smoothDeltaTime, Space.World);
-            }
-            if (Vector3.Distance(transform.position, body[0].position) < 1.3f && Vector3.Distance(transform.position, body[0].position) > 1)
-            {
-                body[0].LookAt(transform);
-                body[0].Translate(body[0].forward * speed * Time.smoothDeltaTime , Space.World);
-            }
+                body[0].Translate(body[0].forward * speed * Time.smoothDeltaTime * 0.8f * DistanceTo(transform.position, body[0].position), Space.World);
         }
         for (int i = 1; i < body.Count; i++)
         {
             //current follows previous;
             Transform previous = body[i - 1];
             Transform current = body[i];
-            if (Vector3.Distance(previous.position, current.position) > 1.3f) {
                 current.LookAt(previous);
-                current.Translate(current.forward * speed * Time.smoothDeltaTime , Space.World);
-            }
-            if (Vector3.Distance(previous.position, current.position) < 1.3f && Vector3.Distance(previous.position, current.position) > 1)
-            {
-                current.LookAt(previous);
-                current.Translate(current.forward * speed * Time.smoothDeltaTime , Space.World);
-            }
+                current.Translate(current.forward * speed * Time.smoothDeltaTime * 0.8f * DistanceTo(previous.position, current.position), Space.World);
         }
-        if (points > 0){
-            
-            auraTransform.position = transform.position;
-            auraTransform.rotation = transform.rotation;
-        }
-        
         //if(Input.GetButtonDown)
     }
 

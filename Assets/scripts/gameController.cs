@@ -12,25 +12,33 @@ public class gameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("spawn", 0.5f, 0.5f);
+        InvokeRepeating("Spawn", 0.5f, 0.5f);
         playerList = new List<GameObject>();
-        add_players(1);
+        AddPlayers(1);
     }
 
-    void add_players(int numberOfPlayers)
+    void AddPlayers(int numberOfPlayers)
     {
         for (int i = 0; i < numberOfPlayers; i++) {
-            add_player(numberOfPlayers, i);
+            AddPlayer(numberOfPlayers, i);
         }
     }
 
-    void add_player(int numberOfPlayers, int playerNumber)
+    void AddPlayer(int numberOfPlayers, int playerNumber)
     {
         Debug.Log("spawning player " + playerNumber);
-        GameObject player = Instantiate(player_prefab, get_random_position(), new Quaternion());
+        GameObject player = Instantiate(player_prefab, GetRandomPosition(), new Quaternion());
         Camera cam = player.GetComponentInChildren<Camera>();
         player.SendMessage("start", new List<int> { numberOfPlayers, playerNumber });
         playerList.Add(player);
+    }
+
+    void CheckIfSomeoneWon()
+    {
+        foreach(GameObject player in playerList)
+        {
+            
+        }
     }
 
     // Update is called once per frame
@@ -39,13 +47,13 @@ public class gameController : MonoBehaviour
 
     }
 
-    public static Vector3 get_random_position()
+    public static Vector3 GetRandomPosition()
     {
-        return new Vector3(Random.Range(-Config.MAP_LENGTH, Config.MAP_LENGTH), 1, Random.Range(-Config.MAP_WIDTH, Config.MAP_WIDTH));
+        return new Vector3(Random.Range(-Config.MAP_LENGTH + 10, Config.MAP_LENGTH - 10 ), 1, Random.Range(-Config.MAP_WIDTH + 10 , Config.MAP_WIDTH - 10));
     }
 
-    void spawn()
+    void Spawn()
     {
-         Instantiate(point_prefab, new Vector3(Random.Range(-Config.MAP_LENGTH, Config.MAP_LENGTH), 1, Random.Range(-Config.MAP_WIDTH, Config.MAP_WIDTH)), new Quaternion());
+         Instantiate(point_prefab, GetRandomPosition(), new Quaternion());
     }
 }
