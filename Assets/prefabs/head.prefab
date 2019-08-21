@@ -323,7 +323,12 @@ MonoBehaviour:
   body: []
   left: 276
   right: 275
+  powerup: 0
   points: 0
+  auraPrefab: {fileID: 967184446621808121, guid: 444478b4d0d9148208fef8344d7813ad,
+    type: 3}
+  timeLeft: 100
+  lastLocation: {x: 0, y: 0, z: 0}
 --- !u!114 &6771610324488535266
 MonoBehaviour:
   m_ObjectHideFlags: 0
