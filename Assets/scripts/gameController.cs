@@ -12,7 +12,7 @@ public class gameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("spawn", 0.5f, 0.5f);
+        InvokeRepeating("spawn", 0.5f, 5f);
         playerList = new List<GameObject>();
         add_players(1);
     }
