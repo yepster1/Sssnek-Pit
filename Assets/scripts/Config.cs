@@ -5,18 +5,16 @@ using System.Collections.Generic;
 public struct controls
 {
 
-    public static controls create_control(KeyCode left, KeyCode right,  KeyCode powerup)
+    public static controls create_control(KeyCode left, KeyCode right)
     {
         controls control = new controls();
         control.Left = left;
         control.rigth = right;
-        control.powerup = powerup;
         return control;
     }
 
     public KeyCode Left;
     public KeyCode rigth;
-    public KeyCode powerup;
 }
 
 public struct view
@@ -50,8 +48,9 @@ public class Config
 {
     public static int MAP_LENGTH = 100;
     public static int MAP_WIDTH = 100;
-    public static float PLAYER_SPEED = 200f;
-    public static List<controls> playerControls = new List<controls> { controls.create_control(KeyCode.A, KeyCode.D, KeyCode.S), controls.create_control(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.DownArrow), controls.create_control(KeyCode.B, KeyCode.M, KeyCode.N), controls.create_control(KeyCode.I, KeyCode.O, KeyCode.P) };
+    public static float PLAYER_SPEED = 10;
+    public static float PLAYER_ROTATION = 3f;
+    public static List<controls> playerControls = new List<controls> { controls.create_control(KeyCode.A, KeyCode.D), controls.create_control(KeyCode.LeftArrow, KeyCode.RightArrow), controls.create_control(KeyCode.B, KeyCode.N), controls.create_control(KeyCode.O, KeyCode.P) };
     public static List<List<view>> playerViews = new List<List<view>> {
         new List<view> { view.create_view(0, 0, 1, 1) },
         new List<view> { view.create_view(0, 0, 1, 0.5f), view.create_view(0.5f, 0, 1, 0.5f)},
