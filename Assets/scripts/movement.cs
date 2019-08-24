@@ -13,6 +13,8 @@ public class movement : MonoBehaviour
     public KeyCode left;
     public KeyCode right;
     public KeyCode powerup;
+    private Rigidbody rb;
+    public float force = 500.0f;
     
     public int points = 0;
     public GameObject auraPrefab;
@@ -76,6 +78,7 @@ public class movement : MonoBehaviour
     void Start()
     {
         body = new List<Transform>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -107,8 +110,10 @@ public class movement : MonoBehaviour
         // }
         //end of speed powerup 
         // jump powerup
-        if (Input.GetKey(powerup))
+        if (Input.GetKey(left) && Input.GetKey(right))
         {
+            Debug.Log("pressed both buttons");
+            // rb.AddForce(transform.up * force );
             transform.Translate(transform.up * speed * Time.smoothDeltaTime, Space.World);
         }
         //end of jump powerup
