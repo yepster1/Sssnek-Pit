@@ -43,7 +43,7 @@ public class movementRightAngle : MonoBehaviour
                 return;
             }
             Debug.Log("I have died");
-            transform.position = gameController.get_random_position();
+            transform.position = gameController.GetRandomPosition();
             points = 0;
             foreach(Transform part in body)
             {
@@ -65,7 +65,6 @@ public class movementRightAngle : MonoBehaviour
         Debug.Log("player " + playerNumber + " started");
         this.left = Config.playerControls[playerNumber].Left;
         this.right = Config.playerControls[playerNumber].rigth;
-        this.powerup = Config.playerControls[playerNumber].powerup;
         setCamara(amountOfPlayers, playerNumber);
     }
 
