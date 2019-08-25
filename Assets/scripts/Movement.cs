@@ -2,60 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Movement : BaseMovement
 {
     private int playerNumber;
-    private float speed = Config.PLAYER_SPEED;
     private float rotationSpeed = Config.PLAYER_ROTATION;
-    public GameObject tailPrefab;
-    public List<Transform> body;
     
     public KeyCode left;
     public KeyCode right;
-    
-    public int points = 0;
-    public GameObject auraPrefab;
-    private Transform auraTransform;
 
     public Vector3 lastLocation;
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        CollideWithPoint(collision);
-        CollideWithOtherSnake(collision);
-        if (collision.gameObject.tag.Equals("powerup"))
-        {
-
-        }
-    }
-
-    private void CollideWithOtherSnake(Collision collision)
-    {
-        if (collision.gameObject.tag.Equals("snake"))
-        {
-            if (body.Contains(collision.transform))
-            {
-                return;
-            }
-            Debug.Log("I have died");
-            transform.position = gameController.GetRandomPosition();
-            points = 0;
-            foreach (Transform part in body)
-                Destroy(part.gameObject);
-            body = new List<Transform>();
-        }
-    }
-
-    private void CollideWithPoint(Collision collision)
-    {
-        if (collision.gameObject.tag.Equals("point"))
-        {
-            Destroy(collision.gameObject);
-            points += 1;
-            add_tail();
-            increase_aura();
-        }
-    }
 
     public void spawnPlayer(List<int> inputs)
     {
@@ -92,7 +47,7 @@ public class Movement : MonoBehaviour
             activatePowerup();
 
         }
-        moveTail();
+        moveMyTail();
 
         moveAura();
     }
@@ -100,18 +55,6 @@ public class Movement : MonoBehaviour
     private void moveForward()
     {
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
-    }
-
-    private void moveTail()
-    {
-        if (body.Count > 0)
-        {
-            moveTail(0, transform);
-        }
-        for (int i = 1; i < body.Count; i++)
-        {
-            moveTail(i, body[i - 1]);
-        }
     }
 
     private void speedPowerUp()
@@ -154,36 +97,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void moveTail(int i, Transform transform)
-	{
-		var MaximumDistance = 1.3;
-		var MinimumDistance = 1.0;
-		var MaxSpeed = speed * 1.5;
-		var MinSpeed = speed * 0.8;
-		var bodySpeed = 0.0;
-		var dist = Vector3.Distance(body[i].position, transform.position);
-
-		if (dist > MaximumDistance)
-		{
-			bodySpeed = MaxSpeed; //to far so max speed
-		}
-		else if (dist < MinimumDistance)
-		{
-			bodySpeed = MinSpeed; //to close so min speed
-		}
-		else
-		{
-			// bodyPart is between Max/Min distance so give it a proportional speed
-			// between Min and Max speed
-			// This is the % ratio between Max and Min distance
-			var distRatio = (dist - MinimumDistance) / (MaximumDistance - MinimumDistance);
-			// This is the extra speed above min speed he can go up too
-			var diffSpeed = MaxSpeed - MinSpeed;
-			bodySpeed = (distRatio * diffSpeed) + MinSpeed; // Final calc 
-		}
-		body[i].LookAt(transform);
-		body[i].Translate(body[i].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
-	}
+    
 
     private void performTurn()
 	{
@@ -196,20 +110,6 @@ public class Movement : MonoBehaviour
 			transform.Rotate(Vector3.up * rotationSpeed * 1);
 		}
 	}
-
-    private void add_tail()
-    {
-        Transform newPart;
-        if (body.Count != 0)
-        {
-            newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
-        } else
-        {
-            auraTransform = Instantiate(auraPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
-            newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
-        }
-        body.Add(newPart);
-    }
 
     public void activatePowerup()
 	{

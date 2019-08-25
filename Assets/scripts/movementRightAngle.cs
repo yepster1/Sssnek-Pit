@@ -33,7 +33,7 @@ public class movementRightAngle : MonoBehaviour
             Destroy(collision.gameObject);
             points += 1;
             add_tail();
-            increase_aura();
+            //increase_aura();
 
         }
         if (collision.gameObject.tag.Equals("snake"))
@@ -219,15 +219,5 @@ public class movementRightAngle : MonoBehaviour
         }
         body.Add(newPart);
 
-    }
-
-    private void increase_aura(){
-        if (points > 0 && auraTransform != null){
-
-            float size = points * 10 / 1500; //change this to modify size faster or slower
-            Debug.Log(size);
-            auraTransform.localScale += new Vector3(size, size, size);
-        }
-        
     }
 }
