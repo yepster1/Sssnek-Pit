@@ -5,6 +5,7 @@ using UnityEngine;
 public class gameController : MonoBehaviour
 {
     public GameObject point_prefab;
+    public GameObject powerup_prefab;
     public GameObject player_prefab;
     public GameObject AI_prefab;
 
@@ -14,6 +15,7 @@ public class gameController : MonoBehaviour
     void Start()
     {
         InvokeRepeating("Spawn", 0.5f, 0.5f);
+        InvokeRepeating("SpawnPowerups", 0.5f , 3f);
         playerList = new List<GameObject>();
         aiList = new List<GameObject>();
         AddPlayers(1);
@@ -56,5 +58,9 @@ public class gameController : MonoBehaviour
     void Spawn()
     {
          Instantiate(point_prefab, GetRandomPosition(), new Quaternion());
+    }
+
+    void SpawnPowerups(){
+        Instantiate(powerup_prefab, GetRandomPosition(), new Quaternion());
     }
 }

@@ -5,17 +5,20 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private int playerNumber;
-    private float speed = Config.PLAYER_SPEED;
+    public float speed = Config.PLAYER_SPEED;
     private float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject tailPrefab;
     public List<Transform> body;
-    
+    public List<Powerup> powerups;
     public KeyCode left;
     public KeyCode right;
-
-    public KeyCode powerup;
+    // public KeyCode powerupSelector;
+    private Powerup powerup;
+    private float timeBetweenJumps = 2f;
+    private float jumpTimer;
     private Rigidbody rb;
-    public float force = 500.0f;
+    
+    // public float force = 500.0f;
 
     
     public int points = 0;
@@ -26,8 +29,14 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        CollideWithPoint(collision);
-        CollideWithOtherSnake(collision);
+        if (collision.gameObject.tag.Equals("snake"))
+        {
+            CollideWithOtherSnake(collision);
+        }
+        if (collision.gameObject.tag.Equals("point"))
+        {
+            CollideWithPoint(collision);
+        }
         if (collision.gameObject.tag.Equals("powerup"))
         {
 
@@ -36,30 +45,40 @@ public class Movement : MonoBehaviour
 
     private void CollideWithOtherSnake(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("snake"))
+        if (body.Contains(collision.transform))
         {
-            if (body.Contains(collision.transform))
-            {
-                return;
-            }
-            Debug.Log("I have died");
-            transform.position = gameController.GetRandomPosition();
-            points = 0;
-            foreach (Transform part in body)
-                Destroy(part.gameObject);
-            body = new List<Transform>();
+            return;
         }
+        Debug.Log("I have died");
+        transform.position = gameController.GetRandomPosition();
+        points = 0;
+        foreach (Transform part in body)
+            Destroy(part.gameObject);
+        body = new List<Transform>();
+        
     }
 
     private void CollideWithPoint(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("point"))
-        {
-            Destroy(collision.gameObject);
-            points += 1;
-            add_tail();
-            increase_aura();
-        }
+        Destroy(collision.gameObject);
+        points += 1;
+        add_tail();
+        increase_aura();
+        
+    }
+
+    private void CollideWithPowerup(Collision collision)
+    {
+        GameObject powerup = collision.gameObject;
+        Powerup powerupScript = powerup.GetComponent<Powerup>();
+        Debug.Log("powerup type: " + powerupScript.powerupType);
+        Debug.Log("powerup is active: " + powerupScript.isActive);
+        powerups.Add(powerupScript);
+        
+        Destroy(collision.gameObject);
+        points += 1;
+        
+        
     }
 
     public void spawnPlayer(List<int> inputs)
@@ -85,17 +104,32 @@ public class Movement : MonoBehaviour
     {
         body = new List<Transform>();
         rb = GetComponent<Rigidbody>();
+        powerups = new List<Powerup>();
+        powerup = this.gameObject.GetComponent<Powerup>();
+        // Powerup defaultScript = default.GetComponent<Powerup>();
+        jumpTimer = 0.0f;
+        powerup.powerupType = "jump";
+        powerup.isActive = true;
+        powerup.activateNow = false;
+        powerups.Add(powerup);
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+       jumpTimer+= Time.smoothDeltaTime;
+            // powerup = GameObject.FindGameObjectWithTag("powerup").GetComponent<Powerup>();
+            
+            
+              
         moveForward();
         performTurn();
 
-        if (Input.GetKey(left) && Input.GetKey(right))
+        if (Input.GetKey(left) && Input.GetKey(right) && jumpTimer > timeBetweenJumps)
         {
             activatePowerup();
+            jumpTimer = 0.0f;
 
         }
         moveTail();
@@ -120,68 +154,6 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void speedPowerUp()
-    {
-        //speed powerup
-        // timeLeft -= Time.deltaTime;
-        // if (Input.GetKey("v"))    
-        // {
-        //     if (timeLeft > 0)
-        //     {
-        //         speed = 50f;
-        //         Debug.Log("Poweup ON. player speed:" + speed +". Time left:" + timeLeft);
-        //     }
-        //     else
-        //     {
-        //         speed = 20f;
-        //         Debug.Log("Poweup OFF. player speed:" + speed + ". Time left:" + timeLeft);
-        //     }
-        // }
-        //end of speed powerup 
-        // jump powerup
-        if (Input.GetKey(left) && Input.GetKey(right))
-        {
-            Debug.Log("pressed both buttons");
-            // rb.AddForce(transform.up * force );
-            transform.Translate(transform.up * speed * Time.smoothDeltaTime, Space.World);
-        }
-        //end of jump powerup
-        
-        float step = speed * Time.deltaTime;
-        if (body.Count > 0)
-        {   
-            var MaximumDistance = 1.2;
-            var MinimumDistance = 1.0;
-            var MaxSpeed = speed * 1.3;
-            var MinSpeed = speed * 0.7;
-            var bodySpeed = 0.0;
-
-            var dist=Vector3.Distance(body[0].position, transform.position);
- 
-            if ( dist > MaximumDistance) 
-            { 
-                bodySpeed = MaxSpeed; //to far so max speed
-            } 
-            else if ( dist < MinimumDistance) 
-            { 
-                bodySpeed = MinSpeed; //to close so min speed
-            } 
-            else 
-            { 
-                // bodyPart is between Max/Min distance so give it a proportional speed
-                // between Min and Max speed
-                // This is the % ratio between Max and Min distance
-                var distRatio=(dist - MinimumDistance)/(MaximumDistance - MinimumDistance);
-                // This is the extra speed above min speed he can go up too
-                var diffSpeed = MaxSpeed - MinSpeed;
-                bodySpeed = ( distRatio * diffSpeed) + MinSpeed; // Final calc 
-            }
-            body[0].LookAt(transform);
-            body[0].Translate(body[0].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
-        }
-        for (int i = 1; i < body.Count; i++)
-
-    }
     private void moveAura()
     {
         if (points > 0)
@@ -263,7 +235,14 @@ public class Movement : MonoBehaviour
 
     public void activatePowerup()
 	{
-		transform.Translate(transform.up * speed * Time.smoothDeltaTime, Space.World);
+        if(powerups!= null){
+            
+            powerups[0].GetComponent<Powerup>().activateNow = true;
+            Debug.Log(powerups[0].powerupType);
+        }else{
+            Debug.Log("no powerups in list");
+        }
+		
 	}
 
     private void increase_aura(){
@@ -275,4 +254,97 @@ public class Movement : MonoBehaviour
         }
         
     }
+
+    // private void speedPowerUp()
+    // {
+    //     //speed powerup
+    //     // timeLeft -= Time.deltaTime;
+    //     // if (Input.GetKey("v"))    
+    //     // {
+    //     //     if (timeLeft > 0)
+    //     //     {
+    //     //         speed = 50f;
+    //     //         Debug.Log("Poweup ON. player speed:" + speed +". Time left:" + timeLeft);
+    //     //     }
+    //     //     else
+    //     //     {
+    //     //         speed = 20f;
+    //     //         Debug.Log("Poweup OFF. player speed:" + speed + ". Time left:" + timeLeft);
+    //     //     }
+    //     // }
+    //     //end of speed powerup 
+    //     // jump powerup
+    //     if (Input.GetKey(left) && Input.GetKey(right))
+    //     {
+    //         Debug.Log("pressed both buttons");
+    //         // rb.AddForce(transform.up * force );
+            
+    //     }
+    //     //end of jump powerup
+        
+    //     float step = speed * Time.deltaTime;
+    //     if (body.Count > 0)
+    //     {   
+    //         var MaximumDistance = 1.2;
+    //         var MinimumDistance = 1.0;
+    //         var MaxSpeed = speed * 1.3;
+    //         var MinSpeed = speed * 0.7;
+    //         var bodySpeed = 0.0;
+
+    //         var dist=Vector3.Distance(body[0].position, transform.position);
+ 
+    //         if ( dist > MaximumDistance) 
+    //         { 
+    //             bodySpeed = MaxSpeed; //to far so max speed
+    //         } 
+    //         else if ( dist < MinimumDistance) 
+    //         { 
+    //             bodySpeed = MinSpeed; //to close so min speed
+    //         } 
+    //         else 
+    //         { 
+    //             // bodyPart is between Max/Min distance so give it a proportional speed
+    //             // between Min and Max speed
+    //             // This is the % ratio between Max and Min distance
+    //             var distRatio=(dist - MinimumDistance)/(MaximumDistance - MinimumDistance);
+    //             // This is the extra speed above min speed he can go up too
+    //             var diffSpeed = MaxSpeed - MinSpeed;
+    //             bodySpeed = ( distRatio * diffSpeed) + MinSpeed; // Final calc 
+    //         }
+    //         body[0].LookAt(transform);
+    //         body[0].Translate(body[0].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
+    //     }
+    //     for (int i = 1; i < body.Count; i++){
+    //         var MaximumDistance = 1.2;
+    //         var MinimumDistance = 1.0;
+    //         var MaxSpeed = speed * 1.3;
+    //         var MinSpeed = speed * 0.7;
+    //         var bodySpeed = 0.0;
+
+    //         var dist=Vector3.Distance(body[i].position, body[i-1].position);
+ 
+    //         if ( dist > MaximumDistance) 
+    //         { 
+    //             bodySpeed = MaxSpeed; //to far so max speed
+    //         } 
+    //         else if ( dist < MinimumDistance) 
+    //         { 
+    //             bodySpeed = MinSpeed; //to close so min speed
+    //         } 
+    //         else 
+    //         { 
+    //             // bodyPart is between Max/Min distance so give it a proportional speed
+    //             // between Min and Max speed
+    //             // This is the % ratio between Max and Min distance
+    //             var distRatio=(dist - MinimumDistance)/(MaximumDistance - MinimumDistance);
+    //             // This is the extra speed above min speed he can go up too
+    //             var diffSpeed = MaxSpeed - MinSpeed;
+    //             bodySpeed = ( distRatio * diffSpeed) + MinSpeed; // Final calc 
+    //         }
+    //         body[i].LookAt(body[i-1].transform);
+    //         body[i].Translate(body[i-1].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
+    //     }
+
+    // }
+
 }

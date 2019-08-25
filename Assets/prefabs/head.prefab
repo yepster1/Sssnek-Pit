@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 1620788263977576722}
   - component: {fileID: 2500112874497333359}
   - component: {fileID: 6771610324488535266}
+  - component: {fileID: 3335003006358511616}
   m_Layer: 0
   m_Name: head
   m_TagString: snake
@@ -315,9 +316,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89d7afd58ead4a4e8341bf4a7fbf9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
   tailPrefab: {fileID: 1915043134201272119, guid: 375204ec7e6c24ee297be54eda61be98,
     type: 3}
   body: []
+  powerups: []
   left: 0
   right: 0
   points: 0
@@ -336,6 +339,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435e5668caffa4f458887883539b4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3335003006358511616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562449043692327784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f161d84d0832465f97eb77860781884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerupType: 
+  isActive: 0
+  activateNow: 0
+  jumpForce: 1000
 --- !u!1 &4400280149147299788
 GameObject:
   m_ObjectHideFlags: 0
