@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour
         }
         if (collision.gameObject.tag.Equals("powerup"))
         {
-
+            CollideWithPowerup(collision);
         }
     }
 
@@ -119,28 +119,48 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
        jumpTimer+= Time.smoothDeltaTime;
-            // powerup = GameObject.FindGameObjectWithTag("powerup").GetComponent<Powerup>();
-            
-            
-              
+        // powerup = GameObject.FindGameObjectWithTag("powerup").GetComponent<Powerup>();
         moveForward();
         performTurn();
 
-        if (Input.GetKey(left) && Input.GetKey(right) && jumpTimer > timeBetweenJumps)
-        {
-            activatePowerup();
-            jumpTimer = 0.0f;
-
-        }
+        activatePowerup();
+        
         moveTail();
-
         moveAura();
+        
     }
 
     private void moveForward()
     {
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
+
+    private void performTurn()
+	{
+		if (Input.GetKey(left))
+		{
+			transform.Rotate(Vector3.up * rotationSpeed * -1);
+		}
+		if (Input.GetKey(right))
+		{
+			transform.Rotate(Vector3.up * rotationSpeed * 1);
+		}
+	}
+
+    public void activatePowerup()
+	{
+        if(powerups!= null){
+            if (Input.GetKey(left) && Input.GetKey(right) && jumpTimer > timeBetweenJumps)
+            {
+                powerups[0].GetComponent<Powerup>().activateNow = true;
+                Debug.Log(powerups[0].powerupType);
+                jumpTimer = 0.0f;
+
+            }
+        }else{
+            Debug.Log("no powerups in list");
+        }
+	}
 
     private void moveTail()
     {
@@ -151,28 +171,6 @@ public class Movement : MonoBehaviour
         for (int i = 1; i < body.Count; i++)
         {
             moveTail(i, body[i - 1]);
-        }
-    }
-
-    private void moveAura()
-    {
-        if (points > 0)
-
-        {
-
-            // auraTransform.position = transform.position;
-            float auraPos;
-            if (points < 90)
-            {
-                auraPos = transform.position.y + (points * 10 / 100.0f);
-            }
-            else
-            { //want to cap y value
-                auraPos = transform.position.y + 9.0f;
-            }
-
-            auraTransform.position = new Vector3(transform.position.x, auraPos, transform.position.z);
-            auraTransform.rotation = transform.rotation;
         }
     }
 
@@ -207,17 +205,27 @@ public class Movement : MonoBehaviour
 		body[i].Translate(body[i].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
 	}
 
-    private void performTurn()
-	{
-		if (Input.GetKey(left))
-		{
-			transform.Rotate(Vector3.up * rotationSpeed * -1);
-		}
-		if (Input.GetKey(right))
-		{
-			transform.Rotate(Vector3.up * rotationSpeed * 1);
-		}
-	}
+    private void moveAura()
+    {
+        if (points > 0)
+
+        {
+
+            // auraTransform.position = transform.position;
+            float auraPos;
+            if (points < 90)
+            {
+                auraPos = transform.position.y + (points * 10 / 100.0f);
+            }
+            else
+            { //want to cap y value
+                auraPos = transform.position.y + 9.0f;
+            }
+
+            auraTransform.position = new Vector3(transform.position.x, auraPos, transform.position.z);
+            auraTransform.rotation = transform.rotation;
+        }
+    }
 
     private void add_tail()
     {
@@ -232,18 +240,6 @@ public class Movement : MonoBehaviour
         }
         body.Add(newPart);
     }
-
-    public void activatePowerup()
-	{
-        if(powerups!= null){
-            
-            powerups[0].GetComponent<Powerup>().activateNow = true;
-            Debug.Log(powerups[0].powerupType);
-        }else{
-            Debug.Log("no powerups in list");
-        }
-		
-	}
 
     private void increase_aura(){
         if (points > 0 && auraTransform != null){

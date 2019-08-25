@@ -81,9 +81,9 @@ public class Powerup : MonoBehaviour
         }
         return isActive;
     }
-    private string setPowerupType(){
-        int[] powerTypes = new int[] { 0, 1};       //int pertaining to which side to choose
-        int length = powerTypes.Length;                //get the length 
+    private string setPowerupType(){ //to get a powerup type of jump:0, speed:1 etc etc
+        int[] powerTypes = new int[] { 0, 1};       //int pertaining to which powerup to choose
+        int length = powerTypes.Length;                 
         string powerupType = "";
         Debug.Log("length of powerups: " + length);
         int myRandomIndex = Random.Range(0, length);    //let random select a range between zero and length
