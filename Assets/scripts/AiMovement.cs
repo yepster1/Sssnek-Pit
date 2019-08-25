@@ -14,11 +14,18 @@ public class AiMovement : BaseMovement
         navMeshAgent.speed = speed;
     }
 
+    void changeTarget(GameObject whoToTarget)
+    {
+        Debug.Log("targing change");
+        target = whoToTarget;
+    }
     // Update is called once per frame
     void Update()
     {
-       
-        target = GameStateHandeler.playerList[0];
+        GameObject whoToTarget = AIUtil.getClosestObject(gameObject);
+        if (whoToTarget != target) {
+            changeTarget(whoToTarget);
+        }
         if (target != null)
         {
 

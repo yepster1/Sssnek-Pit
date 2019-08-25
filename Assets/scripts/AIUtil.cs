@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIUtil
 {
-    GameObject getClosestOtherSnake(GameObject me)
+    public static GameObject getClosestOtherSnake(GameObject me)
     {
         GameObject tMin = null;
         float minDist = Mathf.Infinity;
@@ -35,7 +35,7 @@ public class AIUtil
         return tMin;
     }
 
-    GameObject getClosestPoint(GameObject me)
+    public static GameObject getClosestPoint(GameObject me)
     {
         GameObject tMin = null;
         float minDist = Mathf.Infinity;
@@ -52,11 +52,15 @@ public class AIUtil
         return tMin;
     }
 
-    GameObject getClosestObject(GameObject me)
+    public static GameObject getClosestObject(GameObject me)
     {
         GameObject closestSnake = getClosestOtherSnake(me);
         GameObject closestPoint = getClosestPoint(me);
         float distanceToClosestSnake = getDistance(closestSnake.transform.position, me.transform.position);
+        if(closestPoint == null)
+        {
+            return closestSnake;
+        }
         float distanceToClosetPoint = getDistance(closestPoint.transform.position, me.transform.position);
         if (distanceToClosestSnake  > distanceToClosetPoint)
         {
@@ -65,7 +69,7 @@ public class AIUtil
         return closestPoint;
     }
 
-    float getDistance(Vector3 other, Vector3 me)
+    public static float getDistance(Vector3 other, Vector3 me)
     {
         return Vector3.Distance(other, me);
     }
