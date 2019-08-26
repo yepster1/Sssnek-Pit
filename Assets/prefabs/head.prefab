@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 1620788263977576722}
   - component: {fileID: 2500112874497333359}
   - component: {fileID: 6771610324488535266}
+  - component: {fileID: 450415486386386696}
   m_Layer: 0
   m_Name: head
   m_TagString: snake
@@ -318,12 +319,12 @@ MonoBehaviour:
   tailPrefab: {fileID: 1915043134201272119, guid: 375204ec7e6c24ee297be54eda61be98,
     type: 3}
   body: []
-  left: 0
-  right: 0
   points: 0
   auraPrefab: {fileID: 967184446621808121, guid: 444478b4d0d9148208fef8344d7813ad,
     type: 3}
-  lastLocation: {x: 0, y: 0, z: 0}
+  powerups: []
+  left: 0
+  right: 0
 --- !u!114 &6771610324488535266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +337,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435e5668caffa4f458887883539b4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &450415486386386696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562449043692327784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f486f026b452444ab5298ee2a55472d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerupType: 
+  isActive: 0
+  activateNow: 0
 --- !u!1 &4400280149147299788
 GameObject:
   m_ObjectHideFlags: 0

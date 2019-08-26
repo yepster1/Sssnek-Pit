@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 544188732}
   m_Layer: 0
   m_Name: floor
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 814204386}
   m_Layer: 0
   m_Name: gameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -401,12 +401,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point_prefab: {fileID: 105664559048629168, guid: 3d5a6e2d63ae84bf58e1e408f7f2023d,
     type: 3}
+  powerup_prefab: {fileID: 9091280107290302037, guid: b8e05780c6c0343a78bf1bfc06ad1399,
+    type: 3}
   player_prefab: {fileID: 3562449043692327784, guid: 592e77c9d261b45418a98bf588eaab28,
     type: 3}
-  AI_prefab: {fileID: 3723353707323931747, guid: b4164d78d4c824eab8557432795421a9,
-    type: 3}
-  playerList: []
-  aiList: []
+  AI_prefab: {fileID: 0}
 --- !u!4 &814204387
 Transform:
   m_ObjectHideFlags: 0

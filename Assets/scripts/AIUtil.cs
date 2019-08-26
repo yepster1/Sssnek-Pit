@@ -9,7 +9,7 @@ public class AIUtil
         GameObject tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = me.transform.position;
-        foreach (GameObject t in GameStateHandeler.playerList)
+        foreach (GameObject t in GameStateHandler.playerList)
         {
             float dist = getDistance(t.transform.position, currentPos);
             if (dist < minDist)
@@ -19,7 +19,7 @@ public class AIUtil
             }
         }
 
-        foreach(GameObject t in GameStateHandeler.aiList)
+        foreach(GameObject t in GameStateHandler.aiList)
         {
             if(t==me)
             {
@@ -40,7 +40,7 @@ public class AIUtil
         GameObject tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = me.transform.position;
-        foreach (GameObject t in GameStateHandeler.pointList)
+        foreach (GameObject t in GameStateHandler.pointList)
         {
             float dist = getDistance(t.transform.position, currentPos);
             if (dist < minDist)

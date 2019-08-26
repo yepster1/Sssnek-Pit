@@ -6,76 +6,73 @@ public abstract class BaseMovement : MonoBehaviour
 
     public GameObject tailPrefab;
     public List<Transform> body;
+    protected Rigidbody rb;
     public int points = 0;
-
     protected float speed = Config.PLAYER_SPEED;
+    protected float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject auraPrefab;
     protected Transform auraTransform;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        CollideWithPoint(collision);
-        CollideWithOtherSnake(collision);
-        if (collision.gameObject.tag.Equals("powerup"))
-        {
+    public List<Powerup> powerups;
+    protected Powerup powerup;
+    protected float timeBetweenJumps = 2f;
+    protected float jumpTimer;
 
-        }
-    }
-
-    private void CollideWithOtherSnake(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("snake"))
         {
-            if (body.Contains(collision.transform))
-            {
-                return;
-            }
-            Debug.Log("I have died");
-            transform.position = gameController.GetRandomPosition();
-            points = 0;
-            foreach (Transform part in body)
-                Destroy(part.gameObject);
-            body = new List<Transform>();
+            CollideWithOtherSnake(collision);
         }
+        if (collision.gameObject.tag.Equals("point"))
+        {
+            CollideWithPoint(collision);
+        }
+        
+        if (collision.gameObject.tag.Equals("powerup"))
+        {
+            CollideWithPowerup(collision);
+        }
+    }
+
+    protected void CollideWithOtherSnake(Collision collision)
+    {
+        if (body.Contains(collision.transform))
+        {
+            return;
+        }
+        Debug.Log("I have died");
+        transform.position = gameController.GetRandomPosition();
+        points = 0;
+        foreach (Transform part in body)
+            Destroy(part.gameObject);
+        body = new List<Transform>();
     }
 
     protected void CollideWithPoint(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("point"))
-        {
-            Destroy(collision.gameObject);
-            GameStateHandeler.pointList.Remove(collision.gameObject);
-            points += 1;
-            add_tail();
-            increase_aura();
-        }
+        GameStateHandler.pointList.Remove(collision.gameObject);
+        Destroy(collision.gameObject);
+        points += 1;
+        add_tail();
+        increase_aura();
+        
+        
     }
 
-    private void increase_aura()
-    {
-        if (points > 0 && auraTransform != null)
-        {
-
-            float size = points * 10 / 1500; //change this to modify size faster or slower
-            Debug.Log(size);
-            auraTransform.localScale += new Vector3(size, size, size);
-        }
-
+    protected void CollideWithPowerup(Collision collision){
+        GameObject powerup = collision.gameObject;
+        Powerup powerupScript = powerup.GetComponent<Powerup>();
+        Debug.Log("powerup type: " + powerupScript.powerupType);
+        Debug.Log("powerup is active: " + powerupScript.isActive);
+        powerups.Add(powerupScript);
+        GameStateHandler.powerupsList.Remove(collision.gameObject);
+        Destroy(collision.gameObject);
     }
 
-    protected void add_tail()
+    protected void moveForward()
     {
-        Transform newPart;
-        if (body.Count != 0)
-        {
-            newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
-        }
-        else
-        {
-            auraTransform = Instantiate(auraPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
-            newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
-        }
-        body.Add(newPart);
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
 
     protected void moveMyTail()
@@ -90,7 +87,7 @@ public abstract class BaseMovement : MonoBehaviour
         }
     }
 
-    public void moveTail(int i, Transform transform)
+    protected void moveTail(int i, Transform transform)
     {
         var MaximumDistance = 1.3;
         var MinimumDistance = 1.0;
@@ -119,5 +116,54 @@ public abstract class BaseMovement : MonoBehaviour
         }
         body[i].LookAt(transform);
         body[i].Translate(body[i].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
+    }
+
+    protected void moveAura()
+    {
+        if (points > 0)
+
+        {
+
+            // auraTransform.position = transform.position;
+            float auraPos;
+            if (points < 90)
+            {
+                auraPos = transform.position.y + (points * 10 / 100.0f);
+            }
+            else
+            { //want to cap y value
+                auraPos = transform.position.y + 9.0f;
+            }
+
+            auraTransform.position = new Vector3(transform.position.x, auraPos, transform.position.z);
+            auraTransform.rotation = transform.rotation;
+        }
+    }
+
+    protected void increase_aura()
+    {
+        if (points > 0 && auraTransform != null)
+        {
+
+            float size = points * 10 / 1500; //change this to modify size faster or slower
+            Debug.Log(size);
+            auraTransform.localScale += new Vector3(size, size, size);
+        }
+
+    }
+
+    protected void add_tail()
+    {
+        Transform newPart;
+        if (body.Count != 0)
+        {
+            newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
+        }
+        else
+        {
+            auraTransform = Instantiate(auraPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
+            newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
+        }
+        body.Add(newPart);
     }
 }

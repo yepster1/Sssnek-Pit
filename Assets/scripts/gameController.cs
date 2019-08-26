@@ -5,6 +5,7 @@ using UnityEngine;
 public class gameController : MonoBehaviour
 {
     public GameObject point_prefab;
+    public GameObject powerup_prefab;
     public GameObject player_prefab;
     public GameObject AI_prefab;
 
@@ -12,9 +13,11 @@ public class gameController : MonoBehaviour
     void Start()
     {
         InvokeRepeating("Spawn", 0.5f, 0.5f);
-        GameStateHandeler.playerList = new List<GameObject>();
-        GameStateHandeler.aiList = new List<GameObject>(); 
-        GameStateHandeler.pointList = new List<GameObject>();
+        InvokeRepeating("SpawnPowerups", 0.5f , 3f);
+        GameStateHandler.playerList = new List<GameObject>();
+        GameStateHandler.aiList = new List<GameObject>(); 
+        GameStateHandler.pointList = new List<GameObject>();
+        GameStateHandler.powerupsList = new List<GameObject>();
         AddPlayers(1);
     }
     
@@ -32,12 +35,12 @@ public class gameController : MonoBehaviour
         GameObject player = Instantiate(player_prefab, GetRandomPosition(), new Quaternion());
         Camera cam = player.GetComponentInChildren<Camera>();
         player.SendMessage("spawnPlayer", new List<int> { numberOfPlayers, playerNumber });
-        GameStateHandeler.playerList.Add(player);
+        GameStateHandler.playerList.Add(player);
     }
 
     void CheckIfSomeoneWon()
     {
-        foreach(GameObject player in GameStateHandeler.playerList)
+        foreach(GameObject player in GameStateHandler.playerList)
         {
             
         }
@@ -54,6 +57,12 @@ public class gameController : MonoBehaviour
 
     void Spawn()
     {
-        GameStateHandeler.pointList.Add(Instantiate(point_prefab, GetRandomPosition(), new Quaternion()));
+        GameStateHandler.pointList.Add(Instantiate(point_prefab, GetRandomPosition(), new Quaternion()));
     }
+    
+    void SpawnPowerups()
+    {
+        GameStateHandler.powerupsList.Add(Instantiate(powerup_prefab, GetRandomPosition(), new Quaternion()));
+    }
+    
 }

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/scripts/powerup/powerup.cs.meta
+guid: 0fd3808e503ee4a84a3f87ce2d0264d0
+=======
 guid: 1accf12e9261c4bd885403735f5cfdff
+>>>>>>> f6a24897dc955f81a79c0af612df2f8c59a82db2:Assets/scripts/AiMovement.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
