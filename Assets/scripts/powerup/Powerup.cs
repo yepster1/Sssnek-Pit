@@ -3,70 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Powerup : MonoBehaviour
+public abstract class Powerup : MonoBehaviour
 {
     public string powerupType;
     public bool isActive; //!isActive is passive powerup
-    public bool activateNow; 
-    private int playerNum;
-    private gameController gc;
-    private List<GameObject> playerList;
-    private Rigidbody rb;
-    private float maxTimeToJump = 3f;
-    private GameObject floor;
+    public bool activate; 
+    protected int playerNum;
+    protected gameController gc;
+    protected List<GameObject> playerList;
+    protected Rigidbody rb;
     
-    private bool onGround;
-    private Vector3 jump;
-    private float jumpForce = 10.0f;
-    private float fallMultiplier = 2.5f;
-    private float lowJumpMultiplier = 2f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (gc == null){
-            gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<gameController>();
-        }
-        rb = GetComponent<Rigidbody>();
-        jump = new Vector3(0.0f, 1.0f, 0.0f);
-        playerList = gc.playerList; //to be used for passive powerup effects
-        powerupType = "jump";
-        isActive = setIsActive();
-        activateNow = false;
-       
-        
-    }
-
+    
+    protected bool onGround;
+    
     void OnCollisionStay()
     {
         onGround = true;
     }
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (powerupType == "jump" && onGround && activateNow){
-            rb.velocity = transform.up * jumpForce;
-            onGround = false;
-            activateNow = false;
-            Debug.Log("jumping");
-        }
-        if (rb.velocity.y < 0 ){
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier -1 ) * Time.smoothDeltaTime;
-        }
-        else if (rb.velocity.y > 0){
-            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier -1 ) * Time.smoothDeltaTime;
-        }
-        // if (powerupType == "speed" && isActive){ //active speed powerup
 
-        // }
+    public virtual void activateNow(){
+        Debug.Log("powerup activated");
     }
-
-    // void addJump(){
-
-    // }
-    // void addSpeed(){
-
-    // }
-    private bool setIsActive(){
+    public virtual void deactivateNow(){
+        Debug.Log("powerup deactivated");
+    }
+    
+    //this method randomly sets certain powerups to active/passive when collected 
+    public bool setIsActive(){
         int[] activeTypes = new int[] { 0, 1};       //active/passive
         int length = activeTypes.Length;                //get the length 
         bool isActive = true;
@@ -81,7 +44,9 @@ public class Powerup : MonoBehaviour
         }
         return isActive;
     }
-    private string setPowerupType(){ //to get a powerup type of jump:0, speed:1 etc etc
+
+    //this method randomly sets the type of powerup when collected 
+    public string setPowerupType(){ //to get a powerup type of jump:0, speed:1 etc etc
         int[] powerTypes = new int[] { 0, 1};       //int pertaining to which powerup to choose
         int length = powerTypes.Length;                 
         string powerupType = "";

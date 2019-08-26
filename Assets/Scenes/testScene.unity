@@ -406,8 +406,6 @@ MonoBehaviour:
   player_prefab: {fileID: 3562449043692327784, guid: 592e77c9d261b45418a98bf588eaab28,
     type: 3}
   AI_prefab: {fileID: 0}
-  playerList: []
-  aiList: []
 --- !u!4 &814204387
 Transform:
   m_ObjectHideFlags: 0
