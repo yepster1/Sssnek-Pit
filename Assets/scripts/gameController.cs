@@ -8,14 +8,13 @@ public class gameController : MonoBehaviour
     public GameObject player_prefab;
     public GameObject AI_prefab;
 
-    public List<GameObject> playerList;
-    public List<GameObject> aiList;
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("Spawn", 0.5f, 0.5f);
-        playerList = new List<GameObject>();
-        aiList = new List<GameObject>();
+        GameStateHandeler.playerList = new List<GameObject>();
+        GameStateHandeler.aiList = new List<GameObject>(); 
+        GameStateHandeler.pointList = new List<GameObject>();
         AddPlayers(1);
     }
     
@@ -33,12 +32,12 @@ public class gameController : MonoBehaviour
         GameObject player = Instantiate(player_prefab, GetRandomPosition(), new Quaternion());
         Camera cam = player.GetComponentInChildren<Camera>();
         player.SendMessage("spawnPlayer", new List<int> { numberOfPlayers, playerNumber });
-        playerList.Add(player);
+        GameStateHandeler.playerList.Add(player);
     }
 
     void CheckIfSomeoneWon()
     {
-        foreach(GameObject player in playerList)
+        foreach(GameObject player in GameStateHandeler.playerList)
         {
             
         }
@@ -55,6 +54,6 @@ public class gameController : MonoBehaviour
 
     void Spawn()
     {
-         Instantiate(point_prefab, GetRandomPosition(), new Quaternion());
+        GameStateHandeler.pointList.Add(Instantiate(point_prefab, GetRandomPosition(), new Quaternion()));
     }
 }
