@@ -52,7 +52,7 @@ public class AIUtil
         return tMin;
     }
 
-    public static GameObject getClosestObject(GameObject me)
+    public static GameObject getObjectToTarget(GameObject me, AIPersonality aiPersonality)
     {
         GameObject closestSnake = getClosestOtherSnake(me);
         GameObject closestPoint = getClosestPoint(me);
@@ -62,7 +62,7 @@ public class AIUtil
             return closestSnake;
         }
         float distanceToClosetPoint = getDistance(closestPoint.transform.position, me.transform.position);
-        if (distanceToClosestSnake  > distanceToClosetPoint)
+        if (distanceToClosestSnake * aiPersonality.getAgressivness()  > distanceToClosetPoint * aiPersonality.getGreed())
         {
             return closestSnake;
         }

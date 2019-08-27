@@ -7,6 +7,7 @@ public class AiMovement : BaseMovement
 {
 
     [SerializeField] private NavMeshAgent navMeshAgent;
+    AIPersonality aIPersonality = new AIPersonality(50,50); // Default AI
     private GameObject target;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class AiMovement : BaseMovement
     // Update is called once per frame
     void Update()
     {
-        GameObject whoToTarget = AIUtil.getClosestObject(gameObject);
+        GameObject whoToTarget = AIUtil.getObjectToTarget(gameObject, aIPersonality);
         if (whoToTarget != target) {
             changeTarget(whoToTarget);
         }
