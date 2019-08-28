@@ -19,14 +19,25 @@ public class gameController : MonoBehaviour
         GameStateHandler.pointList = new List<GameObject>();
         GameStateHandler.powerupsList = new List<GameObject>();
         AddPlayers(1);
+        AddAIs(4);
     }
     
+    public void AddAIs(int amountOfAI)
+    {
+        for(int i = 0; i < amountOfAI; i++) {
+            addAI();
+        }
+    }
 
     void AddPlayers(int numberOfPlayers)
     {
         for (int i = 0; i < numberOfPlayers; i++) {
             AddPlayer(numberOfPlayers, i);
         }
+    }
+    private void addAI()
+    {
+        Instantiate(AI_prefab, GetRandomPosition(), new Quaternion());
     }
 
     void AddPlayer(int numberOfPlayers, int playerNumber)

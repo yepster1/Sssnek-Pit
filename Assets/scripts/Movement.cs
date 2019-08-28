@@ -60,6 +60,53 @@ public class Movement : BaseMovement
         
     }
 
+    private void moveForward()
+    {
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+    }
+
+    private void speedPowerUp()
+    {
+        //speed powerup
+        // timeLeft -= Time.deltaTime;
+        // if (Input.GetKey("v"))    
+        // {
+        //     if (timeLeft > 0)
+        //     {
+        //         speed = 50f;
+        //         Debug.Log("Poweup ON. player speed:" + speed +". Time left:" + timeLeft);
+        //     }
+        //     else
+        //     {
+        //         speed = 20f;
+        //         Debug.Log("Poweup OFF. player speed:" + speed + ". Time left:" + timeLeft);
+        //     }
+        // }
+        //end of speed powerup 
+    }
+    private void moveAura()
+    {
+        if (points > 0)
+        {
+
+            // auraTransform.position = transform.position;
+            float auraPos;
+            if (points < 90)
+            {
+                auraPos = transform.position.y + (points * 10 / 100.0f);
+            }
+            else
+            { //want to cap y value
+                auraPos = transform.position.y + 9.0f;
+            }
+
+            auraTransform.position = new Vector3(transform.position.x, auraPos, transform.position.z);
+            auraTransform.rotation = transform.rotation;
+        }
+    }
+
+    
+
     private void performTurn()
 	{
 		if (Input.GetKey(left))
