@@ -7,31 +7,30 @@ public class AiMovement : BaseMovement
 {
 
     [SerializeField] private NavMeshAgent navMeshAgent;
-    AIPersonality aIPersonality = new AIPersonality(50,50); // Default AI
-    private GameObject target;
+    AIPersonality aIPersonality; // Default AI
+    private Vector3 target;
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent.speed = speed;
+        aIPersonality = new AIPersonality(0.5f, 0.5f,3);
     }
 
-    void changeTarget(GameObject whoToTarget)
+    void changeTarget(Vector3 whoToTarget)
     {
-        Debug.Log("targing change");
         target = whoToTarget;
     }
     // Update is called once per frame
     void Update()
     {
-        GameObject whoToTarget = AIUtil.getObjectToTarget(gameObject, aIPersonality);
-        if (whoToTarget != target) {
-            changeTarget(whoToTarget);
+        Vector3 theTarget = AIUtil.getObjectToTarget(gameObject, aIPersonality);
+        if (theTarget != target) {
+            changeTarget(target);
         }
-        if (target != null)
-        {
-
-            navMeshAgent.SetDestination(target.transform.position);
-        }
+        navMeshAgent.SetDestination(theTarget);
         moveMyTail();
+        moveAura();
     }
+
+
 }

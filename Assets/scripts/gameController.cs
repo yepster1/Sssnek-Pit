@@ -16,9 +16,20 @@ public class gameController : MonoBehaviour
         GameStateHandeler.aiList = new List<GameObject>(); 
         GameStateHandeler.pointList = new List<GameObject>();
         AddPlayers(1);
+        AddAIs(10);
     }
     
+    public void AddAIs(int amountOfAI)
+    {
+        for(int i = 0; i < amountOfAI; i++) {
+            addAI();
+        }
+    }
 
+    private void addAI()
+    {
+        Instantiate(AI_prefab, GetRandomPosition(), new Quaternion());
+    }
     void AddPlayers(int numberOfPlayers)
     {
         for (int i = 0; i < numberOfPlayers; i++) {

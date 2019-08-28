@@ -120,4 +120,25 @@ public abstract class BaseMovement : MonoBehaviour
         body[i].LookAt(transform);
         body[i].Translate(body[i].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
     }
+
+    protected void moveAura()
+    {
+        if (points > 0)
+        {
+
+            // auraTransform.position = transform.position;
+            float auraPos;
+            if (points < 90)
+            {
+                auraPos = transform.position.y + (points * 10 / 100.0f);
+            }
+            else
+            { //want to cap y value
+                auraPos = transform.position.y + 9.0f;
+            }
+
+            auraTransform.position = new Vector3(transform.position.x, auraPos, transform.position.z);
+            auraTransform.rotation = transform.rotation;
+        }
+    }
 }
