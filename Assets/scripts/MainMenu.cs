@@ -36,21 +36,21 @@ public class MainMenu : MonoBehaviour
             player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p1LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p1RInputField.text));
             Config.playerControls[0]= player; 
             Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
-            
+
             if(!(p2LInputField.text.Equals("") && p2RInputField.text.Equals(""))){
                 player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p2LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p2RInputField.text));
                 Config.playerControls[1]= player; 
-                Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
+                Debug.Log("Config "+ Config.playerControls[1].Left+ " " + Config.playerControls[1].rigth);
             }
             if(!(p3LInputField.text.Equals("") && p3RInputField.text.Equals(""))){
                 player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p3LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p3RInputField.text));
                 Config.playerControls[2]= player;
-                Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
+                Debug.Log("Config "+ Config.playerControls[2].Left+ " " + Config.playerControls[2].rigth);
             }
             if(!(p4LInputField.text.Equals("") && p4RInputField.text.Equals(""))){
                 player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p4LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p4RInputField.text));
                 Config.playerControls[3]= player; 
-                Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
+                Debug.Log("Config "+ Config.playerControls[3].Left+ " " + Config.playerControls[3].rigth);
             }
 
            
@@ -69,19 +69,6 @@ public class MainMenu : MonoBehaviour
     public  void StorePlayerDetails()
     {
 
-        // control = p1LInputField.text;
-        // Debug.Log(control);
-        
-        // Debug.Log(p1LInputField.ToString());
-        // // Debug.Log(p2LInputField.text);
-        // if(p1LInputField.ToString().Equals("Player1LeftControl (TMPro.TMP_InputField)")){
-        //     Debug.Log("Success");
-        // }
-        // // if(p2LInputField.ToString().Equals("Player1LeftControl (TMPro.TMP_InputField)")){
-        // //     Debug.Log("Success");
-        // // }
-        // Debug.Log("Config "+ Config.playerControls[0].Left);
-        // static TMP_InputField player = p1LInputField;
         if(!p1LInputField.text.Equals("")){
         player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p1LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), "R"));
         Config.playerControls[0]= player;

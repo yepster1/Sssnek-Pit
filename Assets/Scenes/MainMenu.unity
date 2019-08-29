@@ -3421,9 +3421,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   control: 
   errorText: {fileID: 661334054}
-  inputField: {fileID: 0}
   p1LInputField: {fileID: 624530975}
-  p1RInputField: {fileID: 414058130}
+  p1RInputField: {fileID: 1086588065}
   p2LInputField: {fileID: 414058130}
   p2RInputField: {fileID: 588295890}
   p3LInputField: {fileID: 1781221650}
