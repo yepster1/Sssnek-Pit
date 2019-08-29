@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     private ArrayList players;
     public string control;
+    public TMP_Text errorText;
     public TMP_InputField  inputField;
     public TMP_InputField p1LInputField;
     public TMP_InputField p1RInputField;
@@ -17,28 +18,51 @@ public class MainMenu : MonoBehaviour
     public TMP_InputField p3RInputField;
     public TMP_InputField p4LInputField;
     public TMP_InputField p4RInputField;
+    public static controls player;
 
-    private void Start() {
-        // p1LInputField
-        // p1RInputField
-        // p2LInputField
-        // p2RInputField
-        // p3LInputField
-        // p3RInputField
-        // p4LInputField
-        // p4RInputField
-        // for(int i = 0; i<8;++i){
-        //     players.Add()
-        // }
-    }
+   
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-        
+        if(CheckPlayerInput()){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        }
+
     }
 
-    // public void StorePlayerDetails(string text)
-    public void StorePlayerDetails()
+    private bool CheckPlayerInput(){
+        try
+        {
+            //Add player 1 input. Theremust be at leat one player.
+            player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p1LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p1RInputField.text));
+            Config.playerControls[0]= player; 
+            Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
+            if(!(p2LInputField.text.Equals("") && p2RInputField.text.Equals(""))){
+                player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p2LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p2RInputField.text));
+                Config.playerControls[1]= player; 
+                Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
+            }
+            if(!(p3LInputField.text.Equals("") && p3RInputField.text.Equals(""))){
+                player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p3LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p3RInputField.text));
+                Config.playerControls[2]= player;
+                Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
+            }
+            if(!(p4LInputField.text.Equals("") && p4RInputField.text.Equals(""))){
+                player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p4LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p4RInputField.text));
+                Config.playerControls[3]= player; 
+                Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
+            }
+            return true;
+            
+        }
+        catch (System.Exception)
+        {
+            errorText.text="Please make sure that at leat player one has controls.";
+            return false;
+           
+        }
+    
+    }    
+    public  void StorePlayerDetails()
     {
 
         // control = p1LInputField.text;
@@ -52,7 +76,17 @@ public class MainMenu : MonoBehaviour
         // // if(p2LInputField.ToString().Equals("Player1LeftControl (TMPro.TMP_InputField)")){
         // //     Debug.Log("Success");
         // // }
-       
+        // Debug.Log("Config "+ Config.playerControls[0].Left);
+        // static TMP_InputField player = p1LInputField;
+        if(!p1LInputField.text.Equals("")){
+        player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p1LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), "R"));
+        Config.playerControls[0]= player;
+        Debug.Log("Config "+ Config.playerControls[0].Left);
+        }
+        if(p1LInputField.text.Equals("")){
+            Debug.Log("Empty Field");
+        }
+        
 
     }
 
