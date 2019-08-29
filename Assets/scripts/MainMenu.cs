@@ -9,7 +9,6 @@ public class MainMenu : MonoBehaviour
     private ArrayList players;
     public string control;
     public TMP_Text errorText;
-    public TMP_InputField  inputField;
     public TMP_InputField p1LInputField;
     public TMP_InputField p1RInputField;
     public TMP_InputField p2LInputField;
@@ -30,12 +29,14 @@ public class MainMenu : MonoBehaviour
     }
 
     private bool CheckPlayerInput(){
+        errorText.text ="";
         try
         {
             //Add player 1 input. Theremust be at leat one player.
             player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p1LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p1RInputField.text));
             Config.playerControls[0]= player; 
             Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
+            
             if(!(p2LInputField.text.Equals("") && p2RInputField.text.Equals(""))){
                 player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), p2LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), p2RInputField.text));
                 Config.playerControls[1]= player; 
@@ -51,6 +52,9 @@ public class MainMenu : MonoBehaviour
                 Config.playerControls[3]= player; 
                 Debug.Log("Config "+ Config.playerControls[0].Left+ " " + Config.playerControls[0].rigth);
             }
+
+           
+
             return true;
             
         }
