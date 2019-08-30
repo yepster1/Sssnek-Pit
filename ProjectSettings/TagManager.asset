@@ -6,11 +6,6 @@ TagManager:
   tags:
   - snake
   - point
-
-  - player1
-  - player2
-  - player3
-  - player4
   - powerup
   - floor
   layers:
