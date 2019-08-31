@@ -49,6 +49,8 @@ public class Config
     public static int MAP_LENGTH = 100;
     public static int MAP_WIDTH = 100;
     public static float PLAYER_SPEED = 10;
+    public static float MAX_PLAYER_SPEED = Config.PLAYER_SPEED * 1.5f;
+    public static float MIN_PLAYER_SPEED = Config.PLAYER_SPEED * 0.8f;
     public static float PLAYER_ROTATION = 3f;
     public static float PLAYER_JUMP_FORCE = 10.0f; 
     public static float PLAYER_FALL_MULTIPLIER = 2.5f;
