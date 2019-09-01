@@ -62,19 +62,19 @@ public class MainMenu : MonoBehaviour
             
             if(numbers.Contains(p1LInputField.text) && numbers.Contains(p1RInputField.text)){
                 player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), "Keypad"+p1LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), "Keypad"+p1RInputField.text));
-                Config.playerControls[3]= player; 
-                Debug.Log("Config "+ Config.playerControls[3].Left+ " " + Config.playerControls[3].rigth);
+                Config.playerControls[0]= player; 
+                Debug.Log("Config num "+ Config.playerControls[3].Left+ " " + Config.playerControls[3].rigth);
             }
 
             if(numbers.Contains(p2LInputField.text) && numbers.Contains(p2RInputField.text)){
                 player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), "Keypad"+p2LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), "Keypad"+p2RInputField.text));
-                Config.playerControls[3]= player; 
+                Config.playerControls[1]= player; 
                 Debug.Log("Config "+ Config.playerControls[3].Left+ " " + Config.playerControls[3].rigth);
             }
 
             if(numbers.Contains(p3LInputField.text) && numbers.Contains(p3RInputField.text)){
                 player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), "Keypad"+p3LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), "Keypad"+p3RInputField.text));
-                Config.playerControls[3]= player; 
+                Config.playerControls[2]= player; 
                 Debug.Log("Config "+ Config.playerControls[3].Left+ " " + Config.playerControls[3].rigth);
             }
 
