@@ -18,7 +18,7 @@ public class gameController : MonoBehaviour
     public GameObject powerup_prefab;
     public GameObject player_prefab;
     public GameObject AI_prefab;
-    public static totalPlayers totPlayers;
+    
     private  int numOfPlayers;
 
     // Start is called before the first frame update
@@ -34,7 +34,8 @@ public class gameController : MonoBehaviour
         // numOfPlayers = totPlayers.numOfPlayers;
         // AddPlayers(numOfPlayers);
         Debug.Log("In GAME control");
-        AddPlayers(2);
+        // numOfPlayers = ;
+        AddPlayers(MainMenu.totPlayers.numOfPlayers);
         AddAIs(4);
     }
     

@@ -19,7 +19,6 @@ public struct controls
 
 public struct view
 {
-
     public static view create_view(float x, float y, float h, float w)
     {
         view view = new view();
