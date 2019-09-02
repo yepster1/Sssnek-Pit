@@ -23,6 +23,7 @@ public class MainMenu : MonoBehaviour
     private ArrayList alphabets = new ArrayList{"Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M"};
     private ArrayList numbers = new ArrayList{"0","1","2","3","4","5","6","7","8","9"};
     private ArrayList arrows = new ArrayList{KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow,KeyCode.RightArrow};
+    private ArrayList keysAlreadyEntered = new ArrayList();
    
 
     private void Start() {
@@ -144,16 +145,33 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    // public void InputValidator(){
+    //     if(!p1RInputField.text.Equals("")){
+    //         if(!keysAlreadyEntered.Contains(p1RInputField.text))
+    //             keysAlreadyEntered.Add(p1RInputField.text);
+    //         Debug.Log(p1RInputField.text+" Already exist");
+    //     }
+    // }
+
     public  void StorePlayerDetails()
     {
 
         if(!p1LInputField.text.Equals("") && !p1RInputField.text.Equals("")){
             EnablePlayer(2);
+            keysAlreadyEntered.Add(p1LInputField.text);
+            keysAlreadyEntered.Add(p1RInputField.text);
             Debug.Log("P1 not empty");
         }
         if(!p2LInputField.text.Equals("") && !p2RInputField.text.Equals("")){
-            EnablePlayer(3);
-            Debug.Log("P2 not empty");
+            if(keysAlreadyEntered.Contains(p2LInputField.text) && keysAlreadyEntered.Contains(p2RInputField.text)){
+                p2LInputField.text="";
+                p2RInputField.text="";
+            }
+            else
+            {
+                EnablePlayer(3);
+                Debug.Log("P2 not empty");
+            }
         }
         if(!p3LInputField.text.Equals("") && !p3RInputField.text.Equals("")){
             EnablePlayer(4);
