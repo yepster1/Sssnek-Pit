@@ -9,8 +9,8 @@ public class MainMenu : MonoBehaviour
     private ArrayList players;
     public string control;
     public TMP_Text errorText;
-    public TMP_InputField p1LInputField;
     public TMP_InputField p1RInputField;
+    public TMP_InputField p1LInputField;
     public TMP_InputField p2LInputField;
     public TMP_InputField p2RInputField;
     public TMP_InputField p3LInputField;
@@ -24,6 +24,16 @@ public class MainMenu : MonoBehaviour
     private ArrayList numbers = new ArrayList{"0","1","2","3","4","5","6","7","8","9"};
     private ArrayList arrows = new ArrayList{KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow,KeyCode.RightArrow};
    
+
+    private void Start() {
+        // p2LInputField.DeactivateInputField();
+        p2LInputField.enabled=false;
+        p2RInputField.enabled=false;
+        p3LInputField.enabled=false;
+        p3RInputField.enabled=false;
+        p4LInputField.enabled=false;
+        p4RInputField.enabled=false;
+    }
     public void PlayGame()
     {
         errorText.text="";
@@ -116,13 +126,40 @@ public class MainMenu : MonoBehaviour
     
     }    
 
+    public void EnablePlayer(int playerNumber){
+        switch (playerNumber)
+        {
+            case 2:
+                p2LInputField.enabled = true;
+                p2RInputField.enabled = true;
+               break;
+            case 3:
+                p3LInputField.enabled = true;
+                p3RInputField.enabled = true;
+               break;
+            case 4:
+                p4LInputField.enabled = true;
+                p4RInputField.enabled = true;
+               break;
+        }
+    }
+
     public  void StorePlayerDetails()
     {
-        // p1LInputField.GetComponent(KeyCode);
-        // player = controls.create_control( (KeyCode) System.Enum.Parse(typeof(KeyCode), "Keypad"+p1LInputField.text) , (KeyCode) System.Enum.Parse(typeof(KeyCode), "Keypad2"));
-        // Config.playerControls[0]= player;
-        // Debug.Log("Config "+ Config.playerControls[0].Left);
-        
+
+        if(!p1LInputField.text.Equals("") && !p1RInputField.text.Equals("")){
+            EnablePlayer(2);
+            Debug.Log("P1 not empty");
+        }
+        if(!p2LInputField.text.Equals("") && !p2RInputField.text.Equals("")){
+            EnablePlayer(3);
+            Debug.Log("P2 not empty");
+        }
+        if(!p3LInputField.text.Equals("") && !p3RInputField.text.Equals("")){
+            EnablePlayer(4);
+            Debug.Log("P3 not empty");
+        }
+
         
 
     }
