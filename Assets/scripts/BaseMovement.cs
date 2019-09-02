@@ -74,8 +74,9 @@ public abstract class BaseMovement : MonoBehaviour
     protected void CollideWithPowerup(Collision collision){
         GameObject powerupGameObject = collision.gameObject;
         Powerup powerup = powerupGameObject.GetComponent<Powerup>();
-        if (powerup != null){
-            if (powerups.Count == 1){
+        // powerups can be null
+        if (powerups != null && powerup != null){
+            if ( powerups.Count == 1){
                 Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
             // Powerup speed = this.gameObject.AddComponent<Speed>();
                 speedPowerup.setPowerup("speed", true, false);

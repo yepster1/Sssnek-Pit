@@ -2,15 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public  struct totalPlayers
+{
+    public static totalPlayers addTotalPlayers(int pnum){
+        totalPlayers player = new totalPlayers();
+        player.numOfPlayers=pnum;
+        return player;
+    }
+    public int numOfPlayers;
+    
+}
 public class gameController : MonoBehaviour
 {
     public GameObject point_prefab;
     public GameObject powerup_prefab;
     public GameObject player_prefab;
     public GameObject AI_prefab;
+    public static totalPlayers totPlayers;
+    private  int numOfPlayers;
 
     // Start is called before the first frame update
-    void Start()
+
+   private void Start()
     {
         InvokeRepeating("Spawn", 0.5f, 0.5f);
         InvokeRepeating("SpawnPowerups", 0.5f , 3f);
@@ -18,7 +31,10 @@ public class gameController : MonoBehaviour
         GameStateHandler.aiList = new List<GameObject>(); 
         GameStateHandler.pointList = new List<GameObject>();
         GameStateHandler.powerupsList = new List<GameObject>();
-        AddPlayers(1);
+        // numOfPlayers = totPlayers.numOfPlayers;
+        // AddPlayers(numOfPlayers);
+        Debug.Log("In GAME control");
+        AddPlayers(2);
         AddAIs(4);
     }
     

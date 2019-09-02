@@ -18,6 +18,7 @@ public class MainMenu : MonoBehaviour
     public TMP_InputField p4LInputField;
     public TMP_InputField p4RInputField;
     public static controls player;
+    public int numOfPlayers;
     private ArrayList alphabets = new ArrayList{"Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M"};
     private ArrayList numbers = new ArrayList{"0","1","2","3","4","5","6","7","8","9"};
     private ArrayList arrows = new ArrayList{KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow,KeyCode.RightArrow};
@@ -25,6 +26,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         if(CheckPlayerInput()){
+            totalPlayers.addTotalPlayers(2);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
         }
 
