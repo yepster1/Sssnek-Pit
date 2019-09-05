@@ -7,7 +7,8 @@ public class Movement : BaseMovement
     private int playerNumber;
     public KeyCode left;
     public KeyCode right;
-    
+    bool isFired = false; // for missile powerup
+
     public void spawnPlayer(List<int> inputs)
     {
         int amountOfPlayers = inputs[0];
@@ -133,5 +134,16 @@ public class Movement : BaseMovement
             Debug.Log("no powerups in list");
         }
 	}
+
+    void Update()
+    {
+        // missile powerup
+        if (Input.GetButtonDown("Fire1") && isFired == false)
+        {
+            Debug.Log("Pew!");
+            Instantiate(Resources.Load("missile-powerup"), transform.position, Quaternion.identity);
+            isFired = true;
+        }
+    }
 
 }
