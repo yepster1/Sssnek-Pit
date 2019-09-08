@@ -15,6 +15,7 @@ public class Movement : BaseMovement
         Debug.Log("player " + playerNumber + " started");
         this.left = Config.playerControls[playerNumber].Left;
         this.right = Config.playerControls[playerNumber].rigth;
+        snakeColourSetter.SetColor(playerNumber, GetComponent<SkinnedMeshRenderer>());
         setCamara(amountOfPlayers, playerNumber);
     }
 
@@ -133,5 +134,10 @@ public class Movement : BaseMovement
             Debug.Log("no powerups in list");
         }
 	}
+
+    public override void setColor(Transform tail)
+    {
+        snakeColourSetter.SetColor(playerNumber, tail.gameObject.GetComponent<SkinnedMeshRenderer>());
+    }
 
 }

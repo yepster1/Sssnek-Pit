@@ -127,4 +127,9 @@ public class MovementRightAngle : BaseMovement
         cam.transform.position = temp;
         cam.transform.rotation = Quaternion.Euler(rotation, 0, 0);
     }
+
+    public override void setColor(Transform tail)
+    {
+        snakeColourSetter.SetColor(5, tail.gameObject.GetComponent<SkinnedMeshRenderer>());
+    }
 }

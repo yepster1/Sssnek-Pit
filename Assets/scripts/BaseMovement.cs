@@ -164,6 +164,10 @@ public abstract class BaseMovement : MonoBehaviour
             auraTransform = Instantiate(auraPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
             newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
         }
+        setColor(newPart);
+
         body.Add(newPart);
     }
+    public abstract void setColor(Transform tail);
+
 }
