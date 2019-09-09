@@ -35,7 +35,7 @@ public class gameController : MonoBehaviour
         // AddPlayers(numOfPlayers);
         Debug.Log("In GAME control");
         // numOfPlayers = ;
-        AddPlayers(MainMenu.totPlayers.numOfPlayers);
+        AddPlayers(MainMenu.totPlayers.numOfPlayers==0 ? 1 :  MainMenu.totPlayers.numOfPlayers);
         AddAIs(4);
     }
     
