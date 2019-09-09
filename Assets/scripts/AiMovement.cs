@@ -28,7 +28,7 @@ public class AiMovement : BaseMovement
             changeTarget(target);
         }
         navMeshAgent.SetDestination(theTarget);
-        moveMyTail();
+        moveMyTail(MaxSpeed, MinSpeed);
         moveAura();
     }
 

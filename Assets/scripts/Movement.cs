@@ -31,15 +31,16 @@ public class Movement : BaseMovement
     {
         body = new List<Transform>();
         rb = GetComponent<Rigidbody>();
-        powerups = new List<Powerup>();
-        Powerup jumpDefault = (Powerup)this.gameObject.GetComponent<Jump>();
-        jumpDefault.powerupType = "jump";
-        jumpDefault.isActive = true;
-        jumpDefault.deactivateNow();
-        powerups.Add(jumpDefault);
+        powerups = new Stack<Powerup>();
+        Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
+        jumpDefault.setPowerup("jump", true, false);
+        powerups.Push(jumpDefault);
         
+        MaxSpeed = Config.MAX_PLAYER_SPEED;
+        MinSpeed = Config.MIN_PLAYER_SPEED;
         // Powerup defaultScript = default.GetComponent<Powerup>();
         jumpTimer = 0.0f;
+        powerupBeingUsed = false;
         
         // powerups.Add(powerup);
         
@@ -53,59 +54,16 @@ public class Movement : BaseMovement
         moveForward();
         performTurn();
 
-        activatePowerup();
+        if (Input.GetKey(left) && Input.GetKey(right))
+        {   
+            Debug.Log("powerups.Count()" + powerups.Count);
+            activatePowerup();
+        }
         
-        moveMyTail();
+        moveMyTail(MaxSpeed,MinSpeed);
         moveAura();
         
     }
-
-    private void moveForward()
-    {
-        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
-    }
-
-    private void speedPowerUp()
-    {
-        //speed powerup
-        // timeLeft -= Time.deltaTime;
-        // if (Input.GetKey("v"))    
-        // {
-        //     if (timeLeft > 0)
-        //     {
-        //         speed = 50f;
-        //         Debug.Log("Poweup ON. player speed:" + speed +". Time left:" + timeLeft);
-        //     }
-        //     else
-        //     {
-        //         speed = 20f;
-        //         Debug.Log("Poweup OFF. player speed:" + speed + ". Time left:" + timeLeft);
-        //     }
-        // }
-        //end of speed powerup 
-    }
-    private void moveAura()
-    {
-        if (points > 0)
-        {
-
-            // auraTransform.position = transform.position;
-            float auraPos;
-            if (points < 90)
-            {
-                auraPos = transform.position.y + (points * 10 / 100.0f);
-            }
-            else
-            { //want to cap y value
-                auraPos = transform.position.y + 9.0f;
-            }
-
-            auraTransform.position = new Vector3(transform.position.x, auraPos, transform.position.z);
-            auraTransform.rotation = transform.rotation;
-        }
-    }
-
-    
 
     private void performTurn()
 	{
@@ -121,17 +79,41 @@ public class Movement : BaseMovement
 
     public void activatePowerup()
 	{
-        if(powerups!= null){
-            if (Input.GetKey(left) && Input.GetKey(right) && jumpTimer > timeBetweenJumps)
-            {
-                Debug.Log(powerups[0].powerupType);
-                powerups[0].activateNow();
-                jumpTimer = 0.0f;
-
+        bool otherPowerupActive = false;
+        if (powerups.Count  > 1 && !powerupBeingUsed){
+            Powerup p = powerups.Pop();
+            if (p.powerupType == "speed" ){
+                powerupInUse(); //sets powerupBeingUsed to true
+                Debug.Log(p.activate);
+                p.activateNow();
+                Invoke("powerupInUse", p.maxTimeToSpeed); //sets powerupBeingUsed to false to allow others to be used
             }
-        }else{
-            Debug.Log("no powerups in list");
+            
+        }else if (powerups.Count == 1){
+            Powerup p = powerups.Peek();
+            Debug.Log(p.powerupType);
+            if (p.powerupType == "jump" && jumpTimer > timeBetweenJumps && !powerupBeingUsed){
+                powerupInUse(); //sets powerupBeingUsed to true
+                p.activateNow();
+                Invoke("powerupInUse", timeBetweenJumps);
+                jumpTimer = 0.0f;
+            }
+        } 
+       
+        else if (powerups.Count == 0){
+            Debug.Log("no powerup to activate pushing now");
+            Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
+            jumpDefault.setPowerup("jump", true, false);
+            powerups.Push(jumpDefault);
+            
         }
 	}
+    private void powerupInUse(){ //sets it to the opposite
+        
+        powerupBeingUsed = ! powerupBeingUsed;
+    }
+    
+
+   
 
 }

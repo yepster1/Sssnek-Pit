@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Jump : Powerup
 {
-    private float maxTimeToJump = 3f;
+    
     private GameObject floor;
     private Vector3 jump;
 
@@ -12,6 +12,12 @@ public class Jump : Powerup
     private float fallMultiplier = Config.PLAYER_FALL_MULTIPLIER;
     private float lowJumpMultiplier = Config.PLAYER_LOW_JUMP_MULTIPLIER;
     
+    
+    public override void setPowerup(string _powerupType, bool _isActive, bool _activate){
+        powerupType = _powerupType;
+        isActive = _isActive;
+        activate = _activate;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +33,10 @@ public class Jump : Powerup
        
         
     }
-
+    void OnCollisionStay()
+    {
+        onGround = true;
+    }
     public override void activateNow(){
         Debug.Log("Jump Activated");
         activate = true;
@@ -36,6 +45,7 @@ public class Jump : Powerup
     public override void deactivateNow(){
         Debug.Log("jump deactivated");
         activate = false;
+        
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -47,11 +57,12 @@ public class Jump : Powerup
             deactivateNow();
             
         }
-        if (rb.velocity.y < 0 ){
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier -1 ) * Time.smoothDeltaTime;
-        }
-        else if (rb.velocity.y > 0){
+
+        if (rb.velocity.y > 0){
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier -1 ) * Time.smoothDeltaTime;
+        }
+         else if (rb.velocity.y < 0 ){
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier -1 ) * Time.smoothDeltaTime;
         }
         
     }

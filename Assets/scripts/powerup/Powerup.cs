@@ -2,27 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public abstract class Powerup : MonoBehaviour
+// [RequireComponent(typeof(Rigidbody))]
+public class Powerup : MonoBehaviour
 {
     public string powerupType;
     public bool isActive; //!isActive is passive powerup
     public bool activate; 
     protected int playerNum;
     protected gameController gc;
-    protected List<GameObject> playerList;
+    protected List<GameObject> playerList; //to be used for passive powerups
     protected Rigidbody rb;
-    
-    
     protected bool onGround;
+
+    //for speed
+    public float maxTimeToSpeed = 3.0f;
+    public float speedTimer;
     
-    void OnCollisionStay()
-    {
-        onGround = true;
-    }
+    
+    
+    // OnAwake(){
+    //     // setPowerup("jump", true, false);
+    // }
+    // protected void OnCollisionEnter(Collision collision)
+    // {
+    //     if (collision.gameObject.tag.Equals("snake"))
+    //     {
+    //         powerupType = setPowerupType();
+    //         isActive = setIsActive();
+    //     }
+    // }
+    public virtual void setPowerup(string _powerupType, bool _isActive, bool _activate){}
+    
 
     public virtual void activateNow(){
-        Debug.Log("powerup activated");
+       Debug.Log("powerup activated");
     }
     public virtual void deactivateNow(){
         Debug.Log("powerup deactivated");
@@ -64,5 +77,6 @@ public abstract class Powerup : MonoBehaviour
         }
         return powerupType;
     }
+    
 
 }

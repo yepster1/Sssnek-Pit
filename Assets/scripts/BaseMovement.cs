@@ -9,14 +9,25 @@ public abstract class BaseMovement : MonoBehaviour
     protected Rigidbody rb;
     public int points = 0;
     protected float speed = Config.PLAYER_SPEED;
+    public float MaxSpeed;
+    public float MinSpeed;
     protected float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject auraPrefab;
     protected Transform auraTransform;
 
-    public List<Powerup> powerups;
+    public Stack<Powerup> powerups;
     protected Powerup powerup;
+    protected bool powerupBeingUsed;
     protected float timeBetweenJumps = 2f;
+    
     protected float jumpTimer;
+
+    protected bool onGround;
+
+    void OnCollisionStay()
+    {
+        onGround = true;
+    }
 
     protected void OnCollisionEnter(Collision collision)
     {
@@ -61,13 +72,37 @@ public abstract class BaseMovement : MonoBehaviour
     }
 
     protected void CollideWithPowerup(Collision collision){
-        GameObject powerup = collision.gameObject;
-        Powerup powerupScript = powerup.GetComponent<Powerup>();
-        Debug.Log("powerup type: " + powerupScript.powerupType);
-        Debug.Log("powerup is active: " + powerupScript.isActive);
-        powerups.Add(powerupScript);
-        GameStateHandler.powerupsList.Remove(collision.gameObject);
-        Destroy(collision.gameObject);
+        GameObject powerupGameObject = collision.gameObject;
+        Powerup powerup = powerupGameObject.GetComponent<Powerup>();
+        // powerups can be null
+        if (powerups != null && powerup != null){
+            if ( powerups.Count == 1){
+                Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
+            // Powerup speed = this.gameObject.AddComponent<Speed>();
+                speedPowerup.setPowerup("speed", true, false);
+                powerups.Push(speedPowerup);
+                powerup.isActive = true;
+                Debug.Log("powerup type: " + powerup.powerupType);
+                Debug.Log("powerup is active: " + powerup.isActive);
+                Debug.Log("stack peek" + powerups.Peek());
+                GameStateHandler.powerupsList.Remove(collision.gameObject);
+            
+            }else if(powerups.Count  > 1){
+                powerups.Pop(); //remove current powerup
+                Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
+                speedPowerup.setPowerup("speed", true, false);
+                powerups.Push(speedPowerup);
+                powerup.isActive = true;
+                Debug.Log("powerup type: " + powerup.powerupType);
+                Debug.Log("powerup is active: " + powerup.isActive);
+                Debug.Log("stack peek" + powerups.Peek());
+                GameStateHandler.powerupsList.Remove(collision.gameObject);
+            }
+            Destroy(powerupGameObject);  
+        }else{
+            Debug.Log("could not find powerup script component");
+        }
+         
     }
 
     protected void moveForward()
@@ -75,24 +110,24 @@ public abstract class BaseMovement : MonoBehaviour
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
 
-    protected void moveMyTail()
+    public void moveMyTail(float maxSpeed , float minSpeed)
     {
         if (body.Count > 0)
         {
-            moveTail(0, transform);
+            moveTail(0, transform, maxSpeed, minSpeed);
         }
         for (int i = 1; i < body.Count; i++)
         {
-            moveTail(i, body[i - 1]);
+            moveTail(i, body[i - 1], maxSpeed , minSpeed);
         }
     }
 
-    protected void moveTail(int i, Transform transform)
+    protected void moveTail(int i, Transform transform, float maxSpeed , float minSpeed)
     {
         var MaximumDistance = 1.3;
         var MinimumDistance = 1.0;
-        var MaxSpeed = speed * 1.5;
-        var MinSpeed = speed * 0.8;
+        var MaxSpeed = maxSpeed;
+        var MinSpeed = minSpeed;
         var bodySpeed = 0.0;
         var dist = Vector3.Distance(body[i].position, transform.position);
 
@@ -146,7 +181,7 @@ public abstract class BaseMovement : MonoBehaviour
         {
 
             float size = points * 10 / 1500; //change this to modify size faster or slower
-            Debug.Log(size);
+           
             auraTransform.localScale += new Vector3(size, size, size);
         }
 
