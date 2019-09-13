@@ -24,10 +24,6 @@ public abstract class BaseMovement : MonoBehaviour
     protected float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject auraPrefab;
     protected Transform auraTransform;
-    private TMP_Text scoreDisplay;
-    private GameObject scoreDisplayObject;
-
-
     public Stack<Powerup> powerups;
     protected Powerup powerup;
     protected bool powerupBeingUsed;
@@ -37,11 +33,6 @@ public abstract class BaseMovement : MonoBehaviour
 
     protected bool onGround;
 
-    // public void Start() {
-    //     scoreDisplayObject =GameObject.FindGameObjectWithTag("scoreDisplay");
-    //     scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-    //     Debug.Log("GameObject.FindGameObjectWithTag(????????????????????????????????????????)");
-    // }
     void OnCollisionStay()
     {
         onGround = true;
@@ -77,17 +68,11 @@ public abstract class BaseMovement : MonoBehaviour
             Destroy(part.gameObject);
         body = new List<Transform>();
     }
-
     protected void CollideWithPoint(Collision collision)
     {
         GameStateHandler.pointList.Remove(collision.gameObject);
         Destroy(collision.gameObject);
         points += 1;
-        scoreDisplayObject =GameObject.FindGameObjectWithTag("scoreDisplay");
-        scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-        Debug.Log(scoreDisplay.tag+ " With score: " + points);
-        // Debug.Log(scoreDisplay.tag);
-        scoreDisplay.text = points+"";
         add_tail();
         increase_aura();
         
