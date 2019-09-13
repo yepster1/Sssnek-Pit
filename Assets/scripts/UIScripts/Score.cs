@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Score : MonoBehaviour
+public abstract class Score : MonoBehaviour
 {
-    public GameObject player;
-    void Update()
+    public static void getScore()
     {
-        
+        Debug.Log("Score is: "  );
     }
+}
+public  struct score
+{
+    public static score setScore(int totScore){
+        score totalScore = new score();
+        totalScore.currentScore=totScore;
+        return totalScore;
+    }
+    public int currentScore;
+    
 }

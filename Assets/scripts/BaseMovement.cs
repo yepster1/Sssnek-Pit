@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+// public  struct score
+// {
+//     public static score setScore(int totScore){
+//         score totalScore = new score();
+//         totalScore.currentScore=totScore;
+//         return totalScore;
+//     }
+//     public int currentScore;
+    
+// }
 public abstract class BaseMovement : MonoBehaviour
 {
-
     public GameObject tailPrefab;
     public List<Transform> body;
     protected Rigidbody rb;
@@ -14,6 +24,9 @@ public abstract class BaseMovement : MonoBehaviour
     protected float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject auraPrefab;
     protected Transform auraTransform;
+    private TMP_Text scoreDisplay;
+    private GameObject scoreDisplayObject;
+
 
     public Stack<Powerup> powerups;
     protected Powerup powerup;
@@ -24,6 +37,11 @@ public abstract class BaseMovement : MonoBehaviour
 
     protected bool onGround;
 
+    // public void Start() {
+    //     scoreDisplayObject =GameObject.FindGameObjectWithTag("scoreDisplay");
+    //     scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+    //     Debug.Log("GameObject.FindGameObjectWithTag(????????????????????????????????????????)");
+    // }
     void OnCollisionStay()
     {
         onGround = true;
@@ -65,6 +83,11 @@ public abstract class BaseMovement : MonoBehaviour
         GameStateHandler.pointList.Remove(collision.gameObject);
         Destroy(collision.gameObject);
         points += 1;
+        scoreDisplayObject =GameObject.FindGameObjectWithTag("scoreDisplay");
+        scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        Debug.Log(scoreDisplay.tag+ " With score: " + points);
+        // Debug.Log(scoreDisplay.tag);
+        scoreDisplay.text = points+"";
         add_tail();
         increase_aura();
         
