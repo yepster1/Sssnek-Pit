@@ -23,8 +23,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - ScoreNavbar
+  - ScoreLabels
   - 
   - 
   - 
@@ -50,4 +50,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: ScoreNavbar
+    uniqueID: 2864298499
+    locked: 0
+  - name: ScoreLabels
+    uniqueID: 1150826127
     locked: 0

@@ -43,6 +43,7 @@ public class Movement : BaseMovement
         jumpTimer = 0.0f;
         powerupBeingUsed = false;
 
+        alive=true;
         //Set the right Score Display
         if(playerNumber==0){
             scoreDisplayObject =GameObject.FindGameObjectWithTag("player1");
@@ -78,15 +79,15 @@ public class Movement : BaseMovement
             Debug.Log("powerups.Count()" + powerups.Count);
             activatePowerup();
         }
-        // scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-        // if(playerNumber==0){
-        //     scoreDisplay.text=points+"";
-        //     Debug.Log(scoreDisplay.tag+" "+playerNumber+" "+points);
-        // }
-        // else if(playerNumber==1){
-            scoreDisplay.text=points+"";
-            Debug.Log(scoreDisplay.tag+ " "+playerNumber+" "+ points);
-        // }
+        if(alive){
+        scoreDisplay.text="Player "+(playerNumber+1)+":  "+ points+"";
+        Debug.Log(scoreDisplay.tag+ " "+playerNumber+" "+ points);
+        }
+        else{
+             scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
+             alive=true;
+        }
+
         moveMyTail(MaxSpeed,MinSpeed);
         moveAura();
        

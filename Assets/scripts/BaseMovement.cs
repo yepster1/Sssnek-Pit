@@ -28,7 +28,7 @@ public abstract class BaseMovement : MonoBehaviour
     protected Powerup powerup;
     protected bool powerupBeingUsed;
     protected float timeBetweenJumps = 2f;
-    
+    protected bool alive;
     protected float jumpTimer;
 
     protected bool onGround;
@@ -62,8 +62,9 @@ public abstract class BaseMovement : MonoBehaviour
             return;
         }
         Debug.Log("I have died");
-        transform.position = gameController.GetRandomPosition();
         points = 0;
+        alive=false;
+        transform.position = gameController.GetRandomPosition();
         foreach (Transform part in body)
             Destroy(part.gameObject);
         body = new List<Transform>();
