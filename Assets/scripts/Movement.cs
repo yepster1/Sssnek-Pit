@@ -45,6 +45,8 @@ public class Movement : BaseMovement
 
         alive=true;
         //Set the right Score Display
+        Debug.Log(MainMenu.totPlayers.numOfPlayers);
+        // for(int i = 0; i<MainMenu.totPlayers.numOfPlayers; ++i){}
         if(playerNumber==0){
             scoreDisplayObject =GameObject.FindGameObjectWithTag("player1");
             scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
