@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Movement : BaseMovement
 {
     private int playerNumber;
     public KeyCode left;
     public KeyCode right;
-    
+    protected GameObject scoreDisplayObject;
+    protected TMP_Text scoreDisplay;
+
     public void spawnPlayer(List<int> inputs)
     {
         int amountOfPlayers = inputs[0];
@@ -38,11 +40,31 @@ public class Movement : BaseMovement
         
         MaxSpeed = Config.MAX_PLAYER_SPEED;
         MinSpeed = Config.MIN_PLAYER_SPEED;
-        // Powerup defaultScript = default.GetComponent<Powerup>();
         jumpTimer = 0.0f;
         powerupBeingUsed = false;
-        
-        // powerups.Add(powerup);
+
+        alive=true;
+        //Set the right Score Display
+        Debug.Log(MainMenu.totPlayers.numOfPlayers);
+        // for(int i = 0; i<MainMenu.totPlayers.numOfPlayers; ++i){}
+        if(playerNumber==0){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player1");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
+
+        else if(playerNumber==1){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player2");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
+
+        else if(playerNumber==2){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player3");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
+        else if(playerNumber==3){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player4");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
         
     }
 
@@ -59,10 +81,18 @@ public class Movement : BaseMovement
             Debug.Log("powerups.Count()" + powerups.Count);
             activatePowerup();
         }
-        
+        if(alive){
+        scoreDisplay.text="Player "+(playerNumber+1)+":  "+ points+"";
+        Debug.Log(scoreDisplay.tag+ " "+playerNumber+" "+ points);
+        }
+        else{
+             scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
+             alive=true;
+        }
+
         moveMyTail(MaxSpeed,MinSpeed);
         moveAura();
-        
+       
     }
 
     private void performTurn()

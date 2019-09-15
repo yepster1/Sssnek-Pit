@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+// public  struct score
+// {
+//     public static score setScore(int totScore){
+//         score totalScore = new score();
+//         totalScore.currentScore=totScore;
+//         return totalScore;
+//     }
+//     public int currentScore;
+    
+// }
 public abstract class BaseMovement : MonoBehaviour
 {
-
     public GameObject tailPrefab;
     public List<Transform> body;
     protected Rigidbody rb;
@@ -14,12 +24,11 @@ public abstract class BaseMovement : MonoBehaviour
     protected float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject auraPrefab;
     protected Transform auraTransform;
-
     public Stack<Powerup> powerups;
     protected Powerup powerup;
     protected bool powerupBeingUsed;
     protected float timeBetweenJumps = 2f;
-    
+    protected bool alive;
     protected float jumpTimer;
 
     protected bool onGround;
@@ -53,13 +62,13 @@ public abstract class BaseMovement : MonoBehaviour
             return;
         }
         Debug.Log("I have died");
-        transform.position = gameController.GetRandomPosition();
         points = 0;
+        alive=false;
+        transform.position = gameController.GetRandomPosition();
         foreach (Transform part in body)
             Destroy(part.gameObject);
         body = new List<Transform>();
     }
-
     protected void CollideWithPoint(Collision collision)
     {
         GameStateHandler.pointList.Remove(collision.gameObject);
