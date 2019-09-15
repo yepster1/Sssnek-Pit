@@ -5,18 +5,23 @@ public abstract class BaseMovement : MonoBehaviour
 {
 
     public GameObject tailPrefab;
-    public List<Transform> body;
+    public List<GameObject> body;
+    public GameObject head;
     protected Rigidbody rb;
     public int points = 0;
     protected float speed = Config.PLAYER_SPEED;
+    public float MaxSpeed;
+    public float MinSpeed;
     protected float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject auraPrefab;
     protected Transform auraTransform;
 
-    public List<Powerup> powerups;
-    protected Powerup powerup;
-    protected float timeBetweenJumps = 2f;
-    protected float jumpTimer;
+    //for venom
+    // struct Tail{
+        public static int tailNumber;
+    //     public int playerNum;
+    // }
+    
 
     protected void OnCollisionEnter(Collision collision)
     {
@@ -31,22 +36,22 @@ public abstract class BaseMovement : MonoBehaviour
         
         if (collision.gameObject.tag.Equals("powerup"))
         {
-            CollideWithPowerup(collision);
+            // CollideWithPowerup(collision);
         }
     }
 
     protected void CollideWithOtherSnake(Collision collision)
     {
-        if (body.Contains(collision.transform))
+        if (body.Contains(collision.gameObject))
         {
             return;
         }
         Debug.Log("I have died");
         transform.position = gameController.GetRandomPosition();
         points = 0;
-        foreach (Transform part in body)
+        foreach (GameObject part in body)
             Destroy(part.gameObject);
-        body = new List<Transform>();
+        body = new List<GameObject>();
     }
 
     protected void CollideWithPoint(Collision collision)
@@ -54,68 +59,103 @@ public abstract class BaseMovement : MonoBehaviour
         GameStateHandler.pointList.Remove(collision.gameObject);
         Destroy(collision.gameObject);
         points += 1;
+        
+        
         add_tail();
         increase_aura();
         
         
     }
 
-    protected void CollideWithPowerup(Collision collision){
-        GameObject powerup = collision.gameObject;
-        Powerup powerupScript = powerup.GetComponent<Powerup>();
-        Debug.Log("powerup type: " + powerupScript.powerupType);
-        Debug.Log("powerup is active: " + powerupScript.isActive);
-        powerups.Add(powerupScript);
-        GameStateHandler.powerupsList.Remove(collision.gameObject);
-        Destroy(collision.gameObject);
-    }
+    // protected void CollideWithPowerup(Collision collision){
+    //     GameObject powerupGameObject = collision.gameObject;
+    //     Powerup powerup = powerupGameObject.GetComponent<Powerup>();
+    //     // powerups can be null
+    //     if (powerups != null && powerup != null){
+    //         if ( powerups.Count == 1){
+    //             Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
+    //         // Powerup speed = this.gameObject.AddComponent<Speed>();
+    //             speedPowerup.setPowerup("speed", true, false);
+    //             powerups.Push(speedPowerup);
+    //             powerup.isActive = true;
+    //             Debug.Log("powerup type: " + powerup.powerupType);
+    //             Debug.Log("powerup is active: " + powerup.isActive);
+    //             Debug.Log("stack peek" + powerups.Peek());
+    //             GameStateHandler.powerupsList.Remove(collision.gameObject);
+            
+    //         }else if(powerups.Count  > 1){
+    //             powerups.Pop(); //remove current powerup
+    //             Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
+    //             speedPowerup.setPowerup("speed", true, false);
+    //             powerups.Push(speedPowerup);
+    //             powerup.isActive = true;
+    //             Debug.Log("powerup type: " + powerup.powerupType);
+    //             Debug.Log("powerup is active: " + powerup.isActive);
+    //             Debug.Log("stack peek" + powerups.Peek());
+    //             GameStateHandler.powerupsList.Remove(collision.gameObject);
+    //         }
+    //         Destroy(powerupGameObject);  
+    //     }else{
+    //         Debug.Log("could not find powerup script component");
+    //     }
+         
+    // }
 
     protected void moveForward()
     {
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
 
-    protected void moveMyTail()
+    public void moveMyTail(float maxSpeed , float minSpeed)
     {
         if (body.Count > 0)
         {
-            moveTail(0, transform);
+            if(body[0]!= null){
+                moveTail(0, transform, maxSpeed, minSpeed);
+            }
+            
         }
         for (int i = 1; i < body.Count; i++)
         {
-            moveTail(i, body[i - 1]);
+            if (body[i-1]!= null){
+                moveTail(i, body[i - 1].transform, maxSpeed , minSpeed);
+            }
+            
         }
     }
 
-    protected void moveTail(int i, Transform transform)
+    protected void moveTail(int i, Transform transform, float maxSpeed , float minSpeed)
     {
         var MaximumDistance = 1.3;
         var MinimumDistance = 1.0;
-        var MaxSpeed = speed * 1.5;
-        var MinSpeed = speed * 0.8;
+        var MaxSpeed = maxSpeed;
+        var MinSpeed = minSpeed;
         var bodySpeed = 0.0;
-        var dist = Vector3.Distance(body[i].position, transform.position);
+        if (body[i]!= null){
+            var dist = Vector3.Distance(body[i].transform.position, transform.position);
 
-        if (dist > MaximumDistance)
-        {
-            bodySpeed = MaxSpeed; //to far so max speed
+            if (dist > MaximumDistance)
+            {
+                bodySpeed = MaxSpeed; //to far so max speed
+            }
+            else if (dist < MinimumDistance)
+            {
+                bodySpeed = MinSpeed; //to close so min speed
+            }
+            else
+            {
+                // bodyPart is between Max/Min distance so give it a proportional speed
+                // between Min and Max speed
+                // This is the % ratio between Max and Min distance
+                var distRatio = (dist - MinimumDistance) / (MaximumDistance - MinimumDistance);
+                // This is the extra speed above min speed he can go up too
+                var diffSpeed = MaxSpeed - MinSpeed;
+                bodySpeed = (distRatio * diffSpeed) + MinSpeed; // Final calc 
+            }
+            body[i].transform.LookAt(transform);
+            body[i].transform.Translate(body[i].transform.forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
         }
-        else if (dist < MinimumDistance)
-        {
-            bodySpeed = MinSpeed; //to close so min speed
-        }
-        else
-        {
-            // bodyPart is between Max/Min distance so give it a proportional speed
-            // between Min and Max speed
-            // This is the % ratio between Max and Min distance
-            var distRatio = (dist - MinimumDistance) / (MaximumDistance - MinimumDistance);
-            // This is the extra speed above min speed he can go up too
-            var diffSpeed = MaxSpeed - MinSpeed;
-            bodySpeed = (distRatio * diffSpeed) + MinSpeed; // Final calc 
-        }
-        body[i].LookAt(transform);
-        body[i].Translate(body[i].forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
+        
     }
 
     protected void moveAura()
@@ -146,7 +186,7 @@ public abstract class BaseMovement : MonoBehaviour
         {
 
             float size = points * 10 / 1500; //change this to modify size faster or slower
-            Debug.Log(size);
+           
             auraTransform.localScale += new Vector3(size, size, size);
         }
 
@@ -154,15 +194,23 @@ public abstract class BaseMovement : MonoBehaviour
 
     protected void add_tail()
     {
-        Transform newPart;
+        GameObject newPart;
+         
         if (body.Count != 0)
         {
-            newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].position - body[body.Count - 1].forward, body[body.Count - 1].rotation).transform;
+            
+            newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].transform.position - body[body.Count - 1].transform.forward, body[body.Count - 1].transform.rotation);
+            tailNumber++;
+            
+            
         }
         else
         {
             auraTransform = Instantiate(auraPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
-            newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
+            newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation);
+            tailNumber = 0;
+            
+            
         }
         setColor(newPart);
 

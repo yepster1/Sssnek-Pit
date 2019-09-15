@@ -203,8 +203,12 @@ GameObject:
   - component: {fileID: 1620788263977576722}
   - component: {fileID: 2500112874497333359}
   - component: {fileID: 6771610324488535266}
+<<<<<<< HEAD
   - component: {fileID: 450415486386386696}
   - component: {fileID: 4068096344806742422}
+=======
+  - component: {fileID: 5922578595841324065}
+>>>>>>> master
   m_Layer: 0
   m_Name: head
   m_TagString: snake
@@ -281,11 +285,14 @@ MonoBehaviour:
     type: 3}
   body: []
   points: 0
+  MaxSpeed: 0
+  MinSpeed: 0
   auraPrefab: {fileID: 967184446621808121, guid: 444478b4d0d9148208fef8344d7813ad,
     type: 3}
-  powerups: []
+  playerNumber: 0
   left: 0
   right: 0
+  powerupManager: {fileID: 0}
 --- !u!114 &6771610324488535266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435e5668caffa4f458887883539b4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &450415486386386696
+--- !u!114 &5922578595841324065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -307,7 +314,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3562449043692327784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f486f026b452444ab5298ee2a55472d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d9a20da2498347fd827267331398efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   powerupType: 
@@ -390,8 +397,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4400280149147299788}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.2588191, y: -0, z: -0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 0, z: -9.133975}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 3614781567365775986}
@@ -400,7 +407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 9.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!223 &8464393069759700747

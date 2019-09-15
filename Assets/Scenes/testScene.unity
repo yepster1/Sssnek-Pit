@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 3ad873c5b878e4640bf444c3554db3cc, type: 2}
+--- !u!1 &15399879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2166302075998349028, guid: b4164d78d4c824eab8557432795421a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 2166302076060874987}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &324324804
 GameObject:
   m_ObjectHideFlags: 0

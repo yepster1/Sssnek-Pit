@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Movement : BaseMovement
 {
-    private int playerNumber;
+    public int playerNumber;
     public KeyCode left;
     public KeyCode right;
-    
+    public PowerupManager powerupManager;
     public void spawnPlayer(List<int> inputs)
     {
         int amountOfPlayers = inputs[0];
         this.playerNumber = inputs[1];
+        head = this.gameObject;
+        // Debug.Log("**** "+ playerNumber+ " ****");
+        
+        if (playerNumber == 0){ //name for head (different to tag)
+            gameObject.name = "player0";
+        }
+        if (playerNumber == 1){
+            gameObject.name = "player1";
+        }
+        if (playerNumber == 2){
+            gameObject.name = "player2";
+        }
+        if (playerNumber == 3){
+            gameObject.name = "player3";
+        }
         Debug.Log("player " + playerNumber + " started");
+        // Debug.Log("player left: "+Config.playerControls[playerNumber].Left );
         this.left = Config.playerControls[playerNumber].Left;
         this.right = Config.playerControls[playerNumber].rigth;
         snakeColourSetter.SetColor(playerNumber, GetComponent<SkinnedMeshRenderer>());
@@ -30,83 +46,72 @@ public class Movement : BaseMovement
     // Start is called before the first frame update
     void Start()
     {
-        body = new List<Transform>();
-        rb = GetComponent<Rigidbody>();
-        powerups = new List<Powerup>();
-        Powerup jumpDefault = (Powerup)this.gameObject.GetComponent<Jump>();
-        jumpDefault.powerupType = "jump";
-        jumpDefault.isActive = true;
-        jumpDefault.deactivateNow();
-        powerups.Add(jumpDefault);
+        body = new List<GameObject>();
+        rb = this.gameObject.GetComponent<Rigidbody>();
+        // if (powerupManager == null){
+        powerupManager = this.gameObject.GetComponent<PowerupManager>();
+        powerupManager.SetPowerupManager();
+        // }
         
+        //original
+        MaxSpeed = Config.MAX_PLAYER_SPEED;
+        MinSpeed = Config.MIN_PLAYER_SPEED;
         // Powerup defaultScript = default.GetComponent<Powerup>();
-        jumpTimer = 0.0f;
         
-        // powerups.Add(powerup);
+        // // for powerup demonstration
+        // MaxSpeed = 0.0f;
+        // MinSpeed = 0.0f;
+        // speed = 0.0f;
+        // //for powerup demonstration
+        // if (playerNumber == 0){
+        //     gameObject.transform.position = new Vector3(-10.0f, 1.0f,-10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
+        // else if (playerNumber == 1){
+        //     gameObject.transform.position = new Vector3(10.0f, 1.0f,10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,180.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
+        // else if (playerNumber == 2){
+        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,90.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
         
+        // else if (playerNumber == 3){
+        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,-10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,-90.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-       jumpTimer+= Time.smoothDeltaTime;
+    //    jumpTimer+= Time.smoothDeltaTime;
         // powerup = GameObject.FindGameObjectWithTag("powerup").GetComponent<Powerup>();
         moveForward();
         performTurn();
 
-        activatePowerup();
+        if (Input.GetKey(left) && Input.GetKey(right))
+        {   
+            
+            powerupManager.activatePowerup();
+        }
         
-        moveMyTail();
+        moveMyTail(MaxSpeed,MinSpeed);
         moveAura();
         
     }
-
-    private void moveForward()
-    {
-        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
-    }
-
-    private void speedPowerUp()
-    {
-        //speed powerup
-        // timeLeft -= Time.deltaTime;
-        // if (Input.GetKey("v"))    
-        // {
-        //     if (timeLeft > 0)
-        //     {
-        //         speed = 50f;
-        //         Debug.Log("Poweup ON. player speed:" + speed +". Time left:" + timeLeft);
-        //     }
-        //     else
-        //     {
-        //         speed = 20f;
-        //         Debug.Log("Poweup OFF. player speed:" + speed + ". Time left:" + timeLeft);
-        //     }
-        // }
-        //end of speed powerup 
-    }
-    private void moveAura()
-    {
-        if (points > 0)
-        {
-
-            // auraTransform.position = transform.position;
-            float auraPos;
-            if (points < 90)
-            {
-                auraPos = transform.position.y + (points * 10 / 100.0f);
-            }
-            else
-            { //want to cap y value
-                auraPos = transform.position.y + 9.0f;
-            }
-
-            auraTransform.position = new Vector3(transform.position.x, auraPos, transform.position.z);
-            auraTransform.rotation = transform.rotation;
-        }
-    }
-
-    
 
     private void performTurn()
 	{
@@ -120,20 +125,11 @@ public class Movement : BaseMovement
 		}
 	}
 
-    public void activatePowerup()
-	{
-        if(powerups!= null){
-            if (Input.GetKey(left) && Input.GetKey(right) && jumpTimer > timeBetweenJumps)
-            {
-                Debug.Log(powerups[0].powerupType);
-                powerups[0].activateNow();
-                jumpTimer = 0.0f;
+    
+    
+    
 
-            }
-        }else{
-            Debug.Log("no powerups in list");
-        }
-	}
+   
 
     public override void setColor(Transform tail)
     {

@@ -2,31 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public abstract class Powerup : MonoBehaviour
+// [RequireComponent(typeof(Rigidbody))]
+public class Powerup : MonoBehaviour
 {
     public string powerupType;
     public bool isActive; //!isActive is passive powerup
     public bool activate; 
     protected int playerNum;
     protected gameController gc;
-    protected List<GameObject> playerList;
-    protected Rigidbody rb;
-    
-    
+    public static List<GameObject> playerList; //to be used for passive powerups
+    public Rigidbody rb;
     protected bool onGround;
+    private GameObject player;
+    protected PowerupManager powerupManager;
     
-    void OnCollisionStay()
-    {
-        onGround = true;
-    }
+    public void setPowerup(string _powerupType, int _playerNum,bool _isActive, bool _activate){
+        powerupType = _powerupType;
+        isActive = _isActive;
+        activate = _activate;
+        playerNum = _playerNum;
+        
+        // if (powerupType == "jump"){
+            
+        //     // addPowerup(jump);
+            
 
+        // }
+        if (powerupType == "venom"){
+            // Debug.Log("pNum: " + playerNum);
+            
+        }
+    }
+    
     public virtual void activateNow(){
-        Debug.Log("powerup activated");
+       Debug.Log("powerup activated");
     }
     public virtual void deactivateNow(){
         Debug.Log("powerup deactivated");
     }
+
+    
     
     //this method randomly sets certain powerups to active/passive when collected 
     public bool setIsActive(){
@@ -61,8 +76,11 @@ public abstract class Powerup : MonoBehaviour
         else if (result == 1){
             powerupType = "speed";
             
+        }else if (result == 2){
+            powerupType = "venom";
         }
         return powerupType;
     }
+    
 
 }
