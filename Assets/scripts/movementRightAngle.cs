@@ -12,11 +12,11 @@ public class MovementRightAngle : BaseMovement
 //     public float maxTimeToTurn = 0.2f; //edit this to define how long between can turn
 //     private bool canJump;
     
-//     private Camera cam;
+    private Camera cam;
 //     public GameObject cameraPrefab;
-//     private float rotation = 45;
-//     private float yOffset = 30f;
-//     private float zOffset = -30f;
+    private float rotation = 45;
+    private float yOffset = 30f;
+    private float zOffset = -30f;
     
     
 
@@ -118,7 +118,7 @@ public class MovementRightAngle : BaseMovement
 //             Debug.Log("no powerups in list");
 //         }
 		
-	}
+	// }
 
     private void moveCamera(){
         Vector3 temp = this.transform.position;

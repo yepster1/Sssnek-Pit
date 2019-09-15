@@ -6,7 +6,7 @@ public class VenomShootingScript : Powerup
 {
     public GameObject venomPrefab;
 
-    public float maxTimeToShoot = 4.0f;
+    public float maxTimeToShoot = 2.0f;
     public float shootTimer;
     public string myName;
     public int myPlayerNum;

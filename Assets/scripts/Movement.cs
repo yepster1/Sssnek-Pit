@@ -62,10 +62,12 @@ public class Movement : BaseMovement
         
         
         // // for powerup demonstration
+        // //uncomment to make snakes stationery
+        // //venom activated  by pressing left and right at same time
         // MaxSpeed = 0.0f;
         // MinSpeed = 0.0f;
         // speed = 0.0f;
-        // //for powerup demonstration
+        // 
         // if (playerNumber == 0){
         //     gameObject.transform.position = new Vector3(-10.0f, 1.0f,-10.0f);
         //     gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
@@ -87,8 +89,16 @@ public class Movement : BaseMovement
         //         add_tail();
         //     }
         // }
-        jumpTimer = 0.0f;
-        powerupBeingUsed = false;
+        
+        // else if (playerNumber == 3){
+        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,-10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,-90.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
+        
+       
 
         alive=true;
         //Set the right Score Display

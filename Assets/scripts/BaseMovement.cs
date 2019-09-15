@@ -25,7 +25,8 @@ public abstract class BaseMovement : MonoBehaviour
     protected float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject auraPrefab;
     protected Transform auraTransform;
-
+    public static int tailNumber;
+    public bool alive;
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("snake"))
@@ -216,8 +217,11 @@ public abstract class BaseMovement : MonoBehaviour
             
             
         }
-        setColor(newPart);
-
+        setColor(newPart.transform);
+        
+        Tail tail = newPart.AddComponent<Tail>();
+        tail.setHead(this.gameObject);
+        newPart = tail.add_tail(this.gameObject.name,newPart ,tailNumber);
         body.Add(newPart);
     }
     public abstract void setColor(Transform tail);
