@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Movement : BaseMovement
 {
     public int playerNumber;
     public KeyCode left;
     public KeyCode right;
     public PowerupManager powerupManager;
+    protected GameObject scoreDisplayObject;
+    protected TMP_Text scoreDisplay;
+
     public void spawnPlayer(List<int> inputs)
     {
         int amountOfPlayers = inputs[0];
@@ -56,7 +59,7 @@ public class Movement : BaseMovement
         //original
         MaxSpeed = Config.MAX_PLAYER_SPEED;
         MinSpeed = Config.MIN_PLAYER_SPEED;
-        // Powerup defaultScript = default.GetComponent<Powerup>();
+        
         
         // // for powerup demonstration
         // MaxSpeed = 0.0f;
@@ -84,6 +87,31 @@ public class Movement : BaseMovement
         //         add_tail();
         //     }
         // }
+        jumpTimer = 0.0f;
+        powerupBeingUsed = false;
+
+        alive=true;
+        //Set the right Score Display
+        Debug.Log(MainMenu.totPlayers.numOfPlayers);
+        // for(int i = 0; i<MainMenu.totPlayers.numOfPlayers; ++i){}
+        if(playerNumber==0){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player1");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
+
+        else if(playerNumber==1){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player2");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
+
+        else if(playerNumber==2){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player3");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
+        else if(playerNumber==3){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player4");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
         
         // else if (playerNumber == 3){
         //     gameObject.transform.position = new Vector3(0.0f, 1.0f,-10.0f);
@@ -107,10 +135,18 @@ public class Movement : BaseMovement
             
             powerupManager.activatePowerup();
         }
-        
+        if(alive){
+        scoreDisplay.text="Player "+(playerNumber+1)+":  "+ points+"";
+        Debug.Log(scoreDisplay.tag+ " "+playerNumber+" "+ points);
+        }
+        else{
+             scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
+             alive=true;
+        }
+
         moveMyTail(MaxSpeed,MinSpeed);
         moveAura();
-        
+       
     }
 
     private void performTurn()
