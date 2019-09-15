@@ -10,36 +10,38 @@ public class Powerup : MonoBehaviour
     public bool activate; 
     protected int playerNum;
     protected gameController gc;
-    protected List<GameObject> playerList; //to be used for passive powerups
-    protected Rigidbody rb;
+    public static List<GameObject> playerList; //to be used for passive powerups
+    public Rigidbody rb;
     protected bool onGround;
+    private GameObject player;
+    protected PowerupManager powerupManager;
+    
+    public void setPowerup(string _powerupType, int _playerNum,bool _isActive, bool _activate){
+        powerupType = _powerupType;
+        isActive = _isActive;
+        activate = _activate;
+        playerNum = _playerNum;
+        
+        // if (powerupType == "jump"){
+            
+        //     // addPowerup(jump);
+            
 
-    //for speed
-    public float maxTimeToSpeed = 3.0f;
-    public float speedTimer;
+        // }
+        if (powerupType == "venom"){
+            // Debug.Log("pNum: " + playerNum);
+            
+        }
+    }
     
-    
-    
-    // OnAwake(){
-    //     // setPowerup("jump", true, false);
-    // }
-    // protected void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject.tag.Equals("snake"))
-    //     {
-    //         powerupType = setPowerupType();
-    //         isActive = setIsActive();
-    //     }
-    // }
-    public virtual void setPowerup(string _powerupType, bool _isActive, bool _activate){}
-    
-
     public virtual void activateNow(){
        Debug.Log("powerup activated");
     }
     public virtual void deactivateNow(){
         Debug.Log("powerup deactivated");
     }
+
+    
     
     //this method randomly sets certain powerups to active/passive when collected 
     public bool setIsActive(){
@@ -74,6 +76,8 @@ public class Powerup : MonoBehaviour
         else if (result == 1){
             powerupType = "speed";
             
+        }else if (result == 2){
+            powerupType = "venom";
         }
         return powerupType;
     }
