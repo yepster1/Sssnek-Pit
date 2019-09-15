@@ -25,8 +25,8 @@ public class gameController : MonoBehaviour
 
    private void Start()
     {
-        InvokeRepeating("Spawn", 0.5f, 0.5f);
-        InvokeRepeating("SpawnPowerups", 0.5f , 3f);
+        InvokeRepeating("Spawn", 0.5f, 3f);
+        InvokeRepeating("SpawnPowerups", 0.5f , 0.5f);
         GameStateHandler.playerList = new List<GameObject>();
         GameStateHandler.aiList = new List<GameObject>(); 
         GameStateHandler.pointList = new List<GameObject>();
@@ -35,7 +35,7 @@ public class gameController : MonoBehaviour
         // AddPlayers(numOfPlayers);
         Debug.Log("In GAME control");
         // numOfPlayers = ;
-        AddPlayers(MainMenu.totPlayers.numOfPlayers);
+        AddPlayers(4);
         AddAIs(4);
     }
     

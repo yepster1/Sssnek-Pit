@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Movement : BaseMovement
 {
-    private int playerNumber;
+    public int playerNumber;
     public KeyCode left;
     public KeyCode right;
-    
+    public PowerupManager powerupManager;
     public void spawnPlayer(List<int> inputs)
     {
         int amountOfPlayers = inputs[0];
         this.playerNumber = inputs[1];
+        head = this.gameObject;
+        // Debug.Log("**** "+ playerNumber+ " ****");
+        
+        if (playerNumber == 0){ //name for head (different to tag)
+            gameObject.name = "player0";
+        }
+        if (playerNumber == 1){
+            gameObject.name = "player1";
+        }
+        if (playerNumber == 2){
+            gameObject.name = "player2";
+        }
+        if (playerNumber == 3){
+            gameObject.name = "player3";
+        }
         Debug.Log("player " + playerNumber + " started");
+        // Debug.Log("player left: "+Config.playerControls[playerNumber].Left );
         this.left = Config.playerControls[playerNumber].Left;
         this.right = Config.playerControls[playerNumber].rigth;
         setCamara(amountOfPlayers, playerNumber);
@@ -29,35 +45,66 @@ public class Movement : BaseMovement
     // Start is called before the first frame update
     void Start()
     {
-        body = new List<Transform>();
-        rb = GetComponent<Rigidbody>();
-        powerups = new Stack<Powerup>();
-        Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
-        jumpDefault.setPowerup("jump", true, false);
-        powerups.Push(jumpDefault);
+        body = new List<GameObject>();
+        rb = this.gameObject.GetComponent<Rigidbody>();
+        // if (powerupManager == null){
+        powerupManager = this.gameObject.GetComponent<PowerupManager>();
+        powerupManager.SetPowerupManager();
+        // }
         
+        //original
         MaxSpeed = Config.MAX_PLAYER_SPEED;
         MinSpeed = Config.MIN_PLAYER_SPEED;
         // Powerup defaultScript = default.GetComponent<Powerup>();
-        jumpTimer = 0.0f;
-        powerupBeingUsed = false;
         
-        // powerups.Add(powerup);
+        // // for powerup demonstration
+        // MaxSpeed = 0.0f;
+        // MinSpeed = 0.0f;
+        // speed = 0.0f;
+        // //for powerup demonstration
+        // if (playerNumber == 0){
+        //     gameObject.transform.position = new Vector3(-10.0f, 1.0f,-10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
+        // else if (playerNumber == 1){
+        //     gameObject.transform.position = new Vector3(10.0f, 1.0f,10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,180.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
+        // else if (playerNumber == 2){
+        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,90.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
         
+        // else if (playerNumber == 3){
+        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,-10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,-90.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-       jumpTimer+= Time.smoothDeltaTime;
+    //    jumpTimer+= Time.smoothDeltaTime;
         // powerup = GameObject.FindGameObjectWithTag("powerup").GetComponent<Powerup>();
         moveForward();
         performTurn();
 
         if (Input.GetKey(left) && Input.GetKey(right))
         {   
-            Debug.Log("powerups.Count()" + powerups.Count);
-            activatePowerup();
+            
+            powerupManager.activatePowerup();
         }
         
         moveMyTail(MaxSpeed,MinSpeed);
@@ -77,41 +124,8 @@ public class Movement : BaseMovement
 		}
 	}
 
-    public void activatePowerup()
-	{
-        bool otherPowerupActive = false;
-        if (powerups.Count  > 1 && !powerupBeingUsed){
-            Powerup p = powerups.Pop();
-            if (p.powerupType == "speed" ){
-                powerupInUse(); //sets powerupBeingUsed to true
-                Debug.Log(p.activate);
-                p.activateNow();
-                Invoke("powerupInUse", p.maxTimeToSpeed); //sets powerupBeingUsed to false to allow others to be used
-            }
-            
-        }else if (powerups.Count == 1){
-            Powerup p = powerups.Peek();
-            Debug.Log(p.powerupType);
-            if (p.powerupType == "jump" && jumpTimer > timeBetweenJumps && !powerupBeingUsed){
-                powerupInUse(); //sets powerupBeingUsed to true
-                p.activateNow();
-                Invoke("powerupInUse", timeBetweenJumps);
-                jumpTimer = 0.0f;
-            }
-        } 
-       
-        else if (powerups.Count == 0){
-            Debug.Log("no powerup to activate pushing now");
-            Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
-            jumpDefault.setPowerup("jump", true, false);
-            powerups.Push(jumpDefault);
-            
-        }
-	}
-    private void powerupInUse(){ //sets it to the opposite
-        
-        powerupBeingUsed = ! powerupBeingUsed;
-    }
+    
+    
     
 
    
