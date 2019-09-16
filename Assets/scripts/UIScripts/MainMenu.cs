@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
+
 public class MainMenu : MonoBehaviour
 {
     private ArrayList players;
@@ -17,8 +19,10 @@ public class MainMenu : MonoBehaviour
     public TMP_InputField p3RInputField;
     public TMP_InputField p4LInputField;
     public TMP_InputField p4RInputField;
+    public TMP_InputField AINumberField;
     public static controls player;
     public static int totPlayers;
+    public static int totalAis;
     public int numOfPlayers=0;
     private ArrayList alphabets = new ArrayList{"Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M"};
     private ArrayList numbers = new ArrayList{"0","1","2","3","4","5","6","7","8","9"};
@@ -111,8 +115,8 @@ public class MainMenu : MonoBehaviour
                 Debug.Log("Config "+ Config.playerControls[3].Left+ " " + Config.playerControls[3].rigth);
             }
 
-           
 
+            totalAis = Int32.Parse(AINumberField.text);
             return numOfPlayers > 0;
 
             

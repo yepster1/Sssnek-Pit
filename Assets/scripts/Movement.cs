@@ -19,16 +19,16 @@ public class Movement : BaseMovement
         // Debug.Log("**** "+ playerNumber+ " ****");
         
         if (playerNumber == 0){ //name for head (different to tag)
-            gameObject.name = "player0";
-        }
-        if (playerNumber == 1){
             gameObject.name = "player1";
         }
-        if (playerNumber == 2){
+        if (playerNumber == 1){
             gameObject.name = "player2";
         }
+        if (playerNumber == 2){
+            gameObject.name = "player3";
+        }
         if (playerNumber == 3){
-            gameObject.name = " ";
+            gameObject.name = "player4";
         }
         Debug.Log("player " + playerNumber + " started");
         // Debug.Log("player left: "+Config.playerControls[playerNumber].Left );

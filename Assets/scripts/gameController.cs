@@ -23,10 +23,7 @@ public class gameController : MonoBehaviour
         GameStateHandler.powerupsList = new List<GameObject>();
         numOfPlayers = MainMenu.totPlayers;
         AddPlayers(numOfPlayers);
-        Debug.Log("In GAME control");
-        // numOfPlayers = ;
-        //AddPlayers(4);
-        AddAIs(4);
+        AddAIs(MainMenu.totalAis);
     }
     
     public void AddAIs(int amountOfAI)
