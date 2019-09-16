@@ -28,7 +28,7 @@ public class Movement : BaseMovement
             gameObject.name = "player2";
         }
         if (playerNumber == 3){
-            gameObject.name = "player3";
+            gameObject.name = " ";
         }
         Debug.Log("player " + playerNumber + " started");
         // Debug.Log("player left: "+Config.playerControls[playerNumber].Left );
@@ -102,7 +102,7 @@ public class Movement : BaseMovement
 
         alive=true;
         //Set the right Score Display
-        Debug.Log(MainMenu.totPlayers.numOfPlayers);
+        Debug.Log(MainMenu.totPlayers);
         // for(int i = 0; i<MainMenu.totPlayers.numOfPlayers; ++i){}
         if(playerNumber==0){
             scoreDisplayObject =GameObject.FindGameObjectWithTag("player1");
