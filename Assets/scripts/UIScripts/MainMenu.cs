@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
             
         }
         else{
-             errorText.text="Please make sure that at leat player one has controls.";
+             errorText.text="Please make sure that at least player one has controls.";
         }
 
 

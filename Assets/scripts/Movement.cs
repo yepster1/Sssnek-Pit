@@ -19,16 +19,16 @@ public class Movement : BaseMovement
         // Debug.Log("**** "+ playerNumber+ " ****");
         
         if (playerNumber == 0){ //name for head (different to tag)
-            gameObject.name = "player1";
+            gameObject.name = "player0";
         }
         if (playerNumber == 1){
-            gameObject.name = "player2";
+            gameObject.name = "player1";
         }
         if (playerNumber == 2){
-            gameObject.name = "player3";
+            gameObject.name = "player2";
         }
         if (playerNumber == 3){
-            gameObject.name = "player4";
+            gameObject.name = "player3";
         }
         Debug.Log("player " + playerNumber + " started");
         // Debug.Log("player left: "+Config.playerControls[playerNumber].Left );
@@ -61,13 +61,13 @@ public class Movement : BaseMovement
         MinSpeed = Config.MIN_PLAYER_SPEED;
         
         
-        // // for powerup demonstration
-        // //uncomment to make snakes stationery
-        // //venom activated  by pressing left and right at same time
+        // for powerup demonstration
+        //uncomment to make snakes stationery
+        //venom activated  by pressing left and right at same time
+        
         // MaxSpeed = 0.0f;
         // MinSpeed = 0.0f;
         // speed = 0.0f;
-        // 
         // if (playerNumber == 0){
         //     gameObject.transform.position = new Vector3(-10.0f, 1.0f,-10.0f);
         //     gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
