@@ -2,16 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public  struct totalPlayers
-{
-    public static totalPlayers addTotalPlayers(int pnum){
-        totalPlayers player = new totalPlayers();
-        player.numOfPlayers=pnum;
-        return player;
-    }
-    public int numOfPlayers;
-    
-}
 public class gameController : MonoBehaviour
 {
     public GameObject point_prefab;
@@ -31,12 +21,9 @@ public class gameController : MonoBehaviour
         GameStateHandler.aiList = new List<GameObject>(); 
         GameStateHandler.pointList = new List<GameObject>();
         GameStateHandler.powerupsList = new List<GameObject>();
-        // numOfPlayers = totPlayers.numOfPlayers;
-        // AddPlayers(numOfPlayers);
-        Debug.Log("In GAME control");
-        // numOfPlayers = ;
-        AddPlayers(4);
-        AddAIs(4);
+        numOfPlayers = MainMenu.totPlayers;
+        AddPlayers(numOfPlayers);
+        AddAIs(MainMenu.totalAis);
     }
     
     public void AddAIs(int amountOfAI)
