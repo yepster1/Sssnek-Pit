@@ -12,8 +12,9 @@ public class AiMovement : BaseMovement
     // Start is called before the first frame update
     void Start()
     {
+        init();
         navMeshAgent.speed = speed;
-        aIPersonality = new AIPersonality(0.5f, 0.5f,3);
+        aIPersonality = new AIPersonality(0.5f, 0.5f,30);
         snakeColourSetter.SetColor(4, GetComponent<SkinnedMeshRenderer>());
     }
 
@@ -29,6 +30,7 @@ public class AiMovement : BaseMovement
             changeTarget(target);
         }
         navMeshAgent.SetDestination(theTarget);
+        Debug.Log("move tial with maxSpeed " + MaxSpeed + " and min speed " + MinSpeed);
         moveMyTail(MaxSpeed, MinSpeed);
         moveAura();
     }

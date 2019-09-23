@@ -15,8 +15,8 @@ public class gameController : MonoBehaviour
 
    private void Start()
     {
-        InvokeRepeating("Spawn", 0.5f, 3f);
-        InvokeRepeating("SpawnPowerups", 0.5f , 0.5f);
+        InvokeRepeating("Spawn", 0.5f, 0.2f);
+        InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         GameStateHandler.playerList = new List<GameObject>();
         GameStateHandler.aiList = new List<GameObject>(); 
         GameStateHandler.pointList = new List<GameObject>();
