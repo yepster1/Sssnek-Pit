@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class AIUtil
+public static class Perception
 {
+    
     public static GameObject getClosestOtherSnake(GameObject me)
     {
         GameObject tMin = null;
@@ -19,9 +19,9 @@ public class AIUtil
             }
         }
 
-        foreach(GameObject snake in GameStateHandler.aiList)
+        foreach (GameObject snake in GameStateHandler.aiList)
         {
-            if(snake == me)
+            if (snake == me)
             {
                 continue;
             }
@@ -35,20 +35,38 @@ public class AIUtil
         return tMin;
     }
 
-    private static GameObject getIfSomeonesPointsAreHigh(AIPersonality aIPersonality)
+    public static GameObject getHighestScore(GameObject me)
     {
         int highestScore = 0;
         GameObject playerWithHighest = null;
         foreach (GameObject snake in GameStateHandler.playerList)
         {
             BaseMovement movement = snake.GetComponent<BaseMovement>();
-            if(movement.points > aIPersonality.getKillPoint() && movement.points > highestScore)
+            if (highestScore < movement.points)
             {
                 playerWithHighest = snake;
                 highestScore = movement.points;
             }
         }
         return playerWithHighest;
+    }
+
+    public static RaycastHit getDistanceToCollision(GameObject me)
+    {
+        int layerMask = 1 << 8;
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(me.transform.position, me.transform.TransformDirection(Vector3.forward), out hit, 10, layerMask))
+        {
+            Debug.DrawRay(me.transform.position, me.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            Debug.Log("Did Hit");
+        }
+        else
+        {
+            Debug.DrawRay(me.transform.position, me.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            Debug.Log("Did not Hit");
+        }
+        return hit;
     }
 
     public static GameObject getClosestPoint(GameObject me)
@@ -68,30 +86,7 @@ public class AIUtil
         return tMin;
     }
 
-    public static Vector3 getObjectToTarget(GameObject me, AIPersonality aiPersonality)
-    {
-        GameObject snakeAboveThreshHoldForKill = getIfSomeonesPointsAreHigh(aiPersonality);
-        if(snakeAboveThreshHoldForKill != me && snakeAboveThreshHoldForKill != null)
-        {
-            Debug.Log("SNAKE ABOVE THRESHHOLD. KILLING");
-            return getPositionToCutOfSnake(snakeAboveThreshHoldForKill);
-        }
-        GameObject closestSnake = getClosestOtherSnake(me);
-        GameObject closestPoint = getClosestPoint(me);
-        float distanceToClosestSnake = getDistance(closestSnake.transform.position, me.transform.position);
-        if(closestPoint == null)
-        {
-            return getPositionToCutOfSnake(closestSnake);
-        }
-        float distanceToClosetPoint = getDistance(closestPoint.transform.position, me.transform.position);
-        if (distanceToClosestSnake * (1-aiPersonality.getAgressivness())  < distanceToClosetPoint * (1 - aiPersonality.getGreed()))
-        {
-            return getPositionToCutOfSnake(closestSnake);
-        }
-        return closestPoint.transform.position;
-    }
-
-    private static Vector3 getPositionToCutOfSnake(GameObject snake)
+    public static Vector3 getPositionToCutOfSnake(GameObject me, GameObject snake)
     {
         Transform t = snake.transform;
         return t.position + (t.forward * 20);

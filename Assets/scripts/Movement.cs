@@ -146,7 +146,6 @@ public class Movement : BaseMovement
         }
         if(alive){
         scoreDisplay.text="Player "+(playerNumber+1)+":  "+ points+"";
-        Debug.Log(scoreDisplay.tag+ " "+playerNumber+" "+ points);
         }
         else{
              scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
