@@ -28,16 +28,17 @@ public class AiMovement : BaseMovement
     // Update is called once per frame
     void Update()
     {
-        GameObject objectToTarget = intention.Focus(gameObject, aIPersonality);
-        if(objectToTarget == null)
+        GameObject objectToTarget  = intention.Focus(gameObject, aIPersonality);
+
+        Vector3 theTarget;
+        if (objectToTarget == null)
         {
             Debug.Log("about to hit into something");
-            return;
+            theTarget = gameObject.transform.position - (gameObject.transform.forward * 20);
         }
-        Vector3 theTarget;
+        else
         if (objectToTarget.tag.Equals("snake"))
         {
-            Debug.Log("Cutting off snake");
             theTarget = Perception.getPositionToCutOfSnake(gameObject, objectToTarget);
         }
         else

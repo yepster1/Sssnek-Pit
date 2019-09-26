@@ -53,18 +53,15 @@ public static class Perception
 
     public static RaycastHit getDistanceToCollision(GameObject me)
     {
-        int layerMask = 1 << 8;
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(me.transform.position, me.transform.TransformDirection(Vector3.forward), out hit, 10, layerMask))
+        if (Physics.Raycast(me.transform.position, me.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
             Debug.DrawRay(me.transform.position, me.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
         }
         else
         {
             Debug.DrawRay(me.transform.position, me.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            Debug.Log("Did not Hit");
         }
         return hit;
     }

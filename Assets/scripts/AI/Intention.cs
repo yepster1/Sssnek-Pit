@@ -19,6 +19,10 @@ public class Intention
         RaycastHit hit = Perception.getDistanceToCollision(me);
         float distanceToClosestSnake = Perception.getDistance(me.transform.position, closetSnake.transform.position);
         GameObject highestScore = Perception.getHighestScore(me);
+        if (hit.rigidbody != null)
+        {
+            Debug.Log(hit.rigidbody.gameObject.tag);
+        }
         if (hit.rigidbody != null && hit.rigidbody.gameObject.tag.Equals("snake"))
         {
             return null;
@@ -34,15 +38,12 @@ public class Intention
                 return highestScore;
             }
         }
-        Debug.Log(distanceToClosestPoint + " " + distanceToClosestSnake );
         if(distanceToClosestPoint * desires.getGreed() < distanceToClosestSnake * desires.getBloodlust())
         {
-            Debug.Log("targeting point");
             return closestPoint;
             
         } else
         {
-            Debug.Log("targeting snake");
             return closetSnake;
         }
         
