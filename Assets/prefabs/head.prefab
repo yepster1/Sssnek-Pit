@@ -280,7 +280,7 @@ MonoBehaviour:
   tailPrefab: {fileID: 1915043134201272119, guid: 375204ec7e6c24ee297be54eda61be98,
     type: 3}
   body: []
-  head: {fileID: 0}
+  head: {fileID: 3562449043692327784}
   points: 0
   MaxSpeed: 0
   MinSpeed: 0

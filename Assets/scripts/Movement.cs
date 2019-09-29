@@ -103,23 +103,23 @@ public class Movement : BaseMovement
         //Set the right Score Display
         Debug.Log(MainMenu.totPlayers);
         // for(int i = 0; i<MainMenu.totPlayers.numOfPlayers; ++i){}
-        if(playerNumber==0){
-            scoreDisplayObject =GameObject.FindGameObjectWithTag("player1");
-            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-        }
+        //if(playerNumber==0){
+        //    scoreDisplayObject = GameObject.FindGameObjectWithTag("player1");
+        //    scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        //}
 
-        else if(playerNumber==1){
-            scoreDisplayObject =GameObject.FindGameObjectWithTag("player2");
-            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-        }
+        //else if(playerNumber==1){
+        //    scoreDisplayObject = GameObject.FindGameObjectWithTag("player2");
+        //    scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        //}
 
-        else if(playerNumber==2){
-            scoreDisplayObject =GameObject.FindGameObjectWithTag("player3");
-            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-        }
-        else if(playerNumber==3){
-            scoreDisplayObject =GameObject.FindGameObjectWithTag("player4");
-            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        //else if(playerNumber==2){
+        //    scoreDisplayObject = GameObject.FindGameObjectWithTag("player3");
+        //    scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        //}
+        //else if(playerNumber==3){
+        //    scoreDisplayObject = GameObject.FindGameObjectWithTag("player4");
+        //    scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
         }
         
         // else if (playerNumber == 3){
@@ -129,7 +129,7 @@ public class Movement : BaseMovement
         //         add_tail();
         //     }
         // }
-    }
+    //}
 
     // Update is called once per frame
     void FixedUpdate()
@@ -144,13 +144,13 @@ public class Movement : BaseMovement
             
             powerupManager.activatePowerup();
         }
-        if(alive){
-        scoreDisplay.text="Player "+(playerNumber+1)+":  "+ points+"";
-        }
-        else{
-             scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
-             alive=true;
-        }
+        //if(alive){
+        //scoreDisplay.text="Player "+(playerNumber+1)+":  "+ points+"";
+        //}
+        //else{
+        //     scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
+        //     alive=true;
+        //}
 
         moveMyTail(MaxSpeed,MinSpeed);
         moveAura();
