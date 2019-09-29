@@ -22,7 +22,7 @@ public class gameController : MonoBehaviour
         GameStateHandler.pointList = new List<GameObject>();
         GameStateHandler.powerupsList = new List<GameObject>();
         // numOfPlayers = MainMenu.totPlayers;
-        AddPlayers(MainMenu.totPlayers == 0 ? 1 :  MainMenu.totPlayers);
+        AddPlayers(MainMenu.totPlayers == 0 ? 4 :  MainMenu.totPlayers);
         AddAIs(MainMenu.totalAis);
     }
     
