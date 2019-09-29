@@ -27,6 +27,12 @@ public abstract class BaseMovement : MonoBehaviour
     protected Transform auraTransform;
     public static int tailNumber;
     public bool alive;
+
+    public void init()
+    {
+        MaxSpeed = Config.MAX_PLAYER_SPEED;
+        MinSpeed = Config.MIN_PLAYER_SPEED;
+    }
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("snake"))
