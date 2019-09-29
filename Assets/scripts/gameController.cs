@@ -15,12 +15,13 @@ public class gameController : MonoBehaviour
 
    private void Start()
     {
-        InvokeRepeating("Spawn", 0.5f, 3f);
-        InvokeRepeating("SpawnPowerups", 0.5f , 0.5f);
         GameStateHandler.playerList = new List<GameObject>();
-        GameStateHandler.aiList = new List<GameObject>(); 
+        GameStateHandler.aiList = new List<GameObject>();
         GameStateHandler.pointList = new List<GameObject>();
         GameStateHandler.powerupsList = new List<GameObject>();
+        Spawn();
+        InvokeRepeating("Spawn", 0.5f, 0.2f);
+        InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         numOfPlayers = MainMenu.totPlayers;
         AddPlayers(numOfPlayers);
         AddAIs(MainMenu.totalAis);

@@ -7,13 +7,17 @@ public class AiMovement : BaseMovement
 {
 
     [SerializeField] private NavMeshAgent navMeshAgent;
-    AIPersonality aIPersonality; // Default AI
+    Desires aIPersonality; // Default AI
     private Vector3 target;
+    Intention intention;
+
     // Start is called before the first frame update
     void Start()
     {
+        intention = new Intention();
+        init();
         navMeshAgent.speed = speed;
-        aIPersonality = new AIPersonality(0.5f, 0.5f,3);
+        aIPersonality = new Desires(0.5f, 0.5f,30);
         snakeColourSetter.SetColor(4, GetComponent<SkinnedMeshRenderer>());
     }
 
@@ -24,11 +28,28 @@ public class AiMovement : BaseMovement
     // Update is called once per frame
     void Update()
     {
-        Vector3 theTarget = AIUtil.getObjectToTarget(gameObject, aIPersonality);
+        GameObject objectToTarget  = intention.Focus(gameObject, aIPersonality);
+
+        Vector3 theTarget;
+        if (objectToTarget == null)
+        {
+            Debug.Log("about to hit into something");
+            theTarget = gameObject.transform.position - (gameObject.transform.forward * 20);
+        }
+        else
+        if (objectToTarget.tag.Equals("snake"))
+        {
+            theTarget = Perception.getPositionToCutOfSnake(gameObject, objectToTarget);
+        }
+        else
+        {
+            theTarget = objectToTarget.transform.position;
+        }
         if (theTarget != target) {
             changeTarget(target);
         }
         navMeshAgent.SetDestination(theTarget);
+        transform.LookAt(theTarget);
         moveMyTail(MaxSpeed, MinSpeed);
         moveAura();
     }
