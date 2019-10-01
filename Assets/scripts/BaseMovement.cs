@@ -37,11 +37,13 @@ public abstract class BaseMovement : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("snake"))
         {
+            SoundManager.INSTANCE.PlaySpawn();
             CollideWithOtherSnake(collision);
         }
         if (collision.gameObject.tag.Equals("point"))
         {
             CollideWithPoint(collision);
+            SoundManager.INSTANCE.playCollectPoint(null);
         }
         
         if (collision.gameObject.tag.Equals("powerup"))
