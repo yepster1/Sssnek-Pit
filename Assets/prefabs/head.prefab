@@ -291,6 +291,10 @@ MonoBehaviour:
   left: 0
   right: 0
   powerupManager: {fileID: 0}
+  x: 0
+  y: 0
+  w: 1
+  h: 1
 --- !u!114 &6771610324488535266
 MonoBehaviour:
   m_ObjectHideFlags: 0

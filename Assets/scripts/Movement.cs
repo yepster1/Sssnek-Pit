@@ -10,6 +10,7 @@ public class Movement : BaseMovement
     public PowerupManager powerupManager;
     protected GameObject scoreDisplayObject;
     protected TMP_Text scoreDisplay;
+    public float x,y,w,h;
 
     public void spawnPlayer(List<int> inputs)
     {
@@ -43,7 +44,8 @@ public class Movement : BaseMovement
         Debug.Log("setting view with amount of players " + amountOfPlayers + " and player number " + playerNumber);
         Camera cam = GetComponentInChildren<Camera>();
         view view = Config.playerViews[amountOfPlayers-1][playerNumer];
-        cam.rect = new Rect(view.x, view.y, view.w, view.h);
+        // cam.rect = new Rect(view.x, view.y, view.w, view.h);
+        cam.rect = new Rect(x,y,w,h);
         
     }
     // Start is called before the first frame update
