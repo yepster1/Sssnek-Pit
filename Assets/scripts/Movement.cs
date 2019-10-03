@@ -10,6 +10,7 @@ public class Movement : BaseMovement
     public PowerupManager powerupManager;
     protected GameObject scoreDisplayObject;
     protected TMP_Text scoreDisplay;
+    
 
     public void spawnPlayer(List<int> inputs)
     {
@@ -121,14 +122,6 @@ public class Movement : BaseMovement
             scoreDisplayObject =GameObject.FindGameObjectWithTag("player4");
             scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
         }
-        
-        // else if (playerNumber == 3){
-        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,-10.0f);
-        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,-90.0f,0.0f);
-        //     for (int i = 0 ;i < 20 ;i++ ){
-        //         add_tail();
-        //     }
-        // }
     }
 
     // Update is called once per frame
