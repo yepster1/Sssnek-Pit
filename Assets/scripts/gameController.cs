@@ -8,7 +8,8 @@ public class gameController : MonoBehaviour
     public GameObject powerup_prefab;
     public GameObject player_prefab;
     public GameObject AI_prefab;
-    
+    public GameObject pointspawn;
+
     private  int numOfPlayers;
 
     // Start is called before the first frame update
@@ -73,12 +74,21 @@ public class gameController : MonoBehaviour
 
     void Spawn()
     {
-        GameStateHandler.pointList.Add(Instantiate(point_prefab, GetRandomPosition(), new Quaternion()));
+        GameObject point = Instantiate(point_prefab, GetRandomPosition(), new Quaternion());
+        ParticleSystem particleSystem = point.GetComponentInChildren<ParticleSystem>();
+        particleSystem.Play();
+        StartCoroutine(StopParticleSystem(particleSystem, 1));
+        GameStateHandler.pointList.Add(point);
     }
     
     void SpawnPowerups()
     {
         GameStateHandler.powerupsList.Add(Instantiate(powerup_prefab, GetRandomPosition(), new Quaternion()));
     }
-    
+
+    IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
+    {
+        yield return new WaitForSeconds(time);
+        particleSystem.Stop();
+    }
 }

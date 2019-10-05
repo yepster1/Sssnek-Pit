@@ -65,8 +65,25 @@ public abstract class BaseMovement : MonoBehaviour
             Destroy(part);
         }
         body = new List<GameObject>();
+        startParticle(0, gameObject);
         transform.position = gameController.GetRandomPosition();
+        startParticle(1, gameObject);
     }
+
+    IEnumerable startParticle(float time, GameObject player)
+    {
+        yield return new WaitForSeconds(time);
+        ParticleSystem particleSystem = player.GetComponentInChildren<ParticleSystem>();
+        particleSystem.Play();
+        StartCoroutine(StopParticleSystem(particleSystem, 1));
+    }
+
+    IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
+    {
+        yield return new WaitForSeconds(time);
+        particleSystem.Stop();
+    }
+
     protected void CollideWithPoint(Collision collision)
     {
         GameStateHandler.pointList.Remove(collision.gameObject);
