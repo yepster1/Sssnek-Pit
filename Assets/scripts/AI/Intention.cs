@@ -21,7 +21,7 @@ public class Intention
         GameObject highestScore = Perception.getHighestScore(me);
         if (hit.rigidbody != null)
         {
-            Debug.Log(hit.rigidbody.gameObject.tag);
+            // Debug.Log(hit.rigidbody.gameObject.tag);
         }
         if (hit.rigidbody != null && hit.rigidbody.gameObject.tag.Equals("snake"))
         {

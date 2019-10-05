@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool gamePaused=false;
     public GameObject pauseMenuUI;
-
+    public Slider aiAdjuster;
     // Update is called once per frame
     void Update()
     {
@@ -42,5 +42,12 @@ public class PauseMenu : MonoBehaviour
     }
     public void Quit(){
         Application.Quit();
+    }
+
+    public void UpdateAI(){
+        // MainMenu.totalAIs = aiAdjuster.normalizedValue
+        Debug.Log((int)((aiAdjuster.normalizedValue)*10));
+        // Debug.Log(aiAdjuster.wholeNumbers);
+        // MainMenu.totalAIs = (int)((aiAdjuster.normalizedValue)*10);
     }
 }
