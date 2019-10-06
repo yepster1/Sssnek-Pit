@@ -46,7 +46,7 @@ public class gameController : MonoBehaviour
 
     void AddPlayer(int numberOfPlayers, int playerNumber)
     {
-        Debug.Log("spawning player " + playerNumber);
+        // Debug.Log("spawning player " + playerNumber);
         GameObject player = Instantiate(player_prefab, GetRandomPosition(), new Quaternion());
         Camera cam = player.GetComponentInChildren<Camera>();
         player.SendMessage("spawnPlayer", new List<int> { numberOfPlayers, playerNumber });

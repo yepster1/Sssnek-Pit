@@ -219,8 +219,8 @@ public abstract class BaseMovement : MonoBehaviour
         }
         setColor(newPart.transform);
         
-        Tail tail = newPart.AddComponent<Tail>();
-        tail.setHead(this.gameObject);
+        Tail tail = newPart.GetComponent<Tail>();
+        tail.setHead(head);
         newPart = tail.add_tail(this.gameObject.name,newPart ,tailNumber);
         body.Add(newPart);
     }

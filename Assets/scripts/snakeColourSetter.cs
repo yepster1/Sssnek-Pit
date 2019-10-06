@@ -7,7 +7,7 @@ public static class snakeColourSetter
 
     public static void SetColor(int colourNumber, SkinnedMeshRenderer meshRenderer)
     {
-            Debug.Log("Colours colour number " + colourNumber);
+            // Debug.Log("Colours colour number " + colourNumber);
         switch (colourNumber)
         {
             case 0:

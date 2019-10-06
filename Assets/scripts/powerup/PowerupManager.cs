@@ -29,20 +29,25 @@ public class PowerupManager : MonoBehaviour
         }
         powerups = new Stack<Powerup>();
 
+        powerupBeingUsed = false;
+
         Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
         jumpDefault.setPowerup("jump", myPlayerNum, true, false);
         pushPowerup(jumpDefault);
         
-        powerupBeingUsed = false;
-
-        Powerup speedTest = this.gameObject.AddComponent<Speed>();
-        speedTest.setPowerup("speed", myPlayerNum ,true, false);
-        pushPowerup(speedTest);
-
-        Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
-        venomShoot.setPowerup("venom", myPlayerNum, true, false);
-        pushPowerup(venomShoot);
         
+
+        // Powerup speedTest = this.gameObject.AddComponent<Speed>();
+        // speedTest.setPowerup("speed", myPlayerNum ,true, false);
+        // pushPowerup(speedTest);
+
+        // Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
+        // venomShoot.setPowerup("venom", myPlayerNum, true, false);
+        // pushPowerup(venomShoot);
+        
+        // Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
+        // invincibilityTest.setPowerup("invincibility" , myPlayerNum, true, false);
+        // pushPowerup(invincibilityTest);
         
        
     }
@@ -98,6 +103,14 @@ public class PowerupManager : MonoBehaviour
                 venomShoot.setVenom(myPlayerNum, venomPrefab, otherPlayers);
                 venomShoot.activateNow();
                 Invoke("powerupInUse", venomShoot.maxTimeToShoot);
+            }
+            if (p.powerupType == "invincibility" && !powerupBeingUsed){
+                powerupInUse();
+                Invincibility inv = (Invincibility)p;
+                // int _myPlayerNum , GameObject _head , Movement _movement, List<GameObject> _body
+                inv.setInvincibility(myPlayerNum, this.gameObject, movement, movement.body);
+                inv.activateNow();
+                Invoke("powerupInUse", inv.maxTimeForInvincibility);
             }
         }
         
