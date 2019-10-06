@@ -39,6 +39,7 @@ public class PowerupUIScript : MonoBehaviour
         if(type == "jump"){
             // SPB.SetActive(false);
             JPB.gameObject.SetActive(true);
+            // JPB.startFromZero();
         }else if (type == "speed"){
             JPB.gameObject.SetActive(false);
             // SPB.SetActive(true);

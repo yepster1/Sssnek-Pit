@@ -12,7 +12,7 @@ public class Jump : Powerup
     private Movement movement;
 
     public float timeBetweenJumps = 4f;
-    protected float jumpTimer;
+    public float jumpTimer;
     public float timeSpentJumping;
     public float timeFromHeadToTail;
     public float tFHTTtimer; //used to allow entire snake to finish moving from head to tail
@@ -37,6 +37,8 @@ public class Jump : Powerup
         // }
         if (powerupManager == null){
             powerupManager = GetComponent<PowerupManager>();
+            powerupUIScript = GetComponentInChildren<PowerupUIScript>();
+            setPowerup("jump", GetComponent<PowerupManager>().myPlayerNum, true, false);
         }
         if (movement == null){
             movement = GetComponent<Movement>();
@@ -99,10 +101,9 @@ public class Jump : Powerup
                         break;
                     }
                     
-                    // body[i].GetComponent<Rigidbody>().useGravity = true;
                 }
             }
-            // onGround = false;
+            onGround = false;
             deactivateNow();
             // Invoke("powerupInUse", timeBetweenJumps);
         }
@@ -123,6 +124,7 @@ public class Jump : Powerup
                     
                 }
             }
+            // JPB.startFromZero();
            
         }
 

@@ -12,9 +12,10 @@ public class Powerup : MonoBehaviour
     protected gameController gc;
     public static List<GameObject> playerList; //to be used for passive powerups
     public Rigidbody rb;
-    protected bool onGround;
+    public bool onGround;
     private GameObject player;
     protected PowerupManager powerupManager;
+    protected PowerupUIScript powerupUIScript;
     
     public void setPowerup(string _powerupType, int _playerNum,bool _isActive, bool _activate){
         powerupType = _powerupType;
@@ -22,16 +23,21 @@ public class Powerup : MonoBehaviour
         activate = _activate;
         playerNum = _playerNum;
         
-        // if (powerupType == "jump"){
-            
-        //     // addPowerup(jump);
+        if (powerupUIScript != null){
+            Debug.Log ("--------->powerupUIScript not null");
+            powerupUIScript.setPowerupDisplay(powerupType);
+            if (powerupType == "jump"){
+                
+            // addPowerup(jump);
             
 
-        // }
-        if (powerupType == "venom"){
-            // Debug.Log("pNum: " + playerNum);
-            
+            }
+            if (powerupType == "venom"){
+                // Debug.Log("pNum: " + playerNum);
+                
+            }
         }
+        
     }
     
     public virtual void activateNow(){

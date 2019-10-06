@@ -480,6 +480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7622608087789538235}
+  - component: {fileID: 2352320275229958655}
   m_Layer: 5
   m_Name: PowerupUIPlaceholder
   m_TagString: Untagged
@@ -502,11 +503,24 @@ RectTransform:
   m_Father: {fileID: 1334643801324963102}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -60, y: 60}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2352320275229958655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6611251391408476808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea7013495f1e442ebdfd53450a02aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JPB: {fileID: 5691237833608690636}
 --- !u!1001 &2441819041371500853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -587,12 +601,12 @@ PrefabInstance:
     - target: {fileID: 8005222953752578810, guid: b499b71b6ca894153ae4943b3bec6931,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.80000305
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8005222953752578810, guid: b499b71b6ca894153ae4943b3bec6931,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 140.4
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8005222953752578810, guid: b499b71b6ca894153ae4943b3bec6931,
         type: 3}
@@ -624,6 +638,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8005222953593548974, guid: b499b71b6ca894153ae4943b3bec6931,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.400002
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b499b71b6ca894153ae4943b3bec6931, type: 3}
 --- !u!224 &5691237833608690639 stripped
@@ -632,3 +651,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2441819041371500853}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5691237833608690636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8005222953752578809, guid: b499b71b6ca894153ae4943b3bec6931,
+    type: 3}
+  m_PrefabInstance: {fileID: 2441819041371500853}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5147ff00b3f9d45948cfa5acef5a2d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

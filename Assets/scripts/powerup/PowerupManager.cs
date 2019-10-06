@@ -32,7 +32,7 @@ public class PowerupManager : MonoBehaviour
         powerupBeingUsed = false;
 
         Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
-        jumpDefault.setPowerup("jump", myPlayerNum, true, false);
+        
         pushPowerup(jumpDefault);
         
         
@@ -82,7 +82,7 @@ public class PowerupManager : MonoBehaviour
                 Jump jump = (Jump)p;
                 Debug.Log("powerup type " +jump.powerupType);
                 jump.activateNow();
-                Invoke("powerupInUse", jump.timeBetweenJumps);
+                Invoke("powerupInUse", jump.timeFromHeadToTail);
             }
         }else if (powerups.Count > 1 && !powerupBeingUsed){ //for every other powerup
             Powerup p = popPowerup();
