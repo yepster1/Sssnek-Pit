@@ -72,11 +72,12 @@ public class Jump : Powerup
     }
     public float calcTimeFromHeadToTail(){
         //in this case xyz should always be 1 
-        float distanceToTravel = (body.Count) * (transform.localScale.x); 
-        Debug.Log("distance to travel: " +distanceToTravel);
+        float distanceToTravel = 1; 
+        // Debug.Log("distance to travel: " +distanceToTravel);
         
-        Vector3 vel = rigidbody.velocity;      //to get a Vector3 representation of the velocity
+        Vector3 vel = GetComponent<Rigidbody>().velocity;      //to get a Vector3 representation of the velocity
         float speed = vel.magnitude;  
+        // Debug.Log ("speed : " + speed);
         float timeFromHeadToTail = distanceToTravel / speed;
         Debug.Log("time from head to tail: " +timeFromHeadToTail);
         return timeFromHeadToTail;
@@ -119,7 +120,7 @@ public class Jump : Powerup
                         break;
                     }
                     
-                    // body[i].GetComponent<Rigidbody>().useGravity = true;
+                    
                 }
             }
            
