@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Speed : Powerup
 {
-    
+    private Movement movement;
+
     public float maxSpeed = Config.MAX_PLAYER_SPEED * 1.3f;
     public float minSpeed = Config.MIN_PLAYER_SPEED * 1.0f;
     // private GameObject floor;
@@ -14,7 +15,7 @@ public class Speed : Powerup
     private float speedUp = Config.PLAYER_SPEED;
 
     //for speed
-    public float maxTimeToSpeed = 3.0f;
+    public float maxTimeToSpeed = 10.0f;
     public float speedTimer;
 
     // private float xr = Config.PLAYER_FALL_MULTIPLIER;
@@ -28,7 +29,16 @@ public class Speed : Powerup
     void Start()
     {
         // playerList = GameStateHandler.playerList; //to be used for passive powerup effects
-        powerupManager = GetComponent<PowerupManager>();
+        if (powerupManager == null){
+            powerupManager = GetComponent<PowerupManager>();
+            
+            
+        }
+
+        if (movement == null){
+            movement = GetComponent<Movement>();
+            
+        }
         powerupType = "speed";
         // isActive = true;
         activate = false;
@@ -65,6 +75,7 @@ public class Speed : Powerup
                 transform.Translate(transform.forward * maxSpeed * Time.deltaTime, Space.World);
                 gameObject.GetComponent<Movement>().moveMyTail(maxSpeed, minSpeed);
                 speedTimer += Time.smoothDeltaTime;
+                Debug.Log("speedTimer: " + speedTimer);
             }
         }else if(speedTimer >= maxTimeToSpeed && activate){
             if (this.gameObject.tag == "snake"){

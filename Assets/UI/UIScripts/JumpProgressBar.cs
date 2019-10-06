@@ -13,7 +13,7 @@ public class JumpProgressBar : MonoBehaviour
     public float currentLoadingAmount; 
     public float speed;
     
-    void Start(){
+    void OnAwake(){
        jump = transform.parent.parent.parent.GetComponent<Jump>(); 
        
     }
@@ -23,21 +23,24 @@ public class JumpProgressBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentLoadingAmount < 100 && jump.jumpTimer < jump.timeBetweenJumps){
+        if (jump != null){
+            if(currentLoadingAmount < 100 && jump.jumpTimer < jump.timeBetweenJumps){
             
-            currentLoadingAmount += jump.jumpTimer;
-            TextPercentage.GetComponent<Text>().text = ((int)currentLoadingAmount).ToString() + "%";
-            // TextLoading.gameObject.SetActive(true);
-        }
-        else if (currentLoadingAmount >= 100 && jump.jumpTimer > jump.timeBetweenJumps && jump.tFHTTtimer > jump.timeFromHeadToTail){
-            Debug.Log("current loading amount over 100%%%%%%%%%");
-            currentLoadingAmount = 0;
-            
-            // TextLoading.gameObject.SetActive(false);
-            // TextPercentage.GetComponent<Text>().text = "100%";
-        }
-       
-        LoadingBar.GetComponent<Image>().fillAmount = currentLoadingAmount/ 100; 
+                currentLoadingAmount += jump.jumpTimer;
+                TextPercentage.GetComponent<Text>().text = ((int)currentLoadingAmount).ToString() + "%";
+                // TextLoading.gameObject.SetActive(true);
+            }
+            else if (currentLoadingAmount >= 100 && jump.jumpTimer > jump.timeBetweenJumps && jump.tFHTTtimer > jump.timeFromHeadToTail){
+                Debug.Log("current loading amount over 100%%%%%%%%%");
+                currentLoadingAmount = 0;
+                
+                // TextLoading.gameObject.SetActive(false);
+                // TextPercentage.GetComponent<Text>().text = "100%";
+            }
+        
+            LoadingBar.GetComponent<Image>().fillAmount = currentLoadingAmount/ 100; 
+            }
+        
     }
     // void updatePos(Vector3 position){
 

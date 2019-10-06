@@ -37,13 +37,13 @@ public class Jump : Powerup
         // }
         if (powerupManager == null){
             powerupManager = GetComponent<PowerupManager>();
-            powerupUIScript = GetComponentInChildren<PowerupUIScript>();
-            setPowerup("jump", GetComponent<PowerupManager>().myPlayerNum, true, false);
         }
+
         if (movement == null){
             movement = GetComponent<Movement>();
             body = movement.body;
         }
+        
         timeFromHeadToTail = calcTimeFromHeadToTail();
         
         rb = GetComponent<Rigidbody>();

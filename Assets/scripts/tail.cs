@@ -18,11 +18,11 @@ public class Tail : MonoBehaviour
         tailPrefab = this.gameObject;
         movement = head.GetComponent<Movement>();
         myPlayerNum = movement.playerNumber;
-        if (movement != null){
-            Debug.Log ("movement set in tail for p: "+ myPlayerNum);
-        }else{
-            Debug.Log("movement **not** set in tail for p: "+ myPlayerNum);
-        }
+        // if (movement != null){
+        //     Debug.Log ("movement set in tail for p: "+ myPlayerNum);
+        // }else{
+        //     Debug.Log("movement **not** set in tail for p: "+ myPlayerNum);
+        // }
         
     }
     public GameObject add_tail(string _name, GameObject _newTail, int _tailNumber)

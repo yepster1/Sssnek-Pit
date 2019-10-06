@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerupManager : MonoBehaviour
 {
     public Stack<Powerup> powerups;
+    public PowerupUIScript powerupUIScript;
     private Movement movement;
     public int myPlayerNum;
     public bool powerupBeingUsed;
@@ -13,6 +14,7 @@ public class PowerupManager : MonoBehaviour
 
     public void SetPowerupManager(){
         movement = this.gameObject.GetComponent<Movement>();
+        powerupUIScript = GetComponentInChildren<PowerupUIScript>();
         if(movement != null){
             if (movement.playerNumber == 0){ //name for head
                 myPlayerNum = 0;
@@ -32,14 +34,15 @@ public class PowerupManager : MonoBehaviour
         powerupBeingUsed = false;
 
         Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
-        
+        jumpDefault.setPowerup("jump", myPlayerNum, true, false);
         pushPowerup(jumpDefault);
         
+
         
 
-        // Powerup speedTest = this.gameObject.AddComponent<Speed>();
-        // speedTest.setPowerup("speed", myPlayerNum ,true, false);
-        // pushPowerup(speedTest);
+        Powerup speedTest = this.gameObject.AddComponent<Speed>();
+        speedTest.setPowerup("speed", myPlayerNum ,true, false);
+        pushPowerup(speedTest);
 
         // Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
         // venomShoot.setPowerup("venom", myPlayerNum, true, false);
@@ -54,6 +57,7 @@ public class PowerupManager : MonoBehaviour
     
     public void pushPowerup(Powerup powerupToAdd){
         powerups.Push(powerupToAdd);
+        powerupUIScript.setPowerupDisplay(powerupToAdd.powerupType);
         // Debug.Log("powerupToAdd: " + powerupToAdd.powerupType);
         // Debug.Log("powerups.Count()" + powerups.Count);
     }
@@ -81,6 +85,7 @@ public class PowerupManager : MonoBehaviour
                 powerupInUse(); //sets powerupBeingUsed to true
                 Jump jump = (Jump)p;
                 Debug.Log("powerup type " +jump.powerupType);
+                
                 jump.activateNow();
                 Invoke("powerupInUse", jump.timeFromHeadToTail);
             }
@@ -90,6 +95,7 @@ public class PowerupManager : MonoBehaviour
                 powerupInUse(); //sets powerupBeingUsed to true
                 Speed speed = (Speed)p;
                 Debug.Log("powerup type " +speed.powerupType);
+                // powerupUIScript.setPowerupDisplay(speed.powerupType);
                 speed.activateNow();
                 Invoke("powerupInUse", speed.maxTimeToSpeed);
             }
