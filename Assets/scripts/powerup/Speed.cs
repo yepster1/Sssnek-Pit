@@ -52,7 +52,7 @@ public class Speed : Powerup
 
     public override void activateNow(){
         Debug.Log("Speed Activated");
-        speedTimer = 0.0f;
+        speedTimer = maxTimeToSpeed;
         activate = true;
     }
 
@@ -68,22 +68,23 @@ public class Speed : Powerup
 
     void FixedUpdate()
     {
-        if (powerupType == "speed" && onGround && activate && speedTimer <  maxTimeToSpeed){
+        if (powerupType == "speed" && onGround && activate && speedTimer >=  0){
             if (this.gameObject.tag == "snake"){
                 // Debug.Log("speeding");
                 
                 transform.Translate(transform.forward * maxSpeed * Time.deltaTime, Space.World);
                 gameObject.GetComponent<Movement>().moveMyTail(maxSpeed, minSpeed);
-                speedTimer += Time.smoothDeltaTime;
-                Debug.Log("speedTimer: " + speedTimer);
+                speedTimer -= Time.deltaTime;
+                
             }
-        }else if(speedTimer >= maxTimeToSpeed && activate){
+        }else if(speedTimer < 0 && activate){
             if (this.gameObject.tag == "snake"){
                 this.gameObject.GetComponent<Movement>().MaxSpeed = Config.MAX_PLAYER_SPEED;
                 this.gameObject.GetComponent<Movement>().MinSpeed = Config.MIN_PLAYER_SPEED;
                 
                 
             }
+            Debug.Log("speedTimer for player: "+ powerupManager.myPlayerNum + " " + speedTimer);
             deactivateNow();
             
         }

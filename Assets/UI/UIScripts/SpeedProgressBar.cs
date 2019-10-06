@@ -11,7 +11,7 @@ public class SpeedProgressBar : MonoBehaviour
     public Speed speed;
 
     public float currentLoadingAmount; 
-    public float speed1;
+    public float speed1 = 20.0f;
     
     void Start(){
        speed = transform.parent.parent.parent.GetComponent<Speed>();
@@ -24,14 +24,15 @@ public class SpeedProgressBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentLoadingAmount >= 0 && speed.speedTimer <=  speed.maxTimeToSpeed){
+        if(currentLoadingAmount >= 0 && (speed.activate == true) && speed.speedTimer >  0){
             
-            currentLoadingAmount -= ((speed.speedTimer/speed.maxTimeToSpeed));
+            currentLoadingAmount = (speed.speedTimer * 100)/speed.maxTimeToSpeed;
             TextPercentage.GetComponent<Text>().text = ((int)currentLoadingAmount).ToString() + "%";
             // TextLoading.gameObject.SetActive(true);
-        }if (speed.speedTimer >  speed.maxTimeToSpeed){
-            currentLoadingAmount = currentLoadingAmount - speed.speedTimer;
         }
+        // if ( currentLoadingAmount >= 0 && speed.speedTimer > speed.maxTimeToSpeed){
+        //     currentLoadingAmount -= ((speed.speedTimer/speed.maxTimeToSpeed));
+        // }
         // else if (currentLoadingAmount <= 0 && speed.speedTimer <  speed.maxTimeToSpeed){
         //     Debug.Log("current loading amount over 100%%%%%%%%%");
         //     currentLoadingAmount = 0;
