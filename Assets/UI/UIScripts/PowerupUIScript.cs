@@ -37,6 +37,7 @@ public class PowerupUIScript : MonoBehaviour
         //     if (JPB) Debug.Log("JPB set#############################");
         // }
     }
+    
     public void setPowerupDisplay(string type){
         if(type == "jump"){
             JPB.gameObject.SetActive(true);
