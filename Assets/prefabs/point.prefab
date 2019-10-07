@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 105664559048629181}
   - component: {fileID: 105664559048629170}
   - component: {fileID: 105664559048629171}
-  - component: {fileID: -1228961387242468681}
   m_Layer: 0
   m_Name: point
   m_TagString: point
@@ -115,10 +114,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 105664559048629183}
     m_Modifications:
-    - target: {fileID: 100000, guid: 2ecc99cc17e16004caf5a14a8dfdf263, type: 3}
-      propertyPath: m_Name
-      value: fruit_pear
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2ecc99cc17e16004caf5a14a8dfdf263, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -162,6 +157,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 2ecc99cc17e16004caf5a14a8dfdf263, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2ecc99cc17e16004caf5a14a8dfdf263, type: 3}
+      propertyPath: m_Name
+      value: fruit_pear
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ecc99cc17e16004caf5a14a8dfdf263, type: 3}
