@@ -15,25 +15,27 @@ public abstract class BaseMovement : MonoBehaviour
     protected float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject auraPrefab;
     protected Transform auraTransform;
+    public static int tailNumber;
+    public bool alive;
 
-    //for venom
-    // struct Tail{
-        public static int tailNumber;
-    //     public int playerNum;
-    // }
-    
-
+    public void init()
+    {
+        MaxSpeed = Config.MAX_PLAYER_SPEED;
+        MinSpeed = Config.MIN_PLAYER_SPEED;
+    }
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("snake"))
         {
+            SoundManager.INSTANCE.PlaySpawn();
             CollideWithOtherSnake(collision);
         }
         if (collision.gameObject.tag.Equals("point"))
         {
             CollideWithPoint(collision);
+            SoundManager.INSTANCE.playCollectPoint(null);
         }
-        
+
         if (collision.gameObject.tag.Equals("powerup"))
         {
             // CollideWithPowerup(collision);
@@ -52,6 +54,23 @@ public abstract class BaseMovement : MonoBehaviour
         foreach (GameObject part in body)
             Destroy(part.gameObject);
         body = new List<GameObject>();
+        startParticle(0, gameObject);
+        transform.position = gameController.GetRandomPosition();
+        startParticle(1, gameObject);
+    }
+
+    IEnumerable startParticle(float time, GameObject player)
+    {
+        yield return new WaitForSeconds(time);
+        ParticleSystem particleSystem = player.GetComponentInChildren<ParticleSystem>();
+        particleSystem.Play();
+        StartCoroutine(StopParticleSystem(particleSystem, 1));
+    }
+
+    IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
+    {
+        yield return new WaitForSeconds(time);
+        particleSystem.Stop();
     }
 
     protected void CollideWithPoint(Collision collision)
@@ -59,12 +78,12 @@ public abstract class BaseMovement : MonoBehaviour
         GameStateHandler.pointList.Remove(collision.gameObject);
         Destroy(collision.gameObject);
         points += 1;
-        
-        
+
+
         add_tail();
         increase_aura();
-        
-        
+
+
     }
 
     // protected void CollideWithPowerup(Collision collision){
@@ -82,7 +101,7 @@ public abstract class BaseMovement : MonoBehaviour
     //             Debug.Log("powerup is active: " + powerup.isActive);
     //             Debug.Log("stack peek" + powerups.Peek());
     //             GameStateHandler.powerupsList.Remove(collision.gameObject);
-            
+
     //         }else if(powerups.Count  > 1){
     //             powerups.Pop(); //remove current powerup
     //             Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
@@ -94,11 +113,11 @@ public abstract class BaseMovement : MonoBehaviour
     //             Debug.Log("stack peek" + powerups.Peek());
     //             GameStateHandler.powerupsList.Remove(collision.gameObject);
     //         }
-    //         Destroy(powerupGameObject);  
+    //         Destroy(powerupGameObject);
     //     }else{
     //         Debug.Log("could not find powerup script component");
     //     }
-         
+
     // }
 
     protected void moveForward()
@@ -113,14 +132,14 @@ public abstract class BaseMovement : MonoBehaviour
             if(body[0]!= null){
                 moveTail(0, transform, maxSpeed, minSpeed);
             }
-            
+
         }
         for (int i = 1; i < body.Count; i++)
         {
             if (body[i-1]!= null){
                 moveTail(i, body[i - 1].transform, maxSpeed , minSpeed);
             }
-            
+
         }
     }
 
@@ -150,12 +169,12 @@ public abstract class BaseMovement : MonoBehaviour
                 var distRatio = (dist - MinimumDistance) / (MaximumDistance - MinimumDistance);
                 // This is the extra speed above min speed he can go up too
                 var diffSpeed = MaxSpeed - MinSpeed;
-                bodySpeed = (distRatio * diffSpeed) + MinSpeed; // Final calc 
+                bodySpeed = (distRatio * diffSpeed) + MinSpeed; // Final calc
             }
             body[i].transform.LookAt(transform);
             body[i].transform.Translate(body[i].transform.forward * (float)bodySpeed * Time.smoothDeltaTime, Space.World);
         }
-        
+
     }
 
     protected void moveAura()
@@ -186,7 +205,7 @@ public abstract class BaseMovement : MonoBehaviour
         {
 
             float size = points * 10 / 1500; //change this to modify size faster or slower
-           
+
             auraTransform.localScale += new Vector3(size, size, size);
         }
 
@@ -195,22 +214,22 @@ public abstract class BaseMovement : MonoBehaviour
     protected void add_tail()
     {
         GameObject newPart;
-         
+
         if (body.Count != 0)
         {
-            
+
             newPart = Instantiate(tailPrefab as GameObject, body[body.Count - 1].transform.position - body[body.Count - 1].transform.forward, body[body.Count - 1].transform.rotation);
             tailNumber++;
-            
-            
+
+
         }
         else
         {
             auraTransform = Instantiate(auraPrefab as GameObject, transform.position - transform.forward, transform.rotation).transform;
             newPart = Instantiate(tailPrefab as GameObject, transform.position - transform.forward, transform.rotation);
             tailNumber = 0;
-            
-            
+
+
         }
         Tail tail = newPart.AddComponent<Tail>();
         tail.setHead(this.gameObject);
@@ -218,5 +237,5 @@ public abstract class BaseMovement : MonoBehaviour
         // Debug.Log("tail: " +newPart.name.Substring(6));
         body.Add(newPart);
     }
-   
+
 }

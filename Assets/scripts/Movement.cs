@@ -14,7 +14,7 @@ public class Movement : BaseMovement
         this.playerNumber = inputs[1];
         head = this.gameObject;
         // Debug.Log("**** "+ playerNumber+ " ****");
-        
+
         if (playerNumber == 0){ //name for head (different to tag)
             gameObject.name = "player0";
         }
@@ -40,7 +40,7 @@ public class Movement : BaseMovement
         Camera cam = GetComponentInChildren<Camera>();
         view view = Config.playerViews[amountOfPlayers-1][playerNumer];
         cam.rect = new Rect(view.x, view.y, view.w, view.h);
-        
+
     }
     // Start is called before the first frame update
     void Start()
@@ -51,13 +51,15 @@ public class Movement : BaseMovement
         powerupManager = this.gameObject.GetComponent<PowerupManager>();
         powerupManager.SetPowerupManager();
         // }
-        
+
         //original
-        MaxSpeed = Config.MAX_PLAYER_SPEED;
-        MinSpeed = Config.MIN_PLAYER_SPEED;
-        // Powerup defaultScript = default.GetComponent<Powerup>();
-        
-        // // for powerup demonstration
+        init();
+
+
+        // for powerup demonstration
+        //uncomment to make snakes stationery
+        //venom activated  by pressing left and right at same time
+
         // MaxSpeed = 0.0f;
         // MinSpeed = 0.0f;
         // speed = 0.0f;
@@ -83,7 +85,7 @@ public class Movement : BaseMovement
         //         add_tail();
         //     }
         // }
-        
+
         // else if (playerNumber == 3){
         //     gameObject.transform.position = new Vector3(0.0f, 1.0f,-10.0f);
         //     gameObject.transform.rotation = Quaternion.Euler(0.0f,-90.0f,0.0f);
@@ -91,7 +93,40 @@ public class Movement : BaseMovement
         //         add_tail();
         //     }
         // }
-    }
+
+
+
+        alive =true;
+        //Set the right Score Display
+        Debug.Log(MainMenu.totPlayers);
+        // for(int i = 0; i<MainMenu.totPlayers.numOfPlayers; ++i){}
+        //if(playerNumber==0){
+        //    scoreDisplayObject = GameObject.FindGameObjectWithTag("player1");
+        //    scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        //}
+
+        //else if(playerNumber==1){
+        //    scoreDisplayObject = GameObject.FindGameObjectWithTag("player2");
+        //    scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        //}
+
+        //else if(playerNumber==2){
+        //    scoreDisplayObject = GameObject.FindGameObjectWithTag("player3");
+        //    scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        //}
+        //else if(playerNumber==3){
+        //    scoreDisplayObject = GameObject.FindGameObjectWithTag("player4");
+        //    scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
+
+        // else if (playerNumber == 3){
+        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,-10.0f);
+        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,-90.0f,0.0f);
+        //     for (int i = 0 ;i < 20 ;i++ ){
+        //         add_tail();
+        //     }
+        // }
+    //}
 
     // Update is called once per frame
     void FixedUpdate()
@@ -102,14 +137,14 @@ public class Movement : BaseMovement
         performTurn();
 
         if (Input.GetKey(left) && Input.GetKey(right))
-        {   
-            
+        {
+
             powerupManager.activatePowerup();
         }
-        
+
         moveMyTail(MaxSpeed,MinSpeed);
         moveAura();
-        
+
     }
 
     private void performTurn()
@@ -124,10 +159,10 @@ public class Movement : BaseMovement
 		}
 	}
 
-    
-    
-    
 
-   
+
+
+
+
 
 }
