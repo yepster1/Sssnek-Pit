@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Speed : Powerup
 {
-    private Movement movement;
-
+    
     public float maxSpeed = Config.MAX_PLAYER_SPEED * 1.3f;
     public float minSpeed = Config.MIN_PLAYER_SPEED * 1.0f;
     // private GameObject floor;
@@ -15,7 +14,7 @@ public class Speed : Powerup
     private float speedUp = Config.PLAYER_SPEED;
 
     //for speed
-    public float maxTimeToSpeed = 10.0f;
+    public float maxTimeToSpeed = 3.0f;
     public float speedTimer;
 
     // private float xr = Config.PLAYER_FALL_MULTIPLIER;
@@ -29,16 +28,7 @@ public class Speed : Powerup
     void Start()
     {
         // playerList = GameStateHandler.playerList; //to be used for passive powerup effects
-        if (powerupManager == null){
-            powerupManager = GetComponent<PowerupManager>();
-            powerupUIScript = GetComponentInChildren<PowerupUIScript>();
-            
-        }
-
-        if (movement == null){
-            movement = GetComponent<Movement>();
-            
-        }
+        powerupManager = GetComponent<PowerupManager>();
         powerupType = "speed";
         // isActive = true;
         activate = false;
@@ -52,13 +42,12 @@ public class Speed : Powerup
 
     public override void activateNow(){
         Debug.Log("Speed Activated");
-        speedTimer = maxTimeToSpeed;
+        speedTimer = 0.0f;
         activate = true;
     }
 
     public override void deactivateNow(){
         Debug.Log("Speed deactivated");
-        powerupUIScript.setPowerupDisplay("jump");
         speedTimer = 0.0f;
         activate = false;
     }
@@ -69,23 +58,21 @@ public class Speed : Powerup
 
     void FixedUpdate()
     {
-        if (powerupType == "speed" && onGround && activate && speedTimer >=  0){
+        if (powerupType == "speed" && onGround && activate && speedTimer <  maxTimeToSpeed){
             if (this.gameObject.tag == "snake"){
                 // Debug.Log("speeding");
                 
                 transform.Translate(transform.forward * maxSpeed * Time.deltaTime, Space.World);
                 gameObject.GetComponent<Movement>().moveMyTail(maxSpeed, minSpeed);
-                speedTimer -= Time.deltaTime;
-                
+                speedTimer += Time.smoothDeltaTime;
             }
-        }else if(speedTimer < 0 && activate){
+        }else if(speedTimer >= maxTimeToSpeed && activate){
             if (this.gameObject.tag == "snake"){
                 this.gameObject.GetComponent<Movement>().MaxSpeed = Config.MAX_PLAYER_SPEED;
                 this.gameObject.GetComponent<Movement>().MinSpeed = Config.MIN_PLAYER_SPEED;
                 
                 
             }
-            Debug.Log("speedTimer for player: "+ powerupManager.myPlayerNum + " " + speedTimer);
             deactivateNow();
             
         }

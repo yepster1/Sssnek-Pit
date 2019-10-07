@@ -54,9 +54,5 @@ public class AiMovement : BaseMovement
         moveAura();
     }
 
-    public override void setColor(Transform tail)
-    {
-        snakeColourSetter.SetColor(4, tail.gameObject.GetComponent<SkinnedMeshRenderer>());
-    }
 
 }

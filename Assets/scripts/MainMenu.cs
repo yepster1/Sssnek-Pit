@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System;
-
 public class MainMenu : MonoBehaviour
 {
     private ArrayList players;
@@ -19,7 +17,6 @@ public class MainMenu : MonoBehaviour
     public TMP_InputField p3RInputField;
     public TMP_InputField p4LInputField;
     public TMP_InputField p4RInputField;
-    public TMP_InputField AINumberField;
     public static controls player;
     public static int totPlayers = 1;
     public static int totalAis = 1;
@@ -42,7 +39,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         errorText.text="";
-        if(CheckPlayerInput() == true){
+        if(CheckPlayerInput()){
             totPlayers = numOfPlayers;
 //            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
 
@@ -117,7 +114,7 @@ public class MainMenu : MonoBehaviour
             }
 
 
-            totalAis = Int32.Parse(AINumberField.text);
+
             return numOfPlayers > 0;
 
 
@@ -125,7 +122,7 @@ public class MainMenu : MonoBehaviour
         catch (System.Exception e)
         {
             Debug.Log(e);
-            errorText.text="Please make sure that at least player one has controls.";
+            errorText.text="Please make sure that at leat player one has controls.";
             return false;
 
         }

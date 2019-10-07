@@ -1,16 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+
 public class Movement : BaseMovement
 {
     public int playerNumber;
     public KeyCode left;
     public KeyCode right;
     public PowerupManager powerupManager;
-    protected GameObject scoreDisplayObject;
-    protected TMP_Text scoreDisplay;
-
     public void spawnPlayer(List<int> inputs)
     {
         int amountOfPlayers = inputs[0];
@@ -30,17 +27,16 @@ public class Movement : BaseMovement
         if (playerNumber == 3){
             gameObject.name = "player3";
         }
-        // Debug.Log("player " + playerNumber + " started");
+        Debug.Log("player " + playerNumber + " started");
         // Debug.Log("player left: "+Config.playerControls[playerNumber].Left );
         this.left = Config.playerControls[playerNumber].Left;
         this.right = Config.playerControls[playerNumber].rigth;
-        snakeColourSetter.SetColor(playerNumber, GetComponent<SkinnedMeshRenderer>());
         setCamara(amountOfPlayers, playerNumber);
     }
 
     private void setCamara(int amountOfPlayers, int playerNumer)
     {
-        // Debug.Log("setting view with amount of players " + amountOfPlayers + " and player number " + playerNumber);
+        Debug.Log("setting view with amount of players " + amountOfPlayers + " and player number " + playerNumber);
         Camera cam = GetComponentInChildren<Camera>();
         view view = Config.playerViews[amountOfPlayers-1][playerNumer];
         cam.rect = new Rect(view.x, view.y, view.w, view.h);
@@ -49,10 +45,8 @@ public class Movement : BaseMovement
     // Start is called before the first frame update
     void Start()
     {
-        head = this.gameObject;
         body = new List<GameObject>();
         rb = this.gameObject.GetComponent<Rigidbody>();
-
         // if (powerupManager == null){
         powerupManager = this.gameObject.GetComponent<PowerupManager>();
         powerupManager.SetPowerupManager();
@@ -69,6 +63,7 @@ public class Movement : BaseMovement
         // MaxSpeed = 0.0f;
         // MinSpeed = 0.0f;
         // speed = 0.0f;
+        // //for powerup demonstration
         // if (playerNumber == 0){
         //     gameObject.transform.position = new Vector3(-10.0f, 1.0f,-10.0f);
         //     gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
@@ -103,7 +98,7 @@ public class Movement : BaseMovement
 
         alive =true;
         //Set the right Score Display
-        // Debug.Log(MainMenu.totPlayers);
+        Debug.Log(MainMenu.totPlayers);
         // for(int i = 0; i<MainMenu.totPlayers.numOfPlayers; ++i){}
         //if(playerNumber==0){
         //    scoreDisplayObject = GameObject.FindGameObjectWithTag("player1");
@@ -176,10 +171,5 @@ public class Movement : BaseMovement
 
 
 
-
-    public override void setColor(Transform tail)
-    {
-        snakeColourSetter.SetColor(playerNumber, tail.gameObject.GetComponent<SkinnedMeshRenderer>());
-    }
 
 }

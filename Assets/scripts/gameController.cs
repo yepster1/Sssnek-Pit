@@ -2,6 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public  struct totalPlayers
+{
+    public static totalPlayers addTotalPlayers(int pnum){
+        totalPlayers player = new totalPlayers();
+        player.numOfPlayers=pnum;
+        return player;
+    }
+    public int numOfPlayers;
+
+}
 public class gameController : MonoBehaviour
 {
     public GameObject point_prefab;
@@ -27,7 +37,7 @@ public class gameController : MonoBehaviour
         AddPlayers(numOfPlayers);
         AddAIs(MainMenu.totalAis);
     }
-    
+
     public void AddAIs(int amountOfAI)
     {
         for(int i = 0; i < amountOfAI; i++) {
@@ -48,7 +58,7 @@ public class gameController : MonoBehaviour
 
     void AddPlayer(int numberOfPlayers, int playerNumber)
     {
-        // Debug.Log("spawning player " + playerNumber);
+        Debug.Log("spawning player " + playerNumber);
         GameObject player = Instantiate(player_prefab, GetRandomPosition(), new Quaternion());
         Camera cam = player.GetComponentInChildren<Camera>();
         player.SendMessage("spawnPlayer", new List<int> { numberOfPlayers, playerNumber });
@@ -59,7 +69,7 @@ public class gameController : MonoBehaviour
     {
         foreach(GameObject player in GameStateHandler.playerList)
         {
-            
+
         }
     }
 
@@ -80,7 +90,7 @@ public class gameController : MonoBehaviour
         StartCoroutine(StopParticleSystem(particleSystem, 1));
         GameStateHandler.pointList.Add(point);
     }
-    
+
     void SpawnPowerups()
     {
         GameStateHandler.powerupsList.Add(Instantiate(powerup_prefab, GetRandomPosition(), new Quaternion()));

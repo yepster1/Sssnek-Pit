@@ -13,11 +13,7 @@ GameObject:
   - component: {fileID: 4726670543465924883}
   - component: {fileID: 5332655956739832545}
   - component: {fileID: -2061656090783406349}
-  - component: {fileID: -967291448501924276}
-  - component: {fileID: 2958115159105411485}
-  - component: {fileID: 4543472507570472159}
-  - component: {fileID: -4694903206543903952}
-  - component: {fileID: 2357319780665901562}
+  - component: {fileID: 2497874867043180415}
   m_Layer: 0
   m_Name: venom
   m_TagString: Untagged
@@ -116,41 +112,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-967291448501924276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7392922167742800336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0c28f2f53694743859b9e72b0dba00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  venomObjectRB: {fileID: -2061656090783406349}
-  speed: 100
-  activate: 1
-  movement: {fileID: 0}
-  myOtherPlayers: []
---- !u!114 &2958115159105411485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7392922167742800336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0c28f2f53694743859b9e72b0dba00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  venomObjectRB: {fileID: -2061656090783406349}
-  speed: 100
-  activate: 1
-  movement: {fileID: 0}
-  myOtherPlayers: []
---- !u!114 &4543472507570472159
+--- !u!114 &2497874867043180415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,39 +127,4 @@ MonoBehaviour:
   venomObjectRB: {fileID: 0}
   speed: 100
   activate: 0
-  movement: {fileID: 0}
-  myOtherPlayers: []
---- !u!114 &-4694903206543903952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7392922167742800336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0c28f2f53694743859b9e72b0dba00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  venomObjectRB: {fileID: 0}
-  speed: 100
-  activate: 0
-  movement: {fileID: 0}
-  myOtherPlayers: []
---- !u!114 &2357319780665901562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7392922167742800336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0c28f2f53694743859b9e72b0dba00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  venomObjectRB: {fileID: 0}
-  speed: 100
-  activate: 0
-  movement: {fileID: 0}
   myOtherPlayers: []

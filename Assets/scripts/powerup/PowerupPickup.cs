@@ -28,7 +28,7 @@ public class PowerupPickup : MonoBehaviour
                 
                 //uncomment to add venom
                 Powerup venomShoot = player.AddComponent<VenomShootingScript>();
-                venomShoot.setPowerup("venom", powerupManager.myPlayerNum,powerupManager.otherPlayers, true, false);
+                venomShoot.setPowerup("venom", powerupManager.myPlayerNum,true, false);
                 powerupManager.pushPowerup(venomShoot);
                 GameStateHandler.powerupsList.Remove(this.gameObject);
             
@@ -36,7 +36,7 @@ public class PowerupPickup : MonoBehaviour
                 //uncomment to add venom
                 powerupManager.popPowerup(); //remove current powerup
                 Powerup venomShoot = player.AddComponent<VenomShootingScript>();
-                venomShoot.setPowerup("venom", powerupManager.myPlayerNum,powerupManager.otherPlayers, true, false);
+                venomShoot.setPowerup("venom", powerupManager.myPlayerNum,true, false);
                 powerupManager.pushPowerup(venomShoot);
                 GameStateHandler.powerupsList.Remove(this.gameObject);
 
