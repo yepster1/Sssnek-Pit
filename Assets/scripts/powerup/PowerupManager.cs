@@ -29,12 +29,24 @@ public class PowerupManager : MonoBehaviour
                 myPlayerNum = 3;
             }
         }
+        otherPlayers = new List<GameObject>();
+        for (int i = 0 ; i < GameStateHandler.playerList.Count; i++){
+            if(i != myPlayerNum){
+                otherPlayers.Add(GameStateHandler.playerList[i]);
+            }
+        }
+        Debug.Log ("for player: " + myPlayerNum);
+        Debug.Log("other players are");
+        for (int i = 0 ; i < otherPlayers.Count; i++){
+            Debug.Log(otherPlayers[i] + ",");
+        }
+
         powerups = new Stack<Powerup>();
 
         powerupBeingUsed = false;
 
         Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
-        jumpDefault.setPowerup("jump", myPlayerNum, true, false);
+        jumpDefault.setPowerup("jump", myPlayerNum, otherPlayers,true, false);
         // powerupUIScript.setPowerupDisplay("jump");
         pushPowerup(jumpDefault);
         
@@ -46,14 +58,14 @@ public class PowerupManager : MonoBehaviour
         // powerupUIScript.setPowerupDisplay("speed");
         // pushPowerup(speedTest);
 
-        // Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
-        // venomShoot.setPowerup("venom", myPlayerNum, true, false);
-        // pushPowerup(venomShoot);
+        Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
+        venomShoot.setPowerup("venom", myPlayerNum, otherPlayers ,true, false);
+        pushPowerup(venomShoot);
         
-        Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
-        invincibilityTest.setPowerup("invincibility" , myPlayerNum, true, false);
-        // powerupUIScript.setPowerupDisplay("invincibility");
-        pushPowerup(invincibilityTest);
+        // Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
+        // invincibilityTest.setPowerup("invincibility" , myPlayerNum, true, false);
+        // // powerupUIScript.setPowerupDisplay("invincibility");
+        // pushPowerup(invincibilityTest);
         
        
     }
@@ -105,11 +117,12 @@ public class PowerupManager : MonoBehaviour
             if (p.powerupType == "venom" && !powerupBeingUsed){
                 powerupInUse();
                 VenomShootingScript venomShoot = (VenomShootingScript)p;
+                venomShoot.setVenom(myPlayerNum ,venomPrefab, otherPlayers);
                 Debug.Log("powerup type " +venomShoot.powerupType);
                 
                 venomPrefab = Instantiate(venomPrefab as GameObject, transform.position + transform.forward, transform.rotation);
                 Debug.Log("movement.playerNum: " + movement.playerNumber);
-                venomShoot.setVenom(myPlayerNum, venomPrefab, otherPlayers);
+                // venomShoot.setVenom(myPlayerNum, venomPrefab, otherPlayers);
                 venomShoot.activateNow();
                 Invoke("powerupInUse", venomShoot.maxTimeToShoot);
             }

@@ -54,11 +54,11 @@ public class Tail1 : MonoBehaviour
             // int colPlayerNum = -1; //not set yet
             if (collision.gameObject.name.Substring(0,4) == "tail"){
                int tailPlayerNum = ConvertToInt(collision.gameObject.name.Substring(5,1));
-               if (movement != null){
-                   Debug.Log ("movement set in oncollision enter");
-               }else{
-                   Debug.Log("movement **not** set in onCollisionEnter for p: "+ myPlayerNum);
-               }
+            //    if (movement != null){
+            //        Debug.Log ("movement set in oncollision enter");
+            //    }else{
+            //        Debug.Log("movement **not** set in onCollisionEnter for p: "+ myPlayerNum);
+            //    }
                
                if (gObject.gameObject.tag == "snake" && tailPlayerNum != myPlayerNum)
                 {   

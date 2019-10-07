@@ -31,7 +31,7 @@ public class JumpProgressBar : MonoBehaviour
                 // TextLoading.gameObject.SetActive(true);
             }
             else if (currentLoadingAmount >= 100 && jump.jumpTimer > jump.timeBetweenJumps && jump.tFHTTtimer > jump.timeFromHeadToTail){
-                Debug.Log("current loading amount over 100%%%%%%%%%");
+                // Debug.Log("current loading amount over 100%%%%%%%%%");
                 currentLoadingAmount = 0;
                 
                 // TextLoading.gameObject.SetActive(false);

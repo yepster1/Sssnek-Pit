@@ -81,7 +81,7 @@ public class Jump : Powerup
         float speed = vel.magnitude;  
         // Debug.Log ("speed : " + speed);
         float timeFromHeadToTail = distanceToTravel / speed;
-        Debug.Log("time from head to tail: " +timeFromHeadToTail);
+        // Debug.Log("time from head to tail: " +timeFromHeadToTail);
         return timeFromHeadToTail;
     }
     // Update is called once per frame

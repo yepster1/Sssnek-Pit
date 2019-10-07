@@ -71,7 +71,7 @@ public class PowerupUIScript : MonoBehaviour
         
         float propDistX = canvasRT.rect.width * offsetPropX;
         float propDistY = canvasRT.rect.height * offsetPropY;
-        Debug.Log("#########propDistX: " + propDistX);
+        // Debug.Log("#########propDistX: " + propDistX);
  
         // Placement using transform pos, bounds and offset percentage based on canvas size
         // float offset = canvasRT.transform.position.y + propDist;
