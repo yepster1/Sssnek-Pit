@@ -57,16 +57,15 @@ public class Movement : BaseMovement
         powerupManager = this.gameObject.GetComponent<PowerupManager>();
         powerupManager.SetPowerupManager();
         // }
-        
+
         //original
-        MaxSpeed = Config.MAX_PLAYER_SPEED;
-        MinSpeed = Config.MIN_PLAYER_SPEED;
-        
-        
+        init();
+
+
         // for powerup demonstration
         //uncomment to make snakes stationery
         //venom activated  by pressing left and right at same time
-        
+
         // MaxSpeed = 0.0f;
         // MinSpeed = 0.0f;
         // speed = 0.0f;
@@ -102,7 +101,9 @@ public class Movement : BaseMovement
         
        
 
-        alive=true;
+
+
+        alive =true;
         //Set the right Score Display
         // Debug.Log(MainMenu.totPlayers);
         // for(int i = 0; i<MainMenu.totPlayers.numOfPlayers; ++i){}
@@ -132,7 +133,7 @@ public class Movement : BaseMovement
         //         add_tail();
         //     }
         // }
-    }
+    //}
 
     // Update is called once per frame
     void FixedUpdate()

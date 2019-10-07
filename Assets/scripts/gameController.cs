@@ -8,19 +8,21 @@ public class gameController : MonoBehaviour
     public GameObject powerup_prefab;
     public GameObject player_prefab;
     public GameObject AI_prefab;
-    
+    public GameObject pointspawn;
+
     private  int numOfPlayers;
 
     // Start is called before the first frame update
 
    private void Start()
     {
-        InvokeRepeating("Spawn", 0.5f, 3f);
-        InvokeRepeating("SpawnPowerups", 0.5f , 0.5f);
         GameStateHandler.playerList = new List<GameObject>();
-        GameStateHandler.aiList = new List<GameObject>(); 
+        GameStateHandler.aiList = new List<GameObject>();
         GameStateHandler.pointList = new List<GameObject>();
         GameStateHandler.powerupsList = new List<GameObject>();
+        Spawn();
+        InvokeRepeating("Spawn", 0.5f, 0.2f);
+        InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         numOfPlayers = MainMenu.totPlayers;
         AddPlayers(numOfPlayers);
         AddAIs(MainMenu.totalAis);
@@ -72,12 +74,21 @@ public class gameController : MonoBehaviour
 
     void Spawn()
     {
-        GameStateHandler.pointList.Add(Instantiate(point_prefab, GetRandomPosition(), new Quaternion()));
+        GameObject point = Instantiate(point_prefab, GetRandomPosition(), new Quaternion());
+        ParticleSystem particleSystem = point.GetComponentInChildren<ParticleSystem>();
+        particleSystem.Play();
+        StartCoroutine(StopParticleSystem(particleSystem, 1));
+        GameStateHandler.pointList.Add(point);
     }
     
     void SpawnPowerups()
     {
         GameStateHandler.powerupsList.Add(Instantiate(powerup_prefab, GetRandomPosition(), new Quaternion()));
     }
-    
+
+    IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
+    {
+        yield return new WaitForSeconds(time);
+        particleSystem.Stop();
+    }
 }

@@ -44,7 +44,7 @@ public class MainMenu : MonoBehaviour
         errorText.text="";
         if(CheckPlayerInput() == true){
             totPlayers = numOfPlayers;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+//            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
             
         }
         else{
