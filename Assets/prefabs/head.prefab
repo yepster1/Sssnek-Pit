@@ -554,16 +554,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7622608087789538235}
     m_Modifications:
-    - target: {fileID: 8005222953752578811, guid: b499b71b6ca894153ae4943b3bec6931,
-        type: 3}
-      propertyPath: m_Name
-      value: JumpProgressBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 8005222953752578811, guid: b499b71b6ca894153ae4943b3bec6931,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8005222953752578810, guid: b499b71b6ca894153ae4943b3bec6931,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -669,16 +659,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8005222953752578809, guid: b499b71b6ca894153ae4943b3bec6931,
+    - target: {fileID: 8005222953752578811, guid: b499b71b6ca894153ae4943b3bec6931,
         type: 3}
-      propertyPath: powerupUIPlaceholder
-      value: 
-      objectReference: {fileID: 6611251391408476808}
+      propertyPath: m_Name
+      value: JumpProgressBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005222953752578811, guid: b499b71b6ca894153ae4943b3bec6931,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8005222953593548974, guid: b499b71b6ca894153ae4943b3bec6931,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -17.400002
       objectReference: {fileID: 0}
+    - target: {fileID: 8005222953752578809, guid: b499b71b6ca894153ae4943b3bec6931,
+        type: 3}
+      propertyPath: powerupUIPlaceholder
+      value: 
+      objectReference: {fileID: 6611251391408476808}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b499b71b6ca894153ae4943b3bec6931, type: 3}
 --- !u!224 &5691237833608690639 stripped
@@ -706,11 +706,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7622608087789538235}
     m_Modifications:
-    - target: {fileID: 8664154632903738218, guid: 4e3cf5f866a5b400193a793b5fcdc120,
-        type: 3}
-      propertyPath: m_Name
-      value: InvincibilityProgressBar
-      objectReference: {fileID: 0}
     - target: {fileID: 1614936872558525131, guid: 4e3cf5f866a5b400193a793b5fcdc120,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -831,6 +826,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8664154632903738218, guid: 4e3cf5f866a5b400193a793b5fcdc120,
+        type: 3}
+      propertyPath: m_Name
+      value: InvincibilityProgressBar
+      objectReference: {fileID: 0}
     - target: {fileID: 1018050965693378522, guid: 4e3cf5f866a5b400193a793b5fcdc120,
         type: 3}
       propertyPath: powerupUIPlaceholder
@@ -863,16 +863,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7622608087789538235}
     m_Modifications:
-    - target: {fileID: 1684101387775816458, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: VenomProgressBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 1684101387775816458, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8722077706961881771, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -993,6 +983,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1684101387775816458, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: VenomProgressBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684101387775816458, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1055770836441638125, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
         type: 3}
       propertyPath: powerupUIPlaceholder
@@ -1061,16 +1061,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7622608087789538235}
     m_Modifications:
-    - target: {fileID: 8273632649571703090, guid: 7fd479fcea8054094ab9c6c19c79095d,
-        type: 3}
-      propertyPath: m_Name
-      value: SpeedProgressBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 8273632649571703090, guid: 7fd479fcea8054094ab9c6c19c79095d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6812343285409779644, guid: 7fd479fcea8054094ab9c6c19c79095d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1176,11 +1166,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 788023107087936113, guid: 7fd479fcea8054094ab9c6c19c79095d,
+    - target: {fileID: 8273632649571703090, guid: 7fd479fcea8054094ab9c6c19c79095d,
         type: 3}
-      propertyPath: powerupUIPlaceholder
-      value: 
-      objectReference: {fileID: 6611251391408476808}
+      propertyPath: m_Name
+      value: SpeedProgressBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273632649571703090, guid: 7fd479fcea8054094ab9c6c19c79095d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955919278299182297, guid: 7fd479fcea8054094ab9c6c19c79095d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.400002
+      objectReference: {fileID: 0}
     - target: {fileID: 2255133483532333527, guid: 7fd479fcea8054094ab9c6c19c79095d,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1216,23 +1216,23 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6955919278299182297, guid: 7fd479fcea8054094ab9c6c19c79095d,
+    - target: {fileID: 788023107087936113, guid: 7fd479fcea8054094ab9c6c19c79095d,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -17.400002
-      objectReference: {fileID: 0}
+      propertyPath: powerupUIPlaceholder
+      value: 
+      objectReference: {fileID: 6611251391408476808}
     m_RemovedComponents:
     - {fileID: 788023107087936113, guid: 7fd479fcea8054094ab9c6c19c79095d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7fd479fcea8054094ab9c6c19c79095d, type: 3}
---- !u!1 &1226287429900327782 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8273632649571703090, guid: 7fd479fcea8054094ab9c6c19c79095d,
-    type: 3}
-  m_PrefabInstance: {fileID: 7193793301650588244}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4422309414106156520 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6812343285409779644, guid: 7fd479fcea8054094ab9c6c19c79095d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7193793301650588244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &242384445567907469 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6955919278299182297, guid: 7fd479fcea8054094ab9c6c19c79095d,
     type: 3}
   m_PrefabInstance: {fileID: 7193793301650588244}
   m_PrefabAsset: {fileID: 0}
@@ -1242,9 +1242,9 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7193793301650588244}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &242384445567907469 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6955919278299182297, guid: 7fd479fcea8054094ab9c6c19c79095d,
+--- !u!1 &1226287429900327782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8273632649571703090, guid: 7fd479fcea8054094ab9c6c19c79095d,
     type: 3}
   m_PrefabInstance: {fileID: 7193793301650588244}
   m_PrefabAsset: {fileID: 0}

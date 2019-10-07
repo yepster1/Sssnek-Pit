@@ -133,7 +133,7 @@ public class Movement : BaseMovement
         //         add_tail();
         //     }
         // }
-    //}
+    }
 
     // Update is called once per frame
     void FixedUpdate()

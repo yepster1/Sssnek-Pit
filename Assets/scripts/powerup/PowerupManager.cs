@@ -45,27 +45,25 @@ public class PowerupManager : MonoBehaviour
 
         powerupBeingUsed = false;
 
+        //leave jump uncommented - its the default
         Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
         jumpDefault.setPowerup("jump", myPlayerNum, otherPlayers,true, false);
-        // powerupUIScript.setPowerupDisplay("jump");
         pushPowerup(jumpDefault);
         
-
-        
+        //uncomment one of these at a time to see how they work. 
+        //will implement powerup pickup tonight
 
         // Powerup speedTest = this.gameObject.AddComponent<Speed>();
-        // speedTest.setPowerup("speed", myPlayerNum ,true, false);
-        // powerupUIScript.setPowerupDisplay("speed");
+        // speedTest.setPowerup("speed", myPlayerNum ,otherPlayers, true, false);
         // pushPowerup(speedTest);
 
-        Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
-        venomShoot.setPowerup("venom", myPlayerNum, otherPlayers ,true, false);
-        pushPowerup(venomShoot);
+        // Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
+        // venomShoot.setPowerup("venom", myPlayerNum, otherPlayers ,true, false);
+        // pushPowerup(venomShoot);
         
-        // Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
-        // invincibilityTest.setPowerup("invincibility" , myPlayerNum, true, false);
-        // // powerupUIScript.setPowerupDisplay("invincibility");
-        // pushPowerup(invincibilityTest);
+        Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
+        invincibilityTest.setPowerup("invincibility" , myPlayerNum, otherPlayers, true, false);
+        pushPowerup(invincibilityTest);
         
        
     }
