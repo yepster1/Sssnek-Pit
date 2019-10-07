@@ -14,7 +14,6 @@ public class AiMovement : BaseMovement
     {
         navMeshAgent.speed = speed;
         aIPersonality = new AIPersonality(0.5f, 0.5f,3);
-        snakeColourSetter.SetColor(4, GetComponent<SkinnedMeshRenderer>());
     }
 
     void changeTarget(Vector3 whoToTarget)
@@ -33,9 +32,5 @@ public class AiMovement : BaseMovement
         moveAura();
     }
 
-    public override void setColor(Transform tail)
-    {
-        snakeColourSetter.SetColor(4, tail.gameObject.GetComponent<SkinnedMeshRenderer>());
-    }
 
 }

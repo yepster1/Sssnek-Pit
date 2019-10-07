@@ -6,9 +6,7 @@ public class PowerupUIScript : MonoBehaviour
 {
     // public List<Powerup> powerups;
     public JumpProgressBar JPB;
-    public SpeedProgressBar SPB;
-    public InvincibilityProgressBar IPB;
-    public VenomProgressBar VPB;
+    // public SpeedProgressBar SPB;
     private Canvas canvas;
     private RectTransform canvasRT;
     private GameObject player;
@@ -39,29 +37,11 @@ public class PowerupUIScript : MonoBehaviour
     }
     public void setPowerupDisplay(string type){
         if(type == "jump"){
+            // SPB.SetActive(false);
             JPB.gameObject.SetActive(true);
-            SPB.gameObject.SetActive(false);
-            IPB.gameObject.SetActive(false);
-            VPB.gameObject.SetActive(false);
-        }
-
-        if (type == "speed"){
-            JPB.gameObject.SetActive(false);
-            SPB.gameObject.SetActive(true);
-            IPB.gameObject.SetActive(false);
-            VPB.gameObject.SetActive(false);
-        }
-        if (type == "invincibility"){
-            JPB.gameObject.SetActive(false);
-            SPB.gameObject.SetActive(false);
-            IPB.gameObject.SetActive(true);
-            VPB.gameObject.SetActive(false);
-        }
-        if (type == "venom"){
-            JPB.gameObject.SetActive(false);
-            SPB.gameObject.SetActive(false);
-            IPB.gameObject.SetActive(false);
-            VPB.gameObject.SetActive(true);
+        }else if (type == "speed"){
+            JPB.SetActive(false);
+            // SPB.SetActive(true);
         }
     }
 
@@ -81,7 +61,7 @@ public class PowerupUIScript : MonoBehaviour
         
         float propDistX = canvasRT.rect.width * offsetPropX;
         float propDistY = canvasRT.rect.height * offsetPropY;
-        // Debug.Log("#########propDistX: " + propDistX);
+        Debug.Log("#########propDistX: " + propDistX);
  
         // Placement using transform pos, bounds and offset percentage based on canvas size
         // float offset = canvasRT.transform.position.y + propDist;
