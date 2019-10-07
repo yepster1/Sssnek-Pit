@@ -1,30 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
-using System; //int32
 
-public class Tail : MonoBehaviour
+public class Tail1 : MonoBehaviour
 {
     public GameObject tailPrefab;
     public GameObject head;
-    // private string name;
     private Movement movement;
     private int myPlayerNum;
 
     private List <Collision> currentCollisions = new List <Collision> (); //used to test collisions with other objects
-   
-    public void setHead(GameObject _head){
+
+    public void setHead(GameObject _head)
+    {
         head = _head;
         tailPrefab = this.gameObject;
-        movement = head.GetComponent<Movement>();
+        movement = _head.GetComponent<Movement>();
         myPlayerNum = movement.playerNumber;
-        // if (movement != null){
-        //     Debug.Log ("movement set in tail for p: "+ myPlayerNum);
-        // }else{
-        //     Debug.Log("movement **not** set in tail for p: "+ myPlayerNum);
-        // }
-        
     }
+
     public GameObject add_tail(string _name, GameObject _newTail, int _tailNumber)
     {
         if(head != null){
@@ -49,6 +44,7 @@ public class Tail : MonoBehaviour
         }
         
     }
+
     //only check collisions with tail
     //head collisions are already checked in BaseMovement
     protected void OnCollisionEnter(Collision collision)
@@ -58,7 +54,11 @@ public class Tail : MonoBehaviour
             // int colPlayerNum = -1; //not set yet
             if (collision.gameObject.name.Substring(0,4) == "tail"){
                int tailPlayerNum = ConvertToInt(collision.gameObject.name.Substring(5,1));
-               
+               if (movement != null){
+                   Debug.Log ("movement set in oncollision enter");
+               }else{
+                   Debug.Log("movement **not** set in onCollisionEnter for p: "+ myPlayerNum);
+               }
                
                if (gObject.gameObject.tag == "snake" && tailPlayerNum != myPlayerNum)
                 {   
@@ -88,7 +88,7 @@ public class Tail : MonoBehaviour
 
     protected void CollideWithOtherTail(Collision collision)
     {
-        Tail tail = collision.gameObject.GetComponent<Tail>();
+        Tail1 tail = collision.gameObject.GetComponent<Tail1>();
         if (tail != null){
             if (collision.gameObject.name.Substring(0,4) == "tail"){
                 int tailPlayerNum = ConvertToInt(collision.gameObject.name.Substring(5,1));
@@ -137,5 +137,4 @@ public class Tail : MonoBehaviour
             return -1;
         }
     }
-
 }

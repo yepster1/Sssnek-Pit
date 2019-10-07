@@ -31,7 +31,7 @@ public class Speed : Powerup
         // playerList = GameStateHandler.playerList; //to be used for passive powerup effects
         if (powerupManager == null){
             powerupManager = GetComponent<PowerupManager>();
-            
+            powerupUIScript = GetComponentInChildren<PowerupUIScript>();
             
         }
 
@@ -58,6 +58,7 @@ public class Speed : Powerup
 
     public override void deactivateNow(){
         Debug.Log("Speed deactivated");
+        powerupUIScript.setPowerupDisplay("jump");
         speedTimer = 0.0f;
         activate = false;
     }

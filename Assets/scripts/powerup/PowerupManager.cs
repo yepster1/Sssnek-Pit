@@ -35,6 +35,7 @@ public class PowerupManager : MonoBehaviour
 
         Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
         jumpDefault.setPowerup("jump", myPlayerNum, true, false);
+        powerupUIScript.setPowerupDisplay("jump");
         pushPowerup(jumpDefault);
         
 
@@ -42,6 +43,7 @@ public class PowerupManager : MonoBehaviour
 
         Powerup speedTest = this.gameObject.AddComponent<Speed>();
         speedTest.setPowerup("speed", myPlayerNum ,true, false);
+        powerupUIScript.setPowerupDisplay("speed");
         pushPowerup(speedTest);
 
         // Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();

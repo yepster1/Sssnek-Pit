@@ -23,23 +23,23 @@ public class Powerup : MonoBehaviour
         activate = _activate;
         playerNum = _playerNum;
         
-        powerupUIScript = GetComponent<PowerupUIScript>();
+        
         // if (powerupUIScript == null)
         //  Debug.Log ("---------> XX powerupUIScript null");
-        if (powerupUIScript != null){
-            Debug.Log ("--------->powerupUIScript not null");
-            
-            if (powerupType == "jump"){
+        // if (powerupUIScript != null){
+        //     Debug.Log ("--------->powerupUIScript not null");
+        //     powerupUIScript.setPowerupDisplay(powerupType);
+        //     if (powerupType == "jump"){
                 
-            // addPowerup(jump);
+        //     // addPowerup(jump);
             
 
-            }
-            if (powerupType == "venom"){
-                // Debug.Log("pNum: " + playerNum);
+        //     }
+        //     if (powerupType == "venom"){
+        //         // Debug.Log("pNum: " + playerNum);
                 
-            }
-        }
+        //     }
+        // }
         
     }
     

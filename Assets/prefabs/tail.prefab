@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 447223272229901859}
   - component: {fileID: 7189132531295127395}
   - component: {fileID: 2450251001652491600}
-  - component: {fileID: -1460095945370747527}
+  - component: {fileID: 3270288193754867193}
   m_Layer: 0
   m_Name: tail
   m_TagString: snake
@@ -123,7 +123,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &-1460095945370747527
+--- !u!114 &3270288193754867193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1915043134201272119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc0e2e248c69e48db81efaa1ff38ca13, type: 3}
+  m_Script: {fileID: 11500000, guid: 2dd9a2603b5b94f75ba5a380102ec727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tailPrefab: {fileID: 1915043134201272119}

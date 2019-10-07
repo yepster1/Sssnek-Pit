@@ -74,7 +74,7 @@ public class Venom: MonoBehaviour
 
     protected void CollideWithOtherObject(Collider collision)
     {
-        Tail tail = collision.gameObject.GetComponent<Tail>();
+        Tail1 tail = collision.gameObject.GetComponent<Tail1>();
         if (tail != null){
             if (collision.gameObject.name.Substring(0,4) == "tail"){
                 int colPlayerNum = ConvertToInt(collision.gameObject.name.Substring(5,1));

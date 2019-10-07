@@ -52,7 +52,7 @@ public class Jump : Powerup
         // powerupType = "jump";
         isActive = true;
         activate = false;
-        jumpTimer = timeBetweenJumps;
+        jumpTimer = 0.0f;
        
         
     }

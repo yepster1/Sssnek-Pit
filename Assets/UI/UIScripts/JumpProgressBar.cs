@@ -13,9 +13,9 @@ public class JumpProgressBar : MonoBehaviour
     public float currentLoadingAmount; 
     public float speed;
     
-    void OnAwake(){
+    void Start(){
        jump = transform.parent.parent.parent.GetComponent<Jump>(); 
-       
+       currentLoadingAmount = 0.0f;
     }
     // public void startFromZero(){
     //     currentLoadingAmount = 0;
