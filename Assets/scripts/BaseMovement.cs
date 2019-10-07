@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+// public  struct score
+// {
+//     public static score setScore(int totScore){
+//         score totalScore = new score();
+//         totalScore.currentScore=totScore;
+//         return totalScore;
+//     }
+//     public int currentScore;
+    
+// }
 public abstract class BaseMovement : MonoBehaviour
 {
-
     public GameObject tailPrefab;
     public List<GameObject> body;
     public GameObject head;
@@ -15,14 +25,8 @@ public abstract class BaseMovement : MonoBehaviour
     protected float rotationSpeed = Config.PLAYER_ROTATION;
     public GameObject auraPrefab;
     protected Transform auraTransform;
-
-    //for venom
-    // struct Tail{
-        public static int tailNumber;
-    //     public int playerNum;
-    // }
-    
-
+    public static int tailNumber;
+    public bool alive;
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("snake"))
@@ -47,13 +51,14 @@ public abstract class BaseMovement : MonoBehaviour
             return;
         }
         Debug.Log("I have died");
-        transform.position = gameController.GetRandomPosition();
         points = 0;
-        foreach (GameObject part in body)
-            Destroy(part.gameObject);
+        alive=false;
+        foreach (GameObject part in body){
+            Destroy(part);
+        }
         body = new List<GameObject>();
+        transform.position = gameController.GetRandomPosition();
     }
-
     protected void CollideWithPoint(Collision collision)
     {
         GameStateHandler.pointList.Remove(collision.gameObject);
@@ -212,11 +217,13 @@ public abstract class BaseMovement : MonoBehaviour
             
             
         }
-        Tail tail = newPart.AddComponent<Tail>();
-        tail.setHead(this.gameObject);
+        setColor(newPart.transform);
+        
+        Tail1 tail = newPart.GetComponent<Tail1>();
+        tail.setHead(head);
         newPart = tail.add_tail(this.gameObject.name,newPart ,tailNumber);
-        // Debug.Log("tail: " +newPart.name.Substring(6));
         body.Add(newPart);
     }
-   
+    public abstract void setColor(Transform tail);
+
 }

@@ -10,28 +10,41 @@ public class Powerup : MonoBehaviour
     public bool activate; 
     protected int playerNum;
     protected gameController gc;
-    public static List<GameObject> playerList; //to be used for passive powerups
+    // public static List<GameObject> otherPlayers; //to be used for passive powerups
     public Rigidbody rb;
-    protected bool onGround;
+    public bool onGround;
     private GameObject player;
     protected PowerupManager powerupManager;
+    protected PowerupUIScript powerupUIScript;
     
-    public void setPowerup(string _powerupType, int _playerNum,bool _isActive, bool _activate){
+    public void setPowerup(string _powerupType, int _playerNum, List<GameObject> _otherPlayers, bool _isActive, bool _activate){
         powerupType = _powerupType;
         isActive = _isActive;
         activate = _activate;
         playerNum = _playerNum;
+        // otherPlayers = _otherPlayers;
+        // for (int i = 0 ; i < _otherPlayers.Count;i++){
+        //     otherPlayers[i]= _otherPlayers[i];
+        // }
         
-        // if (powerupType == "jump"){
-            
+        
+        // if (powerupUIScript == null)
+        //  Debug.Log ("---------> XX powerupUIScript null");
+        // if (powerupUIScript != null){
+        //     Debug.Log ("--------->powerupUIScript not null");
+        //     powerupUIScript.setPowerupDisplay(powerupType);
+        //     if (powerupType == "jump"){
+                
         //     // addPowerup(jump);
             
 
+        //     }
+        //     if (powerupType == "venom"){
+        //         // Debug.Log("pNum: " + playerNum);
+                
+        //     }
         // }
-        if (powerupType == "venom"){
-            // Debug.Log("pNum: " + playerNum);
-            
-        }
+        
     }
     
     public virtual void activateNow(){

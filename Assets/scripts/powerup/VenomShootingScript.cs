@@ -5,7 +5,7 @@ using UnityEngine;
 public class VenomShootingScript : Powerup
 {
     public GameObject venomPrefab;
-
+    public PowerupUIScript powerupUIScript;
     public float maxTimeToShoot = 4.0f;
     public float shootTimer;
     public string myName;
@@ -13,17 +13,21 @@ public class VenomShootingScript : Powerup
     public List<GameObject> otherPlayers;
     private Venom venom;
     
-    public void setVenom(int _myPlayerNum, GameObject _venomPrefab, List<GameObject> _otherPlayers)
-    {
+    public void setVenom(int _myPlayerNum, GameObject _venomPrefab, List<GameObject> _otherPlayers){
         myPlayerNum = _myPlayerNum;
         venomPrefab = _venomPrefab;
+        
+        powerupUIScript = GetComponentInChildren<PowerupUIScript>();
         otherPlayers = _otherPlayers;
         
         for (int i = 0 ; i < _otherPlayers.Count;i++){
             otherPlayers[i]= _otherPlayers[i];
         }
-        
-        shootTimer = 0.0f;
+        // Debug.Log("other players in VenomShootingScript: ");
+        // for (int i = 0 ; i < otherPlayers.Count;i++){
+        //     Debug.Log(otherPlayers[i].GetComponent<Movement>().playerNumber+", ");
+        // }
+        shootTimer = maxTimeToShoot;
         if (powerupManager == null){
             powerupManager = GetComponent<PowerupManager>();
         }
@@ -35,7 +39,7 @@ public class VenomShootingScript : Powerup
             }
             
             venom = venomPrefab.GetComponent<Venom>();
-            venom.InitVenom(myPlayerNum, false);
+            venom.InitVenom(myPlayerNum, false, otherPlayers);
             
         }
         
@@ -49,7 +53,7 @@ public class VenomShootingScript : Powerup
 
     public override void deactivateNow(){
         Debug.Log("venom deactivated");
-        
+        powerupUIScript.setPowerupDisplay("jump");
         activate = false;
         
         
@@ -57,14 +61,16 @@ public class VenomShootingScript : Powerup
 
     void FixedUpdate()
     {
-        if (activate && shootTimer <  maxTimeToShoot){
+        if (activate && shootTimer >  0){
             venom.activateNow();
-            shootTimer += Time.smoothDeltaTime;
-        }else if(shootTimer >= maxTimeToShoot && activate){
+            // venom.InitVenom(myPlayerNum, true);
+            
+        }else if(shootTimer <= 0 && activate){
             venom.deactivateNow();
-            shootTimer = 0.0f;
             deactivateNow();
+            
         }
-        
+        shootTimer -= Time.smoothDeltaTime;
     }
+    
 }
