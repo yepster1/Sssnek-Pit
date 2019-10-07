@@ -835,16 +835,6 @@ PrefabInstance:
       propertyPath: powerupUIPlaceholder
       value: 
       objectReference: {fileID: 6611251391408476808}
-    - target: {fileID: 4540776352956667993, guid: 4e3cf5f866a5b400193a793b5fcdc120,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4540776352956667993, guid: 4e3cf5f866a5b400193a793b5fcdc120,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e3cf5f866a5b400193a793b5fcdc120, type: 3}
 --- !u!224 &6301173141802430522 stripped
@@ -880,7 +870,7 @@ PrefabInstance:
     - target: {fileID: 1684101387775816458, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8722077706961881771, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
         type: 3}
