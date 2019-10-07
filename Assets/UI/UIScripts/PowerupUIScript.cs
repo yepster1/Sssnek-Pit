@@ -8,6 +8,7 @@ public class PowerupUIScript : MonoBehaviour
     public JumpProgressBar JPB;
     public SpeedProgressBar SPB;
     public InvincibilityProgressBar IPB;
+    public VenomProgressBar VPB;
     private Canvas canvas;
     private RectTransform canvasRT;
     private GameObject player;
@@ -38,20 +39,29 @@ public class PowerupUIScript : MonoBehaviour
     }
     public void setPowerupDisplay(string type){
         if(type == "jump"){
-            SPB.gameObject.SetActive(false);
             JPB.gameObject.SetActive(true);
+            SPB.gameObject.SetActive(false);
             IPB.gameObject.SetActive(false);
-            // JPB.startFromZero();
+            VPB.gameObject.SetActive(false);
         }
+
         if (type == "speed"){
-            SPB.gameObject.SetActive(true);
             JPB.gameObject.SetActive(false);
+            SPB.gameObject.SetActive(true);
             IPB.gameObject.SetActive(false);
+            VPB.gameObject.SetActive(false);
         }
         if (type == "invincibility"){
-            SPB.gameObject.SetActive(false);
             JPB.gameObject.SetActive(false);
+            SPB.gameObject.SetActive(false);
             IPB.gameObject.SetActive(true);
+            VPB.gameObject.SetActive(false);
+        }
+        if (type == "venom"){
+            JPB.gameObject.SetActive(false);
+            SPB.gameObject.SetActive(false);
+            IPB.gameObject.SetActive(false);
+            VPB.gameObject.SetActive(true);
         }
     }
 

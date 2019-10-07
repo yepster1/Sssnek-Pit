@@ -5,7 +5,7 @@ using UnityEngine;
 public class VenomShootingScript : Powerup
 {
     public GameObject venomPrefab;
-
+    public PowerupUIScript powerupUIScript;
     public float maxTimeToShoot = 4.0f;
     public float shootTimer;
     public string myName;
@@ -17,6 +17,7 @@ public class VenomShootingScript : Powerup
         myPlayerNum = _myPlayerNum;
         venomPrefab = _venomPrefab;
         
+        powerupUIScript = GetComponentInChildren<PowerupUIScript>();
         otherPlayers = _otherPlayers;
         
         for (int i = 0 ; i < _otherPlayers.Count;i++){
@@ -26,7 +27,7 @@ public class VenomShootingScript : Powerup
         // for (int i = 0 ; i < otherPlayers.Count;i++){
         //     Debug.Log(otherPlayers[i].GetComponent<Movement>().playerNumber+", ");
         // }
-        shootTimer = 0.0f;
+        shootTimer = maxTimeToShoot;
         if (powerupManager == null){
             powerupManager = GetComponent<PowerupManager>();
         }
@@ -52,6 +53,7 @@ public class VenomShootingScript : Powerup
 
     public override void deactivateNow(){
         Debug.Log("venom deactivated");
+        powerupUIScript.setPowerupDisplay("jump");
         activate = false;
         
         
@@ -59,19 +61,16 @@ public class VenomShootingScript : Powerup
 
     void FixedUpdate()
     {
-        if (activate && shootTimer <  maxTimeToShoot){
+        if (activate && shootTimer >  0){
             venom.activateNow();
             // venom.InitVenom(myPlayerNum, true);
-            Invoke("powerupInUse", maxTimeToShoot);
-        }else if(shootTimer > maxTimeToShoot && activate){
+            
+        }else if(shootTimer <= 0 && activate){
             venom.deactivateNow();
-            shootTimer = 0.0f;
+            deactivateNow();
+            
         }
-        shootTimer += Time.smoothDeltaTime;
+        shootTimer -= Time.smoothDeltaTime;
     }
-
-    public void powerupInUse(){
-        powerupManager.powerupInUse();
-        
-    }
+    
 }
