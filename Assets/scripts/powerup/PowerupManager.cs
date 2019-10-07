@@ -35,24 +35,25 @@ public class PowerupManager : MonoBehaviour
 
         Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
         jumpDefault.setPowerup("jump", myPlayerNum, true, false);
-        powerupUIScript.setPowerupDisplay("jump");
+        // powerupUIScript.setPowerupDisplay("jump");
         pushPowerup(jumpDefault);
         
 
         
 
-        Powerup speedTest = this.gameObject.AddComponent<Speed>();
-        speedTest.setPowerup("speed", myPlayerNum ,true, false);
-        powerupUIScript.setPowerupDisplay("speed");
-        pushPowerup(speedTest);
+        // Powerup speedTest = this.gameObject.AddComponent<Speed>();
+        // speedTest.setPowerup("speed", myPlayerNum ,true, false);
+        // powerupUIScript.setPowerupDisplay("speed");
+        // pushPowerup(speedTest);
 
         // Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
         // venomShoot.setPowerup("venom", myPlayerNum, true, false);
         // pushPowerup(venomShoot);
         
-        // Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
-        // invincibilityTest.setPowerup("invincibility" , myPlayerNum, true, false);
-        // pushPowerup(invincibilityTest);
+        Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
+        invincibilityTest.setPowerup("invincibility" , myPlayerNum, true, false);
+        // powerupUIScript.setPowerupDisplay("invincibility");
+        pushPowerup(invincibilityTest);
         
        
     }
@@ -116,7 +117,7 @@ public class PowerupManager : MonoBehaviour
                 powerupInUse();
                 Invincibility inv = (Invincibility)p;
                 // int _myPlayerNum , GameObject _head , Movement _movement, List<GameObject> _body
-                inv.setInvincibility(myPlayerNum, this.gameObject, movement, movement.body);
+                // inv.setInvincibility(myPlayerNum, this.gameObject, movement, movement.body);
                 inv.activateNow();
                 Invoke("powerupInUse", inv.maxTimeForInvincibility);
             }
