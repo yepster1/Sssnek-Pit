@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa6a6ff43eaba4a52a48574bbfe029ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   LoadingBar: {fileID: 5704046068662459345}
   TextPercentage: {fileID: 242384445567907469}
   powerupUIPlaceholder: {fileID: 6611251391408476808}
@@ -73,8 +73,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
@@ -243,6 +243,7 @@ Transform:
   m_Children:
   - {fileID: 1245818261439294201}
   - {fileID: 1334643801324963102}
+  - {fileID: 9137049345559688671}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -293,12 +294,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f89d7afd58ead4a4e8341bf4a7fbf9d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   tailPrefab: {fileID: 1915043134201272119, guid: 375204ec7e6c24ee297be54eda61be98,
     type: 3}
   body: []
-  head: {fileID: 0}
+  head: {fileID: 3562449043692327784}
   points: 0
   MaxSpeed: 0
   MinSpeed: 0
@@ -319,8 +320,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 435e5668caffa4f458887883539b4679, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!137 &4068096344806742422
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -382,8 +383,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d9a20da2498347fd827267331398efe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   powerupUIScript: {fileID: 0}
   myPlayerNum: 0
   powerupBeingUsed: 0
@@ -461,8 +462,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
@@ -483,8 +484,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
   m_BlockingMask:
@@ -540,8 +541,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aea7013495f1e442ebdfd53450a02aa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   JPB: {fileID: 5691237833608690636}
   SPB: {fileID: 6858622427850766488}
   IPB: {fileID: 5709435011015370027}
@@ -671,7 +672,7 @@ PrefabInstance:
     - target: {fileID: 8005222953752578809, guid: b499b71b6ca894153ae4943b3bec6931,
         type: 3}
       propertyPath: powerupUIPlaceholder
-      value: 
+      value:
       objectReference: {fileID: 6611251391408476808}
     - target: {fileID: 8005222953593548974, guid: b499b71b6ca894153ae4943b3bec6931,
         type: 3}
@@ -696,8 +697,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5147ff00b3f9d45948cfa5acef5a2d67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1001 &4691390789368564465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -833,7 +834,7 @@ PrefabInstance:
     - target: {fileID: 1018050965693378522, guid: 4e3cf5f866a5b400193a793b5fcdc120,
         type: 3}
       propertyPath: powerupUIPlaceholder
-      value: 
+      value:
       objectReference: {fileID: 6611251391408476808}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e3cf5f866a5b400193a793b5fcdc120, type: 3}
@@ -853,8 +854,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df7868a123d334f5eb8bc8ff53630d30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1001 &6937079650953164517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -995,7 +996,7 @@ PrefabInstance:
     - target: {fileID: 1055770836441638125, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
         type: 3}
       propertyPath: powerupUIPlaceholder
-      value: 
+      value:
       objectReference: {fileID: 6611251391408476808}
     - target: {fileID: 6720710080925793449, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
         type: 3}
@@ -1015,7 +1016,7 @@ PrefabInstance:
     - target: {fileID: 6720710080925793449, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
         type: 3}
       propertyPath: m_Sprite
-      value: 
+      value:
       objectReference: {fileID: 21300000, guid: ea09f53108e144bd38cd44909feaa244,
         type: 3}
     - target: {fileID: 1280238451820293876, guid: 60a45e52f23f04480b1a6a6d7a8a8d6b,
@@ -1051,8 +1052,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 132f08ceed4864a7cabdca254a2e2065, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1001 &7193793301650588244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1178,7 +1179,7 @@ PrefabInstance:
     - target: {fileID: 788023107087936113, guid: 7fd479fcea8054094ab9c6c19c79095d,
         type: 3}
       propertyPath: powerupUIPlaceholder
-      value: 
+      value:
       objectReference: {fileID: 6611251391408476808}
     - target: {fileID: 2255133483532333527, guid: 7fd479fcea8054094ab9c6c19c79095d,
         type: 3}

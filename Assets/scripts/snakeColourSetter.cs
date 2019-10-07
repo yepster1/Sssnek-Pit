@@ -7,12 +7,11 @@ public static class snakeColourSetter
 
     public static void SetColor(int colourNumber, SkinnedMeshRenderer meshRenderer)
     {
-            // Debug.Log("Colours colour number " + colourNumber);
         switch (colourNumber)
         {
             case 0:
                meshRenderer.materials[0].color = Color.red;
-                
+
                 break;
             case 1:
                 meshRenderer.materials[0].color = Color.blue ;
@@ -31,7 +30,7 @@ public static class snakeColourSetter
                 meshRenderer.materials[0].color = Color.white;
                 break;
         }
-        
+
     }
 
 }
