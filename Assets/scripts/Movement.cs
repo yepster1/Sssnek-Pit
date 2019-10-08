@@ -61,45 +61,6 @@ public class Movement : BaseMovement
         init();
 
 
-        // for powerup demonstration
-        //uncomment to make snakes stationery
-        //venom activated  by pressing left and right at same time
-
-        // MaxSpeed = 0.0f;
-        // MinSpeed = 0.0f;
-        // speed = 0.0f;
-        // if (playerNumber == 0){
-        //     gameObject.transform.position = new Vector3(-10.0f, 1.0f,-10.0f);
-        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
-        //     for (int i = 0 ;i < 20 ;i++ ){
-        //         add_tail();
-        //     }
-        // }
-        // else if (playerNumber == 1){
-        //     gameObject.transform.position = new Vector3(10.0f, 1.0f,10.0f);
-        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,180.0f,0.0f);
-        //     for (int i = 0 ;i < 20 ;i++ ){
-        //         add_tail();
-        //     }
-        // }
-        // else if (playerNumber == 2){
-        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,10.0f);
-        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,90.0f,0.0f);
-        //     for (int i = 0 ;i < 20 ;i++ ){
-        //         add_tail();
-        //     }
-        // }
-
-        // else if (playerNumber == 3){
-        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,-10.0f);
-        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,-90.0f,0.0f);
-        //     for (int i = 0 ;i < 20 ;i++ ){
-        //         add_tail();
-        //     }
-        // }
-
-
-
         alive =true;
         //Set the right Score Display
         Debug.Log(MainMenu.totPlayers);
@@ -131,7 +92,7 @@ public class Movement : BaseMovement
         // powerup = GameObject.FindGameObjectWithTag("powerup").GetComponent<Powerup>();
         moveForward();
         performTurn();
-
+        
         if (Input.GetKey(left) && Input.GetKey(right))
         {   
             
@@ -139,10 +100,15 @@ public class Movement : BaseMovement
         }
         if(alive){
         scoreDisplay.text="Player "+(playerNumber+1)+":  "+ points+"";
+        Config.playerScores[playerNumber] = points;
+        
+        // Debug.Log("Player "+ playerNumber+" Score from Config is "+ Config.playerScores[playerNumber]) ;
+        
         }
         else{
-             scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
-             alive=true;
+            Config.playerScores[playerNumber]=points;
+            scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
+            alive=true;
         }
 
         moveMyTail(MaxSpeed,MinSpeed);

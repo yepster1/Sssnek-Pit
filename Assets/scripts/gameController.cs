@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class gameController : MonoBehaviour
 {
@@ -8,9 +10,9 @@ public class gameController : MonoBehaviour
     public GameObject powerup_prefab;
     public GameObject player_prefab;
     public GameObject AI_prefab;
-    
+    public TMP_Text timerLabel;
     private  int numOfPlayers;
-
+    public float timer;
     // Start is called before the first frame update
 
    private void Start()
@@ -23,10 +25,11 @@ public class gameController : MonoBehaviour
         InvokeRepeating("Spawn", 0.5f, 0.2f);
         InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         numOfPlayers = MainMenu.totPlayers;
-        AddPlayers(numOfPlayers);
+        AddPlayers(numOfPlayers==0 ? numOfPlayers : 4);
         AddAIs(MainMenu.totalAis);
-    }
-    
+        // timer=90f;
+    } 
+     
     public void AddAIs(int amountOfAI)
     {
         for(int i = 0; i < amountOfAI; i++) {
@@ -52,6 +55,7 @@ public class gameController : MonoBehaviour
         Camera cam = player.GetComponentInChildren<Camera>();
         player.SendMessage("spawnPlayer", new List<int> { numberOfPlayers, playerNumber });
         GameStateHandler.playerList.Add(player);
+
     }
 
     void CheckIfSomeoneWon()
@@ -65,6 +69,15 @@ public class gameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer-=(float)Time.deltaTime;
+        // string min = Mathf.Floor(timer/60).ToString("00");
+        // string sec = (timer%60).ToString("00");
+        
+        timerLabel.text =(timer).ToString("0")+"s left";
+        if(timer<=0){
+            Debug.Log("Loading new Scene");
+            SceneManager.LoadScene(2);
+        }
     }
     public static Vector3 GetRandomPosition()
     {
