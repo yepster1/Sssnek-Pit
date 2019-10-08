@@ -12,7 +12,7 @@ public class gameController : MonoBehaviour
 
     private  int numOfPlayers;
 
-    // Start is called before the first frame update
+    private float pointSpawnTime = 4f;
 
    private void Start()
     {
@@ -21,7 +21,7 @@ public class gameController : MonoBehaviour
         GameStateHandler.pointList = new List<GameObject>();
         GameStateHandler.powerupsList = new List<GameObject>();
         Spawn();
-        InvokeRepeating("Spawn", 0.5f, 0.2f);
+        InvokeRepeating("Spawn", pointSpawnTime, pointSpawnTime/2);
         InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         numOfPlayers = MainMenu.totPlayers;
         AddPlayers(numOfPlayers);
@@ -77,8 +77,12 @@ public class gameController : MonoBehaviour
         GameObject point = Instantiate(point_prefab, GetRandomPosition(), new Quaternion());
         ParticleSystem particleSystem = point.GetComponentInChildren<ParticleSystem>();
         particleSystem.Play();
-        StartCoroutine(StopParticleSystem(particleSystem, 1));
+        //StartCoroutine(StopParticleSystem(particleSystem, 2));
         GameStateHandler.pointList.Add(point);
+        if(pointSpawnTime > 1f)
+        {
+            pointSpawnTime -= 0.1f;
+        }
     }
     
     void SpawnPowerups()
@@ -86,9 +90,9 @@ public class gameController : MonoBehaviour
         GameStateHandler.powerupsList.Add(Instantiate(powerup_prefab, GetRandomPosition(), new Quaternion()));
     }
 
-    IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
-    {
-        yield return new WaitForSeconds(time);
-        particleSystem.Stop();
-    }
+    //IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
+    //{
+    //    yield return new WaitForSeconds(time);
+    //    particleSystem.Stop();
+    //}
 }

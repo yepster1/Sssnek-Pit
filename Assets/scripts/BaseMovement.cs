@@ -37,7 +37,6 @@ public abstract class BaseMovement : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("snake"))
         {
-            SoundManager.INSTANCE.PlaySpawn();
             CollideWithOtherSnake(collision);
         }
         if (collision.gameObject.tag.Equals("point"))
@@ -58,14 +57,13 @@ public abstract class BaseMovement : MonoBehaviour
         {
             return;
         }
-        Debug.Log("I have died");
+        SoundManager.INSTANCE.PlaySpawn();
         points = 0;
         alive=false;
         foreach (GameObject part in body){
             Destroy(part);
         }
         body = new List<GameObject>();
-        startParticle(0, gameObject);
         transform.position = gameController.GetRandomPosition();
         startParticle(1, gameObject);
     }
@@ -75,13 +73,6 @@ public abstract class BaseMovement : MonoBehaviour
         yield return new WaitForSeconds(time);
         ParticleSystem particleSystem = player.GetComponentInChildren<ParticleSystem>();
         particleSystem.Play();
-        StartCoroutine(StopParticleSystem(particleSystem, 1));
-    }
-
-    IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
-    {
-        yield return new WaitForSeconds(time);
-        particleSystem.Stop();
     }
 
     protected void CollideWithPoint(Collision collision)
@@ -112,7 +103,7 @@ public abstract class BaseMovement : MonoBehaviour
     //             Debug.Log("powerup is active: " + powerup.isActive);
     //             Debug.Log("stack peek" + powerups.Peek());
     //             GameStateHandler.powerupsList.Remove(collision.gameObject);
-            
+
     //         }else if(powerups.Count  > 1){
     //             powerups.Pop(); //remove current powerup
     //             Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
@@ -128,7 +119,7 @@ public abstract class BaseMovement : MonoBehaviour
     //     }else{
     //         Debug.Log("could not find powerup script component");
     //     }
-         
+
     // }
 
     protected void moveForward()
