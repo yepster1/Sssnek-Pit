@@ -60,13 +60,15 @@ public class Tail1 : MonoBehaviour
                 //        Debug.Log("movement **not** set in onCollisionEnter for p: "+ myPlayerNum);
                 //    }
 
-                //if (gObject.gameObject.tag == "snake" && tailPlayerNum != myPlayerNum && !(myPlayerNum > 4 || tailPlayerNum > 4))
-                //{
-                //    // Debug.Log("myPlayerNum: " + myPlayerNum);
-                //    // Debug.Log(" vs tailPlayerNum: " + tailPlayerNum);
-                //    // Debug.Log(" colliding with player: " + tailPlayerNum);
-                //    CollideWithOtherTail(gObject);
-                //}
+                if (gObject.gameObject.tag == "snake" && tailPlayerNum != myPlayerNum && !(myPlayerNum > 4 || tailPlayerNum > 4) && 
+                    (gObject.gameObject.name == "player0" || gObject.gameObject.name == "player1" || 
+                     gObject.gameObject.name == "player2" || gObject.gameObject.name == "player3"))
+                {
+                   // Debug.Log("myPlayerNum: " + myPlayerNum);
+                   // Debug.Log(" vs tailPlayerNum: " + tailPlayerNum);
+                   // Debug.Log(" colliding with player: " + tailPlayerNum);
+                   CollideWithOtherTail(gObject);
+                }
             }
         }
     }

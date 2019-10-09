@@ -61,14 +61,17 @@ public class Venom: MonoBehaviour
  
          // Print the entire list to the console.
          foreach (Collider gObject in currentCollisions) {
-            
-            if (gObject.gameObject.tag == "snake" && gObject.gameObject != null)
-            {   
-                // Debug.Log("collided with " +collision.gameObject.tag);
-                // Movement movement = collision.GetComponent<Movement>();
-                // Debug.Log("snake number: "  + movement.playerNumber);
-                CollideWithOtherObject(gObject);
+            if (gObject != null){
+                if (gObject.gameObject.tag == "snake" && (gObject.gameObject.name == "player0" || gObject.gameObject.name == "player1" || 
+                                                          gObject.gameObject.name == "player2" || gObject.gameObject.name == "player3"))
+                {   
+                    // Debug.Log("collided with " +collision.gameObject.tag);
+                    // Movement movement = collision.GetComponent<Movement>();
+                    // Debug.Log("snake number: "  + movement.playerNumber);
+                    CollideWithOtherObject(gObject);
+                }
             }
+            
          }
         
         
