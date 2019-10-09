@@ -34,7 +34,6 @@ public class Intention
             Movement highestScoreMovement = highestScore.GetComponent<Movement>();
             if (highestScoreMovement.points > desires.getFrenzyPoint())
             {
-                Debug.Log("Frenzy");
                 return highestScore;
             }
         }

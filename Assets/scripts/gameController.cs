@@ -9,11 +9,9 @@ public class gameController : MonoBehaviour
     public GameObject player_prefab;
     public GameObject AI_prefab;
 
-    public Texture[] texture;
-
     private  int numOfPlayers;
 
-    // Start is called before the first frame update
+    
 
     private void Start()
     {
@@ -26,7 +24,7 @@ public class gameController : MonoBehaviour
             Spawn();
         }
        
-        InvokeRepeating("Spawn", 0.5f, 3f);
+        InvokeRepeating("Spawn", 0.5f, 2f);
         InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         numOfPlayers = MainMenu.totPlayers;
         AddPlayers(numOfPlayers);
