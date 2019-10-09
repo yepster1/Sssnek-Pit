@@ -2,16 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-// public  struct score
-// {
-//     public static score setScore(int totScore){
-//         score totalScore = new score();
-//         totalScore.currentScore=totScore;
-//         return totalScore;
-//     }
-//     public int currentScore;
-    
-// }
+
 public abstract class BaseMovement : MonoBehaviour
 {
 

@@ -9,6 +9,7 @@ public class Movement : BaseMovement
     public PowerupManager powerupManager;
     protected GameObject scoreDisplayObject;
     protected TMP_Text scoreDisplay;
+    
 
     public void spawnPlayer(List<int> inputs)
     {
@@ -102,36 +103,28 @@ public class Movement : BaseMovement
 
 
 
-        alive =true;
+        // alive =true;
         //Set the right Score Display
         // Debug.Log(MainMenu.totPlayers);
         // for(int i = 0; i<MainMenu.totPlayers.numOfPlayers; ++i){}
-        // if(playerNumber==0){
-        //     scoreDisplayObject = GameObject.Find("player0");
-        //     scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-        // }
+        if(playerNumber==0){
+            scoreDisplayObject = GameObject.FindWithTag("player1");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
 
-        // else if(playerNumber==1){
-        //     scoreDisplayObject =GameObject.Find("player1");
-        //     scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-        // }
+        else if(playerNumber==1){
+            scoreDisplayObject =GameObject.FindWithTag("player2");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
 
-        // else if(playerNumber==2){
-        //     scoreDisplayObject =GameObject.Find("player2");
-        //     scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-        // }
-        // else if(playerNumber==3){
-        //     scoreDisplayObject =GameObject.Find("player3");
-        //     scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
-        // }
-        
-        // else if (playerNumber == 3){
-        //     gameObject.transform.position = new Vector3(0.0f, 1.0f,-10.0f);
-        //     gameObject.transform.rotation = Quaternion.Euler(0.0f,-90.0f,0.0f);
-        //     for (int i = 0 ;i < 20 ;i++ ){
-        //         add_tail();
-        //     }
-        // }
+        else if(playerNumber==2){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player3");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
+        else if(playerNumber==3){
+            scoreDisplayObject =GameObject.FindGameObjectWithTag("player4");
+            scoreDisplay=scoreDisplayObject.GetComponentInChildren<TMP_Text>();
+        }
     }
 
     // Update is called once per frame
@@ -141,20 +134,24 @@ public class Movement : BaseMovement
         // powerup = GameObject.FindGameObjectWithTag("powerup").GetComponent<Powerup>();
         moveForward();
         performTurn();
-
+        
         if (Input.GetKey(left) && Input.GetKey(right))
         {   
             
             powerupManager.activatePowerup();
         }
-        // if(alive){
-        //     scoreDisplay.text="Player "+(playerNumber+1)+":  "+ points+"";
-        //     Debug.Log(scoreDisplay.tag+ " "+playerNumber+" "+ points);
-        // }
-        // else{
-        //      scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
-        //      alive=true;
-        // }
+        if(alive){
+        scoreDisplay.text="Player "+(playerNumber+1)+":  "+ points+"";
+        Config.playerScores[playerNumber] = points;
+        
+        // Debug.Log("Player "+ playerNumber+" Score from Config is "+ Config.playerScores[playerNumber]) ;
+        
+        }
+        else{
+            Config.playerScores[playerNumber]=points;
+            scoreDisplay.text="Player "+(playerNumber+1)+":  Died.";
+            alive=true;
+        }
 
         moveMyTail(MaxSpeed,MinSpeed);
         moveAura();
@@ -172,12 +169,6 @@ public class Movement : BaseMovement
 			transform.Rotate(Vector3.up * rotationSpeed * 1);
 		}
 	}
-
-    
-    
-    
-
-   
 
     public override void setColor(Transform tail, Texture texture)
     {

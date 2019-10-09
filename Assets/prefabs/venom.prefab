@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f5ff32175aa261f42b709cf345181555, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,6 +167,9 @@ MonoBehaviour:
   speed: 100
   activate: 0
   myPlayerNum: 0
+<<<<<<< HEAD
+  myOtherPlayers: []
+=======
   otherPlayers: []
 --- !u!114 &-4694903206543903952
 MonoBehaviour:
@@ -265,3 +268,4 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 957879222681836520}
   m_PrefabAsset: {fileID: 0}
+>>>>>>> origin/master

@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     public TMP_InputField p4RInputField;
     public TMP_InputField AINumberField;
     public static controls player;
-    public static int totPlayers =2;
+    public static int totPlayers = 1;
     public static int totalAis = 2;
     public int numOfPlayers=0;
     private ArrayList alphabets = new ArrayList{"Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M"};
@@ -42,14 +42,13 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         errorText.text="";
-        if(CheckPlayerInput() == true){
+        if(CheckPlayerInput()){
             totPlayers = numOfPlayers;
-//            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex +1);
             
         }
         else{
              errorText.text="Please make sure that at least player one has controls.";
-             
         }
 
 
