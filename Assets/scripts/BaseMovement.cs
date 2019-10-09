@@ -14,6 +14,7 @@ using TMPro;
 // }
 public abstract class BaseMovement : MonoBehaviour
 {
+
     public GameObject tailPrefab;
     public List<GameObject> body;
     public GameObject head;
@@ -28,6 +29,7 @@ public abstract class BaseMovement : MonoBehaviour
     public static int tailNumber;
     public bool alive;
     public int playerNumber;
+    public Texture[] textures;
 
     public void init()
     {
@@ -68,7 +70,6 @@ public abstract class BaseMovement : MonoBehaviour
         body = new List<GameObject>();
         startParticle(0, gameObject);
         transform.position = gameController.GetRandomPosition();
-        startParticle(1, gameObject);
     }
 
     IEnumerable startParticle(float time, GameObject player)
@@ -76,7 +77,6 @@ public abstract class BaseMovement : MonoBehaviour
         yield return new WaitForSeconds(time);
         ParticleSystem particleSystem = player.GetComponentInChildren<ParticleSystem>();
         particleSystem.Play();
-        StartCoroutine(StopParticleSystem(particleSystem, 1));
     }
 
     IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
@@ -209,13 +209,19 @@ public abstract class BaseMovement : MonoBehaviour
             
             
         }
-        setColor(newPart.transform);
+        if (playerNumber < 4)
+        {
+            setColor(newPart.transform, textures[playerNumber]);
+        } else
+        {
+            setColor(newPart.transform, textures[0]);
+        }
         
         Tail1 tail = newPart.GetComponent<Tail1>();
         tail.setHead(head);
         newPart = tail.add_tail(this.gameObject.name,newPart ,tailNumber);
         body.Add(newPart);
     }
-    public abstract void setColor(Transform tail);
+    public abstract void setColor(Transform tail, Texture texture);
 
 }

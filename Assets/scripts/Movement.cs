@@ -33,7 +33,7 @@ public class Movement : BaseMovement
         // Debug.Log("player left: "+Config.playerControls[playerNumber].Left );
         this.left = Config.playerControls[playerNumber].Left;
         this.right = Config.playerControls[playerNumber].rigth;
-        snakeColourSetter.SetColor(playerNumber, GetComponent<SkinnedMeshRenderer>());
+        snakeColourSetter.SetColor(GetComponentInChildren<MeshRenderer>(), textures[playerNumber]);
         setCamara(amountOfPlayers, playerNumber);
     }
 
@@ -179,9 +179,9 @@ public class Movement : BaseMovement
 
    
 
-    public override void setColor(Transform tail)
+    public override void setColor(Transform tail, Texture texture)
     {
-        snakeColourSetter.SetColor(playerNumber, tail.gameObject.GetComponent<SkinnedMeshRenderer>());
+        snakeColourSetter.SetColor(tail.gameObject.GetComponentInChildren<MeshRenderer>(), texture);
     }
 
     public float getSpeed(){
