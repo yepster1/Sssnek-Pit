@@ -39,7 +39,7 @@ public class gameController : MonoBehaviour
         numOfPlayers = MainMenu.totPlayers;
         AddPlayers(numOfPlayers);
         AddAIs(MainMenu.totalAis);
-        timer=5f;
+        timer=50f;
     } 
      
     public void AddAIs(int amountOfAI)
