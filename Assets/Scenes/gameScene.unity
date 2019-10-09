@@ -147,7 +147,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 213183369}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f855191581a40ff8fb6760d0fdecbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 38b6bead3654d46afb40b2421544296c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   point_prefab: {fileID: 105664559048629168, guid: 3d5a6e2d63ae84bf58e1e408f7f2023d,
@@ -158,7 +158,7 @@ MonoBehaviour:
     type: 3}
   AI_prefab: {fileID: 2166302075998349028, guid: b4164d78d4c824eab8557432795421a9,
     type: 3}
-  pointspawn: {fileID: 0}
+  texture: []
 --- !u!4 &213183371
 Transform:
   m_ObjectHideFlags: 0
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 1072471440}
   m_Layer: 0
   m_Name: wall (3)
-  m_TagString: Untagged
+  m_TagString: snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 1761574722}
   m_Layer: 0
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 1787977427}
   m_Layer: 0
   m_Name: wall (2)
-  m_TagString: Untagged
+  m_TagString: snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 2083318626}
   m_Layer: 0
   m_Name: wall (1)
-  m_TagString: Untagged
+  m_TagString: snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

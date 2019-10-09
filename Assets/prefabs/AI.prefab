@@ -97,7 +97,7 @@ MonoBehaviour:
   alive: 0
   playerNumber: 0
   textures:
-  - {fileID: 2800000, guid: 2d496a04c2df94040bad8e4609aa8f33, type: 3}
+  - {fileID: 2800000, guid: 188db7f41edd644daa76f40a5cde4afa, type: 3}
   navMeshAgent: {fileID: 2166302075998349050}
 --- !u!195 &2166302075998349050
 NavMeshAgent:
