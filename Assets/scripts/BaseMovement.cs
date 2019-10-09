@@ -5,6 +5,7 @@ using TMPro;
 
 public abstract class BaseMovement : MonoBehaviour
 {
+
     public GameObject tailPrefab;
     public List<GameObject> body;
     public GameObject head;
@@ -18,6 +19,8 @@ public abstract class BaseMovement : MonoBehaviour
     protected Transform auraTransform;
     public static int tailNumber;
     public bool alive;
+    public int playerNumber;
+    public Texture[] textures;
 
     public void init()
     {
@@ -28,11 +31,13 @@ public abstract class BaseMovement : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("snake"))
         {
+            SoundManager.INSTANCE.PlaySpawn();
             CollideWithOtherSnake(collision);
         }
         if (collision.gameObject.tag.Equals("point"))
         {
             CollideWithPoint(collision);
+            SoundManager.INSTANCE.playCollectPoint(null);
         }
         
         if (collision.gameObject.tag.Equals("powerup"))
@@ -54,8 +59,26 @@ public abstract class BaseMovement : MonoBehaviour
             Destroy(part);
         }
         body = new List<GameObject>();
+        startParticle(0, gameObject);
         transform.position = gameController.GetRandomPosition();
+        add_tail();
+        add_tail();
+        add_tail();
     }
+
+    IEnumerable startParticle(float time, GameObject player)
+    {
+        yield return new WaitForSeconds(time);
+        ParticleSystem particleSystem = player.GetComponentInChildren<ParticleSystem>();
+        particleSystem.Play();
+    }
+
+    IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
+    {
+        yield return new WaitForSeconds(time);
+        particleSystem.Stop();
+    }
+
     protected void CollideWithPoint(Collision collision)
     {
         GameStateHandler.pointList.Remove(collision.gameObject);
@@ -68,40 +91,6 @@ public abstract class BaseMovement : MonoBehaviour
         
         
     }
-
-    // protected void CollideWithPowerup(Collision collision){
-    //     GameObject powerupGameObject = collision.gameObject;
-    //     Powerup powerup = powerupGameObject.GetComponent<Powerup>();
-    //     // powerups can be null
-    //     if (powerups != null && powerup != null){
-    //         if ( powerups.Count == 1){
-    //             Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
-    //         // Powerup speed = this.gameObject.AddComponent<Speed>();
-    //             speedPowerup.setPowerup("speed", true, false);
-    //             powerups.Push(speedPowerup);
-    //             powerup.isActive = true;
-    //             Debug.Log("powerup type: " + powerup.powerupType);
-    //             Debug.Log("powerup is active: " + powerup.isActive);
-    //             Debug.Log("stack peek" + powerups.Peek());
-    //             GameStateHandler.powerupsList.Remove(collision.gameObject);
-            
-    //         }else if(powerups.Count  > 1){
-    //             powerups.Pop(); //remove current powerup
-    //             Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
-    //             speedPowerup.setPowerup("speed", true, false);
-    //             powerups.Push(speedPowerup);
-    //             powerup.isActive = true;
-    //             Debug.Log("powerup type: " + powerup.powerupType);
-    //             Debug.Log("powerup is active: " + powerup.isActive);
-    //             Debug.Log("stack peek" + powerups.Peek());
-    //             GameStateHandler.powerupsList.Remove(collision.gameObject);
-    //         }
-    //         Destroy(powerupGameObject);  
-    //     }else{
-    //         Debug.Log("could not find powerup script component");
-    //     }
-         
-    // }
 
     protected void moveForward()
     {
@@ -214,13 +203,19 @@ public abstract class BaseMovement : MonoBehaviour
             
             
         }
-        setColor(newPart.transform);
+        if (playerNumber < 4)
+        {
+            setColor(newPart.transform, textures[playerNumber]);
+        } else
+        {
+            setColor(newPart.transform, textures[0]);
+        }
         
-        Tail tail = newPart.AddComponent<Tail>();
-        tail.setHead(this.gameObject);
+        Tail1 tail = newPart.GetComponent<Tail1>();
+        tail.setHead(head);
         newPart = tail.add_tail(this.gameObject.name,newPart ,tailNumber);
         body.Add(newPart);
     }
-    public abstract void setColor(Transform tail);
+    public abstract void setColor(Transform tail, Texture texture);
 
 }

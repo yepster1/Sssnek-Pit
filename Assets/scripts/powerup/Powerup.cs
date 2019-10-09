@@ -10,28 +10,25 @@ public class Powerup : MonoBehaviour
     public bool activate; 
     protected int playerNum;
     protected gameController gc;
-    public static List<GameObject> playerList; //to be used for passive powerups
+    // public static List<GameObject> otherPlayers; //to be used for passive powerups
     public Rigidbody rb;
-    protected bool onGround;
+    public bool onGround;
     private GameObject player;
     protected PowerupManager powerupManager;
+    protected PowerupUIScript powerupUIScript;
     
-    public void setPowerup(string _powerupType, int _playerNum,bool _isActive, bool _activate){
-        powerupType = _powerupType;
+    public void setPowerup(int _playerNum, List<GameObject> _otherPlayers, bool _isActive, bool _activate){
+        
         isActive = _isActive;
         activate = _activate;
         playerNum = _playerNum;
-        
-        // if (powerupType == "jump"){
-            
-        //     // addPowerup(jump);
-            
-
+        // otherPlayers = _otherPlayers;
+        // for (int i = 0 ; i < _otherPlayers.Count;i++){
+        //     otherPlayers[i]= _otherPlayers[i];
         // }
-        if (powerupType == "venom"){
-            // Debug.Log("pNum: " + playerNum);
-            
-        }
+        player = this.gameObject;
+        powerupManager = player.GetComponent<PowerupManager>();
+        powerupType = generatePowerupType();
     }
     
     public virtual void activateNow(){
@@ -61,8 +58,8 @@ public class Powerup : MonoBehaviour
     }
 
     //this method randomly sets the type of powerup when collected 
-    public string setPowerupType(){ //to get a powerup type of jump:0, speed:1 etc etc
-        int[] powerTypes = new int[] { 0, 1};       //int pertaining to which powerup to choose
+    public string generatePowerupType(){ //to get a powerup type of speed:0, venom:1, invincibility:2
+        int[] powerTypes = new int[] { 0, 1, 2};       //int pertaining to which powerup to choose
         int length = powerTypes.Length;                 
         string powerupType = "";
         Debug.Log("length of powerups: " + length);
@@ -70,14 +67,14 @@ public class Powerup : MonoBehaviour
         
         int result = powerTypes[myRandomIndex];
         if (result == 0){
-            powerupType = "jump";
+            powerupType = "speed";
             
         }
         else if (result == 1){
-            powerupType = "speed";
+            powerupType = "venom";
             
         }else if (result == 2){
-            powerupType = "venom";
+            powerupType = "invincibility";
         }
         return powerupType;
     }

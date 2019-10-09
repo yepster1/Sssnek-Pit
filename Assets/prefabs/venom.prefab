@@ -13,7 +13,11 @@ GameObject:
   - component: {fileID: 4726670543465924883}
   - component: {fileID: 5332655956739832545}
   - component: {fileID: -2061656090783406349}
-  - component: {fileID: 2497874867043180415}
+  - component: {fileID: -967291448501924276}
+  - component: {fileID: 2958115159105411485}
+  - component: {fileID: 4543472507570472159}
+  - component: {fileID: -4694903206543903952}
+  - component: {fileID: 2357319780665901562}
   m_Layer: 0
   m_Name: venom
   m_TagString: Untagged
@@ -31,7 +35,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 0.5, y: 0.3, z: 2}
-  m_Children: []
+  m_Children:
+  - {fileID: 955981717294148246}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,7 +55,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7392922167742800336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -112,7 +117,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2497874867043180415
+--- !u!114 &-967291448501924276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392922167742800336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0c28f2f53694743859b9e72b0dba00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  venomObjectRB: {fileID: -2061656090783406349}
+  speed: 100
+  activate: 1
+  myPlayerNum: 0
+  otherPlayers: []
+--- !u!114 &2958115159105411485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392922167742800336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0c28f2f53694743859b9e72b0dba00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  venomObjectRB: {fileID: -2061656090783406349}
+  speed: 100
+  activate: 1
+  myPlayerNum: 0
+  otherPlayers: []
+--- !u!114 &4543472507570472159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,4 +167,105 @@ MonoBehaviour:
   speed: 100
   activate: 0
   myPlayerNum: 0
+<<<<<<< HEAD
   myOtherPlayers: []
+=======
+  otherPlayers: []
+--- !u!114 &-4694903206543903952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392922167742800336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0c28f2f53694743859b9e72b0dba00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  venomObjectRB: {fileID: 0}
+  speed: 100
+  activate: 0
+  myPlayerNum: 0
+  otherPlayers: []
+--- !u!114 &2357319780665901562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392922167742800336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0c28f2f53694743859b9e72b0dba00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  venomObjectRB: {fileID: 0}
+  speed: 100
+  activate: 0
+  myPlayerNum: 0
+  otherPlayers: []
+--- !u!1001 &957879222681836520
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 202578384084452870}
+    m_Modifications:
+    - target: {fileID: 1077678054020164, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_Name
+      value: Egg_Fruit_Apple
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa2a7197f38a3024ba87bc08a3d33b18, type: 3}
+--- !u!4 &955981717294148246 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4299491955470718, guid: aa2a7197f38a3024ba87bc08a3d33b18,
+    type: 3}
+  m_PrefabInstance: {fileID: 957879222681836520}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> origin/master

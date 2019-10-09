@@ -15,19 +15,31 @@ public class gameController : MonoBehaviour
     public float timer;
     // Start is called before the first frame update
 
-   private void Start()
+//    private void Start()
+//     {
+
+//     // private  int numOfPlayers;
+//     } 
+
+    
+
+    private void Start()
     {
         GameStateHandler.playerList = new List<GameObject>();
         GameStateHandler.aiList = new List<GameObject>();
         GameStateHandler.pointList = new List<GameObject>();
         GameStateHandler.powerupsList = new List<GameObject>();
-        Spawn();
-        InvokeRepeating("Spawn", 0.5f, 0.2f);
+        for (int i = 0; i < 10; i++)
+        {
+            Spawn();
+        }
+       
+        InvokeRepeating("Spawn", 0.5f, 2f);
         InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         numOfPlayers = MainMenu.totPlayers;
         AddPlayers(numOfPlayers);
         AddAIs(MainMenu.totalAis);
-        // timer=90f;
+        timer=5f;
     } 
      
     public void AddAIs(int amountOfAI)
@@ -50,7 +62,7 @@ public class gameController : MonoBehaviour
 
     void AddPlayer(int numberOfPlayers, int playerNumber)
     {
-        Debug.Log("spawning player " + playerNumber);
+        // Debug.Log("spawning player " + playerNumber);
         GameObject player = Instantiate(player_prefab, GetRandomPosition(), new Quaternion());
         Camera cam = player.GetComponentInChildren<Camera>();
         player.SendMessage("spawnPlayer", new List<int> { numberOfPlayers, playerNumber });
@@ -58,13 +70,7 @@ public class gameController : MonoBehaviour
 
     }
 
-    void CheckIfSomeoneWon()
-    {
-        foreach(GameObject player in GameStateHandler.playerList)
-        {
-            
-        }
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -86,12 +92,27 @@ public class gameController : MonoBehaviour
 
     void Spawn()
     {
-        GameStateHandler.pointList.Add(Instantiate(point_prefab, GetRandomPosition(), new Quaternion()));
+        GameObject point = Instantiate(point_prefab, GetRandomPosition(), new Quaternion());
+        ParticleSystem particleSystem = point.GetComponentInChildren<ParticleSystem>();
+        particleSystem.Play();
+        StartCoroutine(StopParticleSystem(particleSystem, 1));
+        GameStateHandler.pointList.Add(point);
     }
     
     void SpawnPowerups()
     {
         GameStateHandler.powerupsList.Add(Instantiate(powerup_prefab, GetRandomPosition(), new Quaternion()));
     }
-    
+
+    IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
+    {
+        yield return new WaitForSeconds(time);
+        try
+        {
+            particleSystem.Stop();
+        }catch
+        {
+            Debug.Log("can't stop particle effect");
+        }
+    }
 }
