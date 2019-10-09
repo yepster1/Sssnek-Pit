@@ -7,7 +7,7 @@ public class Tail1 : MonoBehaviour
 {
     public GameObject tailPrefab;
     public GameObject head;
-    private Movement movement;
+    private BaseMovement movement;
     private int myPlayerNum;
 
     private List <Collision> currentCollisions = new List <Collision> (); //used to test collisions with other objects
@@ -16,7 +16,7 @@ public class Tail1 : MonoBehaviour
     {
         head = _head;
         tailPrefab = this.gameObject;
-        movement = _head.GetComponent<Movement>();
+        movement = _head.GetComponent<BaseMovement>();
         myPlayerNum = movement.playerNumber;
     }
 
@@ -54,14 +54,14 @@ public class Tail1 : MonoBehaviour
             // int colPlayerNum = -1; //not set yet
             if (collision.gameObject.name.Substring(0,4) == "tail"){
                int tailPlayerNum = ConvertToInt(collision.gameObject.name.Substring(5,1));
-            //    if (movement != null){
-            //        Debug.Log ("movement set in oncollision enter");
-            //    }else{
-            //        Debug.Log("movement **not** set in onCollisionEnter for p: "+ myPlayerNum);
-            //    }
-               
-               if (gObject.gameObject.tag == "snake" && tailPlayerNum != myPlayerNum)
-                {   
+                //    if (movement != null){
+                //        Debug.Log ("movement set in oncollision enter");
+                //    }else{
+                //        Debug.Log("movement **not** set in onCollisionEnter for p: "+ myPlayerNum);
+                //    }
+
+                if (gObject.gameObject.tag == "snake" && tailPlayerNum != myPlayerNum && !(myPlayerNum > 4 || tailPlayerNum > 4))
+                {
                     // Debug.Log("myPlayerNum: " + myPlayerNum);
                     // Debug.Log(" vs tailPlayerNum: " + tailPlayerNum);
                     // Debug.Log(" colliding with player: " + tailPlayerNum);

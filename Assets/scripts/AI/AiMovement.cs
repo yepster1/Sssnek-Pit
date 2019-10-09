@@ -14,6 +14,7 @@ public class AiMovement : BaseMovement
     // Start is called before the first frame update
     void Start()
     {
+        this.playerNumber = 5 + GameStateHandler.aiList.Count * 2;
         intention = new Intention();
         init();
         navMeshAgent.speed = speed;
@@ -25,6 +26,7 @@ public class AiMovement : BaseMovement
     {
         target = whoToTarget;
     }
+
     // Update is called once per frame
     void Update()
     {

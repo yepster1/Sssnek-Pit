@@ -89,6 +89,12 @@ public class gameController : MonoBehaviour
     IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
     {
         yield return new WaitForSeconds(time);
-        particleSystem.Stop();
+        try
+        {
+            particleSystem.Stop();
+        }catch
+        {
+            Debug.Log("can't stop particle effect");
+        }
     }
 }

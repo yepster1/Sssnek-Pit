@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 public class Movement : BaseMovement
 {
-    public int playerNumber;
     public KeyCode left;
     public KeyCode right;
     public PowerupManager powerupManager;
