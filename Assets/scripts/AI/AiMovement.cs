@@ -20,6 +20,9 @@ public class AiMovement : BaseMovement
         navMeshAgent.speed = speed;
         aIPersonality = new Desires(0.5f, 0.5f,30);
         snakeColourSetter.SetColor(GetComponentInChildren<MeshRenderer>(), textures[0]);
+        add_tail();
+        add_tail();
+        add_tail();
     }
 
     void changeTarget(Vector3 whoToTarget)

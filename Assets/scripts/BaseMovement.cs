@@ -64,6 +64,9 @@ public abstract class BaseMovement : MonoBehaviour
         add_tail();
         add_tail();
         add_tail();
+        add_tail();
+        add_tail();
+        add_tail();
     }
 
     IEnumerable startParticle(float time, GameObject player)

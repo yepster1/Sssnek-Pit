@@ -284,6 +284,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 831964454}
     m_Modifications:
+    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
+        type: 3}
+      propertyPath: m_Name
+      value: Player2
+      objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226213, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -389,11 +394,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
-        type: 3}
-      propertyPath: m_Name
-      value: Player2
-      objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226212, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -428,6 +428,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 831964454}
     m_Modifications:
+    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
+        type: 3}
+      propertyPath: m_Name
+      value: HeaderLeftControlText
+      objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226213, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -542,11 +547,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.6071563
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
-        type: 3}
-      propertyPath: m_Name
-      value: HeaderLeftControlText
       objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226212, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
@@ -1780,6 +1780,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 831964454}
     m_Modifications:
+    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
+        type: 3}
+      propertyPath: m_Name
+      value: Player3
+      objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226213, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1884,11 +1889,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
-        type: 3}
-      propertyPath: m_Name
-      value: Player3
       objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226212, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
@@ -4499,7 +4499,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Enter Left Control
+  m_text: 'Enter number of AI
 
 '
   m_isRightToLeft: 0
@@ -4572,8 +4572,8 @@ MonoBehaviour:
     textComponent: {fileID: 1008801330}
     characterCount: 19
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 3
+    spaceCount: 4
+    wordCount: 4
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -5174,6 +5174,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 831964454}
     m_Modifications:
+    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
+        type: 3}
+      propertyPath: m_Name
+      value: 'HeaderRightControlText '
+      objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226213, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5288,11 +5293,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.6071563
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
-        type: 3}
-      propertyPath: m_Name
-      value: 'HeaderRightControlText '
       objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226212, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
@@ -6051,11 +6051,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6928628718777512697, guid: 6367820031a175c418197e874da5fb91,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50.2
-      objectReference: {fileID: 0}
     - target: {fileID: 6928628718777512696, guid: 6367820031a175c418197e874da5fb91,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -6085,6 +6080,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Player 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928628718777512697, guid: 6367820031a175c418197e874da5fb91,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6367820031a175c418197e874da5fb91, type: 3}
@@ -6430,7 +6430,7 @@ PrefabInstance:
     - target: {fileID: 6928628718036493196, guid: 6367820031a175c418197e874da5fb91,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -132
+      value: -132.4
       objectReference: {fileID: 0}
     - target: {fileID: 6928628718036493196, guid: 6367820031a175c418197e874da5fb91,
         type: 3}
@@ -6773,6 +6773,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 831964454}
     m_Modifications:
+    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
+        type: 3}
+      propertyPath: m_Name
+      value: HeaderPlayerText
+      objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226213, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6887,11 +6892,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.4493107
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
-        type: 3}
-      propertyPath: m_Name
-      value: HeaderPlayerText
       objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226212, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
@@ -7784,6 +7784,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 831964454}
     m_Modifications:
+    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
+        type: 3}
+      propertyPath: m_Name
+      value: Player4
+      objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226213, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7889,11 +7894,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
-        type: 3}
-      propertyPath: m_Name
-      value: Player4
-      objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226212, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
       propertyPath: m_text
@@ -7948,6 +7948,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 831964454}
     m_Modifications:
+    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
+        type: 3}
+      propertyPath: m_Name
+      value: Player1
+      objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226213, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8057,11 +8062,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 0.86327493
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555594655369226218, guid: 96153ce685f50c04ea4c13dc824bf79a,
-        type: 3}
-      propertyPath: m_Name
-      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 4555594655369226212, guid: 96153ce685f50c04ea4c13dc824bf79a,
         type: 3}
