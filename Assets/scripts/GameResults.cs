@@ -49,9 +49,9 @@ public class GameResults : MonoBehaviour
     }
 
     public void Replay(){
-        SceneManager.LoadScene(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
     public void BackToMainMenu(){
-        SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

@@ -25,7 +25,7 @@ public class gameController : MonoBehaviour
         InvokeRepeating("Spawn", 0.5f, 0.2f);
         InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         numOfPlayers = MainMenu.totPlayers;
-        AddPlayers(numOfPlayers==0 ? numOfPlayers : 4);
+        AddPlayers(numOfPlayers);
         AddAIs(MainMenu.totalAis);
         // timer=90f;
     } 
@@ -76,7 +76,7 @@ public class gameController : MonoBehaviour
         timerLabel.text =(timer).ToString("0")+"s left";
         if(timer<=0){
             Debug.Log("Loading new Scene");
-            SceneManager.LoadScene(2);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         }
     }
     public static Vector3 GetRandomPosition()
