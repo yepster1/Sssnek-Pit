@@ -167,9 +167,6 @@ MonoBehaviour:
   speed: 100
   activate: 0
   myPlayerNum: 0
-<<<<<<< HEAD
-  myOtherPlayers: []
-=======
   otherPlayers: []
 --- !u!114 &-4694903206543903952
 MonoBehaviour:
@@ -268,4 +265,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 957879222681836520}
   m_PrefabAsset: {fileID: 0}
->>>>>>> origin/master

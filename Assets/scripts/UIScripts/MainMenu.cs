@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     public TMP_InputField p4RInputField;
     public TMP_InputField AINumberField;
     public static controls player;
-    public static int totPlayers = 1;
+    public static int totPlayers = 4;
     public static int totalAis = 2;
     public int numOfPlayers=0;
     private ArrayList alphabets = new ArrayList{"Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M"};

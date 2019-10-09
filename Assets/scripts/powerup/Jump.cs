@@ -41,6 +41,9 @@ public class Jump : Powerup
 
         if (movement == null){
             movement = GetComponent<Movement>();
+            
+        }
+        if (body == null){
             body = movement.body;
         }
         
@@ -92,7 +95,8 @@ public class Jump : Powerup
             timeSpentJumping = 0.0f;
             tFHTTtimer = 0.0f;
             rb.velocity = transform.up * jumpForce;
-            if (body.Count > 0){
+            // if (body.Count > 0){
+                body = movement.body;
                 for (int i = 0 ; i < body.Count; i++){
                     if (body[i] != null){
                         body[i].GetComponent<Rigidbody>().useGravity = false;
@@ -101,7 +105,7 @@ public class Jump : Powerup
                     }
                     
                 }
-            }
+            // }
             onGround = false;
             deactivateNow();
             // Invoke("powerupInUse", timeBetweenJumps);

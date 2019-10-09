@@ -60,21 +60,21 @@ public class Movement : BaseMovement
         if (playerNumber == 0){
             gameObject.transform.position = new Vector3(-20.0f, 1.0f,-20.0f);
             gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
-            for (int i = 0 ;i < 4 ;i++ ){
+            for (int i = 0 ;i < 10 ;i++ ){
                 add_tail();
             }
         }
         else if (playerNumber == 1){
             gameObject.transform.position = new Vector3(-20.0f, 1.0f,20.0f);
             gameObject.transform.rotation = Quaternion.Euler(0.0f,-90.0f,0.0f);
-            for (int i = 0 ;i < 4 ;i++ ){
+            for (int i = 0 ;i < 10 ;i++ ){
                 add_tail();
             }
         }
         else if (playerNumber == 2){
             gameObject.transform.position = new Vector3(20.0f, 1.0f,20.0f);
             gameObject.transform.rotation = Quaternion.Euler(0.0f,180.0f,0.0f);
-            for (int i = 0 ;i < 4 ;i++ ){
+            for (int i = 0 ;i < 10 ;i++ ){
                 add_tail();
             }
         }
@@ -82,7 +82,7 @@ public class Movement : BaseMovement
         else if (playerNumber == 3){
             gameObject.transform.position = new Vector3(20.0f, 1.0f,-20.0f);
             gameObject.transform.rotation = Quaternion.Euler(0.0f,90.0f,0.0f);
-            for (int i = 0 ;i < 4 ;i++ ){
+            for (int i = 0 ;i < 10 ;i++ ){
                 add_tail();
             }
         }

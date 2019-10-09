@@ -5,6 +5,7 @@ using UnityEngine;
 public class VenomShootingScript : Powerup
 {
     public GameObject venomPrefab;
+    public GameObject venomClone;
     public float maxTimeToShoot = 4.0f;
     public float shootTimer;
     public string myName;
@@ -37,8 +38,7 @@ public class VenomShootingScript : Powerup
                 // Debug.Log("position of venom prefab:" + venomPrefab.transform.position);
             }
             
-            venom = venomPrefab.GetComponent<Venom>();
-            venom.InitVenom(myPlayerNum, false, otherPlayers);
+            
             
         }
         
@@ -47,6 +47,9 @@ public class VenomShootingScript : Powerup
     
 
     public override void activateNow(){
+        venomClone = Instantiate(venomPrefab as GameObject, transform.position + transform.forward, transform.rotation);
+        venom = venomClone.GetComponent<Venom>();
+        venom.InitVenom(myPlayerNum, false, otherPlayers);
         activate = true;
     }
 

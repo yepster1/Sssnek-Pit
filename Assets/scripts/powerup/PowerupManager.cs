@@ -47,10 +47,10 @@ public class PowerupManager : MonoBehaviour
 
         //leave jump uncommented - its the default
         
-        Powerup jumpDefault = this.gameObject.GetComponent<Jump>();
-        jumpDefault.setPowerup(myPlayerNum, otherPlayers, true, false);
-        jumpDefault.powerupType = "jump"; //just to change it back (default)
-        pushPowerup(jumpDefault);
+        // Powerup jumpDefault = this.gameObject.GetComponent<Jump>();
+        // jumpDefault.setPowerup(myPlayerNum, otherPlayers, true, false);
+        // jumpDefault.powerupType = "jump"; //just to change it back (default)
+        // pushPowerup(jumpDefault);
         
         //uncomment one of these at a time to see how they work. 
         //will implement powerup pickup tonight
@@ -59,9 +59,10 @@ public class PowerupManager : MonoBehaviour
         // speedTest.setPowerup(myPlayerNum ,otherPlayers, true, false);
         // pushPowerup(speedTest);
 
-        // Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
-        // venomShoot.setPowerup(myPlayerNum, otherPlayers ,true, false);
-        // pushPowerup(venomShoot);
+        Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
+        venomShoot.setPowerup(myPlayerNum, otherPlayers ,true, false);
+        venomShoot.powerupType = "venom";
+        pushPowerup(venomShoot);
         
         // Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
         // invincibilityTest.setPowerup(myPlayerNum, otherPlayers, true, false);
@@ -104,6 +105,15 @@ public class PowerupManager : MonoBehaviour
                 jump.activateNow();
                 Invoke("powerupInUse", jump.timeBetweenJumps);
             }
+            if (p.powerupType == "venom" && !powerupBeingUsed){
+                powerupInUse();
+                VenomShootingScript venomShoot = this.gameObject.GetComponent<VenomShootingScript>();
+                venomShoot.setVenom(myPlayerNum ,venomPrefab, otherPlayers);
+                Debug.Log("powerup type " +venomShoot.powerupType);
+                // venomShoot.setVenom(myPlayerNum, venomPrefab, otherPlayers);
+                venomShoot.activateNow();
+                Invoke("powerupInUse", venomShoot.maxTimeToShoot);
+            }
         }else if (powerups.Count > 1 && !powerupBeingUsed){ //for every other powerup
             Powerup p = popPowerup();
             if (p.powerupType == "speed"){
@@ -120,9 +130,6 @@ public class PowerupManager : MonoBehaviour
                 VenomShootingScript venomShoot = this.gameObject.GetComponent<VenomShootingScript>();
                 venomShoot.setVenom(myPlayerNum ,venomPrefab, otherPlayers);
                 Debug.Log("powerup type " +venomShoot.powerupType);
-                
-                venomPrefab = Instantiate(venomPrefab as GameObject, transform.position + transform.forward, transform.rotation);
-                Debug.Log("movement.playerNum: " + movement.playerNumber);
                 // venomShoot.setVenom(myPlayerNum, venomPrefab, otherPlayers);
                 venomShoot.activateNow();
                 Invoke("powerupInUse", venomShoot.maxTimeToShoot);
