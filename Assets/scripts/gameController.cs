@@ -14,14 +14,18 @@ public class gameController : MonoBehaviour
 
     // Start is called before the first frame update
 
-   private void Start()
+    private void Start()
     {
         GameStateHandler.playerList = new List<GameObject>();
         GameStateHandler.aiList = new List<GameObject>();
         GameStateHandler.pointList = new List<GameObject>();
         GameStateHandler.powerupsList = new List<GameObject>();
-        Spawn();
-        InvokeRepeating("Spawn", 0.5f, 0.2f);
+        for (int i = 0; i < 10; i++)
+        {
+            Spawn();
+        }
+       
+        InvokeRepeating("Spawn", 0.5f, 4f);
         InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         numOfPlayers = MainMenu.totPlayers;
         AddPlayers(numOfPlayers);
