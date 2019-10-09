@@ -27,6 +27,7 @@ public abstract class BaseMovement : MonoBehaviour
     protected Transform auraTransform;
     public static int tailNumber;
     public bool alive;
+    public int playerNumber;
 
     public void init()
     {
