@@ -5,7 +5,6 @@ using UnityEngine;
 public class VenomShootingScript : Powerup
 {
     public GameObject venomPrefab;
-    public PowerupUIScript powerupUIScript;
     public float maxTimeToShoot = 4.0f;
     public float shootTimer;
     public string myName;

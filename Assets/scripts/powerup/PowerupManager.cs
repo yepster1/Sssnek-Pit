@@ -46,24 +46,27 @@ public class PowerupManager : MonoBehaviour
         powerupBeingUsed = false;
 
         //leave jump uncommented - its the default
-        Powerup jumpDefault = this.gameObject.AddComponent<Jump>();
-        jumpDefault.setPowerup("jump", myPlayerNum, otherPlayers,true, false);
+        
+        Powerup jumpDefault = this.gameObject.GetComponent<Jump>();
+        jumpDefault.setPowerup(myPlayerNum, otherPlayers, true, false);
+        jumpDefault.powerupType = "jump"; //just to change it back (default)
         pushPowerup(jumpDefault);
         
         //uncomment one of these at a time to see how they work. 
         //will implement powerup pickup tonight
 
         // Powerup speedTest = this.gameObject.AddComponent<Speed>();
-        // speedTest.setPowerup("speed", myPlayerNum ,otherPlayers, true, false);
+        // speedTest.setPowerup(myPlayerNum ,otherPlayers, true, false);
         // pushPowerup(speedTest);
 
         // Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
-        // venomShoot.setPowerup("venom", myPlayerNum, otherPlayers ,true, false);
+        // venomShoot.setPowerup(myPlayerNum, otherPlayers ,true, false);
         // pushPowerup(venomShoot);
         
-        Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
-        invincibilityTest.setPowerup("invincibility" , myPlayerNum, otherPlayers, true, false);
-        pushPowerup(invincibilityTest);
+        // Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
+        // invincibilityTest.setPowerup(myPlayerNum, otherPlayers, true, false);
+        // invincibilityTest.powerupType = "invincibility";
+        // pushPowerup(invincibilityTest);
         
        
     }
@@ -81,7 +84,7 @@ public class PowerupManager : MonoBehaviour
         
     }
 
-    public Powerup peekPowerup(){
+    public Powerup peekPowerup(){ //should only be used for jump
         return powerups.Peek();
     }
     public void powerupInUse(){ //sets it to the opposite
@@ -96,17 +99,17 @@ public class PowerupManager : MonoBehaviour
             Powerup p = peekPowerup();
             if (p.powerupType == "jump" ){
                 powerupInUse(); //sets powerupBeingUsed to true
-                Jump jump = (Jump)p;
+                Jump jump = this.gameObject.GetComponent<Jump>();
                 Debug.Log("powerup type " +jump.powerupType);
-                
                 jump.activateNow();
-                Invoke("powerupInUse", jump.timeFromHeadToTail);
+                Invoke("powerupInUse", jump.timeBetweenJumps);
             }
         }else if (powerups.Count > 1 && !powerupBeingUsed){ //for every other powerup
             Powerup p = popPowerup();
             if (p.powerupType == "speed"){
                 powerupInUse(); //sets powerupBeingUsed to true
-                Speed speed = (Speed)p;
+                //  = this.gameObject.AddComponent<Speed>();
+                Speed speed = this.gameObject.GetComponent<Speed>();
                 Debug.Log("powerup type " +speed.powerupType);
                 // powerupUIScript.setPowerupDisplay(speed.powerupType);
                 speed.activateNow();
@@ -114,7 +117,7 @@ public class PowerupManager : MonoBehaviour
             }
             if (p.powerupType == "venom" && !powerupBeingUsed){
                 powerupInUse();
-                VenomShootingScript venomShoot = (VenomShootingScript)p;
+                VenomShootingScript venomShoot = this.gameObject.GetComponent<VenomShootingScript>();
                 venomShoot.setVenom(myPlayerNum ,venomPrefab, otherPlayers);
                 Debug.Log("powerup type " +venomShoot.powerupType);
                 
@@ -126,7 +129,7 @@ public class PowerupManager : MonoBehaviour
             }
             if (p.powerupType == "invincibility" && !powerupBeingUsed){
                 powerupInUse();
-                Invincibility inv = (Invincibility)p;
+                Invincibility inv = this.gameObject.GetComponent<Invincibility>();
                 // int _myPlayerNum , GameObject _head , Movement _movement, List<GameObject> _body
                 // inv.setInvincibility(myPlayerNum, this.gameObject, movement, movement.body);
                 inv.activateNow();

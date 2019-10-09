@@ -10,8 +10,8 @@ public class Jump : Powerup
     // private PowerupManager powerupManager;
     private List<GameObject> body;
     private Movement movement;
-
-    public float timeBetweenJumps = 4f;
+    private SphereCollider col;
+    public float timeBetweenJumps = 5f;
     public float jumpTimer;
     public float timeSpentJumping;
     public float timeFromHeadToTail;
@@ -44,9 +44,11 @@ public class Jump : Powerup
             body = movement.body;
         }
         
+        rb = GetComponent<Rigidbody>();
+        col = GetComponent<SphereCollider>();
         timeFromHeadToTail = calcTimeFromHeadToTail();
         
-        rb = GetComponent<Rigidbody>();
+        
         jump = new Vector3(0.0f, 1.0f, 0.0f);
         // playerList = GameStateHandler.playerList; //to be used for passive powerup effects
         // powerupType = "jump";
@@ -73,17 +75,14 @@ public class Jump : Powerup
         
     }
     public float calcTimeFromHeadToTail(){
-        //in this case xyz should always be 1 
-        float distanceToTravel = 1; 
-        // Debug.Log("distance to travel: " +distanceToTravel);
-        
-        Vector3 vel = GetComponent<Rigidbody>().velocity;      //to get a Vector3 representation of the velocity
-        float speed = vel.magnitude;  
-        // Debug.Log ("speed : " + speed);
-        float timeFromHeadToTail = distanceToTravel / speed;
-        // Debug.Log("time from head to tail: " +timeFromHeadToTail);
+        float distanceToTravel = body.Count/col.radius; 
+        Debug.Log("distance to travel: " +distanceToTravel);
+        float timeFromHeadToTail = distanceToTravel/ movement.getSpeed();
+        timeFromHeadToTail += 3.0f; //for extra clearance
+        Debug.Log("time from head to tail: " +timeFromHeadToTail);
         return timeFromHeadToTail;
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -108,7 +107,8 @@ public class Jump : Powerup
             // Invoke("powerupInUse", timeBetweenJumps);
         }
         tFHTTtimer += Time.smoothDeltaTime; 
-        if (!onGround ){
+        
+        if (!onGround ){ //to calculate how much time spent jumping
             timeSpentJumping += Time.smoothDeltaTime;
             // Debug.Log("timeSpentJumping: " + timeSpentJumping);
         }
@@ -124,10 +124,9 @@ public class Jump : Powerup
                     
                 }
             }
-            // JPB.startFromZero();
-           
         }
 
+        //for mario styled jumping
         if (rb.velocity.y > 0){
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier -1 ) * Time.smoothDeltaTime;
         }

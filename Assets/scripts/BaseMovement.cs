@@ -97,40 +97,6 @@ public abstract class BaseMovement : MonoBehaviour
         
     }
 
-    // protected void CollideWithPowerup(Collision collision){
-    //     GameObject powerupGameObject = collision.gameObject;
-    //     Powerup powerup = powerupGameObject.GetComponent<Powerup>();
-    //     // powerups can be null
-    //     if (powerups != null && powerup != null){
-    //         if ( powerups.Count == 1){
-    //             Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
-    //         // Powerup speed = this.gameObject.AddComponent<Speed>();
-    //             speedPowerup.setPowerup("speed", true, false);
-    //             powerups.Push(speedPowerup);
-    //             powerup.isActive = true;
-    //             Debug.Log("powerup type: " + powerup.powerupType);
-    //             Debug.Log("powerup is active: " + powerup.isActive);
-    //             Debug.Log("stack peek" + powerups.Peek());
-    //             GameStateHandler.powerupsList.Remove(collision.gameObject);
-            
-    //         }else if(powerups.Count  > 1){
-    //             powerups.Pop(); //remove current powerup
-    //             Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
-    //             speedPowerup.setPowerup("speed", true, false);
-    //             powerups.Push(speedPowerup);
-    //             powerup.isActive = true;
-    //             Debug.Log("powerup type: " + powerup.powerupType);
-    //             Debug.Log("powerup is active: " + powerup.isActive);
-    //             Debug.Log("stack peek" + powerups.Peek());
-    //             GameStateHandler.powerupsList.Remove(collision.gameObject);
-    //         }
-    //         Destroy(powerupGameObject);  
-    //     }else{
-    //         Debug.Log("could not find powerup script component");
-    //     }
-         
-    // }
-
     protected void moveForward()
     {
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);

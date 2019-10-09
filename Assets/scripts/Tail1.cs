@@ -68,22 +68,13 @@ public class Tail1 : MonoBehaviour
                     CollideWithOtherTail(gObject);
                 }
             }
-            
-            
-         }
+        }
     }
 
     protected void OnCollisionExit (Collision collision) 
     {
         // Remove the GameObject collided with from the list.
         currentCollisions.Remove (collision);
- 
-        // Print the entire list to the console.
-        // foreach (Collision gObject in currentCollisions) {
-        //     if (gObject!= null){
-        //         print (gObject.gameObject.name);
-        //     }
-        // }
     }
 
     protected void CollideWithOtherTail(Collision collision)

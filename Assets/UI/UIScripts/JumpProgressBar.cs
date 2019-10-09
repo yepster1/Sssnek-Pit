@@ -30,13 +30,14 @@ public class JumpProgressBar : MonoBehaviour
                 TextPercentage.GetComponent<Text>().text = ((int)currentLoadingAmount).ToString() + "%";
                 // TextLoading.gameObject.SetActive(true);
             }
-            else if (currentLoadingAmount >= 100 && jump.jumpTimer > jump.timeBetweenJumps && jump.tFHTTtimer > jump.timeFromHeadToTail){
+            else if (currentLoadingAmount >= 100 && jump.jumpTimer >= jump.timeBetweenJumps){
                 // Debug.Log("current loading amount over 100%%%%%%%%%");
-                currentLoadingAmount = 0;
+                currentLoadingAmount = 0.0f;
                 
                 // TextLoading.gameObject.SetActive(false);
                 // TextPercentage.GetComponent<Text>().text = "100%";
             }
+            
         
             LoadingBar.GetComponent<Image>().fillAmount = currentLoadingAmount/ 100; 
             }
