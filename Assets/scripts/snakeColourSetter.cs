@@ -4,33 +4,11 @@ using UnityEngine;
 
 public static class snakeColourSetter
 {
-
-    public static void SetColor(int colourNumber, SkinnedMeshRenderer meshRenderer)
+   
+    public static void SetColor(MeshRenderer meshRenderer, Texture texture)
     {
-            // Debug.Log("Colours colour number " + colourNumber);
-        switch (colourNumber)
-        {
-            case 0:
-               meshRenderer.materials[0].color = Color.red;
-                
-                break;
-            case 1:
-                meshRenderer.materials[0].color = Color.blue ;
-                break;
-            case 2:
-                meshRenderer.materials[0].color = Color.green;
-                break;
-            case 3:
-                meshRenderer.materials[0].color = Color.yellow ;
-                break;
-            case 4:
-                //AI
-                meshRenderer.materials[0].color = Color.black;
-                break;
-            default:
-                meshRenderer.materials[0].color = Color.white;
-                break;
-        }
+        // Debug.Log("Colours colour number " + colourNumber);
+        meshRenderer.materials[0].mainTexture = texture;
         
     }
 

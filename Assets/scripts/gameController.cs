@@ -8,7 +8,8 @@ public class gameController : MonoBehaviour
     public GameObject powerup_prefab;
     public GameObject player_prefab;
     public GameObject AI_prefab;
-    public GameObject pointspawn;
+
+    public Texture[] texture;
 
     private  int numOfPlayers;
 
@@ -25,7 +26,7 @@ public class gameController : MonoBehaviour
             Spawn();
         }
        
-        InvokeRepeating("Spawn", 0.5f, 4f);
+        InvokeRepeating("Spawn", 0.5f, 3f);
         InvokeRepeating("SpawnPowerups", 0.5f , 10f);
         numOfPlayers = MainMenu.totPlayers;
         AddPlayers(numOfPlayers);
