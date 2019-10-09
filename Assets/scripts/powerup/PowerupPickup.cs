@@ -15,44 +15,27 @@ public class PowerupPickup : MonoBehaviour
         GameObject player = _player.gameObject;
         PowerupManager powerupManager = player.GetComponent<PowerupManager>();
         if (powerupManager != null){
-            if (powerupManager.powerups.Count == 1){
-            // //  uncomment to add speed
-            //     Powerup speedPowerup = player.AddComponent<Speed>();
-            // //  Powerup speed = this.gameObject.AddComponent<Speed>();
-            //     speedPowerup.setPowerup("speed", powerupManager.myPlayerNum,true, false);
-            //     powerupManager.pushPowerup(speedPowerup);
-                
-            //     Debug.Log("powerup type: " + speedPowerup.powerupType);
-            //     Debug.Log("powerup is active: " + speedPowerup.isActive);
-            //     Debug.Log("stack peek" + powerupManager.peekPowerup());
-                
-                //uncomment to add venom
-                Powerup venomShoot = player.AddComponent<VenomShootingScript>();
-                venomShoot.setPowerup("venom", powerupManager.myPlayerNum,powerupManager.otherPlayers, true, false);
-                powerupManager.pushPowerup(venomShoot);
-                GameStateHandler.powerupsList.Remove(this.gameObject);
             
-            }else if(powerupManager.powerups.Count  > 1){
-                //uncomment to add venom
-                powerupManager.popPowerup(); //remove current powerup
-                Powerup venomShoot = player.AddComponent<VenomShootingScript>();
-                venomShoot.setPowerup("venom", powerupManager.myPlayerNum,powerupManager.otherPlayers, true, false);
-                powerupManager.pushPowerup(venomShoot);
-                GameStateHandler.powerupsList.Remove(this.gameObject);
-
-                //uncomment to add speed
-                // Powerup speedPowerup = this.gameObject.AddComponent<Speed>();
-                // speedPowerup.setPowerup("speed", powerupManager.myPlayerNum , true, false);
-                // powerupManager.pushPowerup(speedPowerup);
-                
-                // Debug.Log("powerup type: " + speedPowerup.powerupType);
-                // Debug.Log("powerup is active: " + speedPowerup.isActive);
-                // Debug.Log("stack peek" + powerupManager.peekPowerup());
-                // GameStateHandler.powerupsList.Remove(this.gameObject);
+            Powerup newPowerup  = player.GetComponent<Powerup>();
+            newPowerup.setPowerup(powerupManager.myPlayerNum, powerupManager.otherPlayers, true, false);
+            
+            if (powerupManager.powerups.Count == 1){
+                if(powerupManager.powerupBeingUsed == false){
+                    powerupManager.pushPowerup(newPowerup);
+                }
+            
             }
+            else if(powerupManager.powerups.Count  > 1){
+                //uncomment to add venom
+                if(powerupManager.powerupBeingUsed == false){
+                    powerupManager.popPowerup(); //remove current powerup
+                    powerupManager.pushPowerup(newPowerup);
+                }
+            }
+
             Destroy(this.gameObject);  
         }else{
-            Debug.Log("could not find powerup script component");
+            Debug.Log("could not find powerupManager component");
         }
     }
 }
