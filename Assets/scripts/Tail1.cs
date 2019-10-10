@@ -36,6 +36,9 @@ public class Tail1 : MonoBehaviour
             if (_name == "player3"){
                 newTail.name = "tailP3";
             }
+            if (_name.Substring(0,2) == "AI"){
+                newTail.name = "tailAI";
+            }
             newTail.name += _tailNumber;
             return newTail;
             // Debug.Log("tail: " +newPart.name.Substring(6));
@@ -60,9 +63,7 @@ public class Tail1 : MonoBehaviour
                 //        Debug.Log("movement **not** set in onCollisionEnter for p: "+ myPlayerNum);
                 //    }
 
-                if (gObject.gameObject.tag == "snake" && tailPlayerNum != myPlayerNum && !(myPlayerNum > 4 || tailPlayerNum > 4) && 
-                    (gObject.gameObject.name == "player0" || gObject.gameObject.name == "player1" || 
-                     gObject.gameObject.name == "player2" || gObject.gameObject.name == "player3"))
+                if (gObject.gameObject.tag == "snake" && tailPlayerNum != myPlayerNum && !(myPlayerNum > 4 || tailPlayerNum > 4))
                 {
                    // Debug.Log("myPlayerNum: " + myPlayerNum);
                    // Debug.Log(" vs tailPlayerNum: " + tailPlayerNum);
@@ -84,15 +85,16 @@ public class Tail1 : MonoBehaviour
         Tail1 tail = collision.gameObject.GetComponent<Tail1>();
         if (tail != null){
             if (collision.gameObject.name.Substring(0,4) == "tail"){
-                int tailPlayerNum = ConvertToInt(collision.gameObject.name.Substring(5,1));
-                Debug.Log("in CollideWithOtherTail: " + myPlayerNum + " vs tailPlayerNum: " + tailPlayerNum);
-                // Debug.Log("myPlayerNum: " + myPlayerNum + " vs tailPlayerNum: " + tailPlayerNum);
-                if (tailPlayerNum != myPlayerNum){
-                    Debug.Log("hit tail");
-                    Debug.Log("player number: " +collision.gameObject.name.Substring(5,1));
-                    Debug.Log("my number: " +myPlayerNum);
-                    DestroyTail(collision.gameObject.name);
+                if (collision.gameObject.name.Substring(4,1) == "P"){ //only check collisions with players
+                    int tailPlayerNum = ConvertToInt(collision.gameObject.name.Substring(5,1));
+                    if (tailPlayerNum != myPlayerNum){
+                        Debug.Log("hit tail");
+                        Debug.Log("player number: " +collision.gameObject.name.Substring(5,1));
+                        Debug.Log("my number: " +myPlayerNum);
+                        DestroyTail(collision.gameObject.name);
+                    }
                 }
+                
             }
         }
     }

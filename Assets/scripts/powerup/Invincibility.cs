@@ -13,7 +13,7 @@ public class Invincibility : Powerup
     
     List <Collision> currentCollisions = new List <Collision> (); //used to test collisions with other objects
     
-    public float maxTimeForInvincibility = 5f;
+    public float maxTimeForInvincibility = 1f;
     public float invincibilityTimer;
     // Start is called before the first frame update
     void Start(){
@@ -51,6 +51,7 @@ public class Invincibility : Powerup
         if (activate && invincibilityTimer >= 0){
             Debug.Log("invincibility activated");
             if (head != null){
+                body = movement.body;
                 if (body.Count > 0){
                     for (int i = 0; i <  body.Count; i++){
                         // int j = GameStateHandler.playerList[playerToHit].GetComponent<Movement>().body.Count-1 ; j > tailNum ; j--  
@@ -73,6 +74,7 @@ public class Invincibility : Powerup
             if (head != null){
                 head.GetComponent<Collider>().enabled = true;
                 head.GetComponent<Rigidbody>().useGravity = true;
+                body = movement.body;
                 if (body.Count > 0){
                     for (int i = 0 ; i < body.Count; i++){
                         if (body[i] != null){

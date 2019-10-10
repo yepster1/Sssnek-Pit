@@ -61,12 +61,12 @@ public abstract class BaseMovement : MonoBehaviour
         body = new List<GameObject>();
         startParticle(0, gameObject);
         transform.position = gameController.GetRandomPosition();
-        add_tail();
-        add_tail();
-        add_tail();
-        add_tail();
-        add_tail();
-        add_tail();
+        // add_tail();
+        // add_tail();
+        // add_tail();
+        // add_tail();
+        // add_tail();
+        // add_tail();
     }
 
     IEnumerable startParticle(float time, GameObject player)
