@@ -15,7 +15,7 @@ public class Speed : Powerup
     private float speedUp = Config.PLAYER_SPEED;
 
     //for speed
-    public float maxTimeToSpeed = 5.0f;
+    public float maxTimeToSpeed = 3.0f;
     public float speedTimer;
 
     // private float xr = Config.PLAYER_FALL_MULTIPLIER;

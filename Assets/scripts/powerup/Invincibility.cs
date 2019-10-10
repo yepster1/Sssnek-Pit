@@ -13,7 +13,7 @@ public class Invincibility : Powerup
     
     List <Collision> currentCollisions = new List <Collision> (); //used to test collisions with other objects
     
-    public float maxTimeForInvincibility = 1f;
+    public float maxTimeForInvincibility = 2f;
     public float invincibilityTimer;
     // Start is called before the first frame update
     void Start(){

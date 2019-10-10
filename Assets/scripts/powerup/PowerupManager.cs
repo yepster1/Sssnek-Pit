@@ -47,16 +47,17 @@ public class PowerupManager : MonoBehaviour
 
         //leave jump uncommented - its the default
         
-        // Powerup jumpDefault = this.gameObject.GetComponent<Jump>();
-        // jumpDefault.setPowerup(myPlayerNum, otherPlayers, true, false);
-        // jumpDefault.powerupType = "jump"; //just to change it back (default)
-        // pushPowerup(jumpDefault);
+        Powerup jumpDefault = this.gameObject.GetComponent<Jump>();
+        jumpDefault.setPowerup(myPlayerNum, otherPlayers, true, false);
+        jumpDefault.powerupType = "jump"; //just to change it back (default)
+        pushPowerup(jumpDefault);
         
         //uncomment one of these at a time to see how they work. 
         //will implement powerup pickup tonight
 
         // Powerup speedTest = this.gameObject.AddComponent<Speed>();
         // speedTest.setPowerup(myPlayerNum ,otherPlayers, true, false);
+        // speedTest.powerupType = "speed";
         // pushPowerup(speedTest);
 
         // Powerup venomShoot = this.gameObject.AddComponent<VenomShootingScript>();
@@ -64,10 +65,10 @@ public class PowerupManager : MonoBehaviour
         // venomShoot.powerupType = "venom";
         // pushPowerup(venomShoot);
         
-        Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
-        invincibilityTest.setPowerup(myPlayerNum, otherPlayers, true, false);
-        invincibilityTest.powerupType = "invincibility";
-        pushPowerup(invincibilityTest);
+        // Powerup invincibilityTest = this.gameObject.AddComponent<Invincibility>();
+        // invincibilityTest.setPowerup(myPlayerNum, otherPlayers, true, false);
+        // invincibilityTest.powerupType = "invincibility";
+        // pushPowerup(invincibilityTest);
         
        
     }
@@ -95,37 +96,17 @@ public class PowerupManager : MonoBehaviour
     public void activatePowerup()
 	{   
         if (powerups.Count == 1 && !powerupBeingUsed){ //only for jump
-            Powerup p = peekPowerup();
+            Powerup p = peekPowerup(); //peek to keep jump on stack
             if (p.powerupType == "jump" ){
                 powerupInUse(); //sets powerupBeingUsed to true
                 Jump jump = this.gameObject.GetComponent<Jump>();
-                Debug.Log("powerup type " +jump.powerupType);
                 jump.activateNow();
                 Invoke("powerupInUse", jump.timeBetweenJumps);
-            }
-            if (p.powerupType == "venom" && !powerupBeingUsed){
-                powerupInUse();
-                VenomShootingScript venomShoot = this.gameObject.GetComponent<VenomShootingScript>();
-                venomShoot.setVenom(myPlayerNum ,venomPrefab, otherPlayers);
-                venomShoot.activateNow();
-                Invoke("powerupInUse", venomShoot.maxTimeToShoot);
-            }
-            if (p.powerupType == "invincibility" && !powerupBeingUsed){
-                powerupInUse();
-                Invincibility inv = this.gameObject.GetComponent<Invincibility>();
-                inv.activateNow();
-                Invoke("powerupInUse", inv.maxTimeForInvincibility);
-            }
-            if (p.powerupType == "speed"){
-                powerupInUse(); //sets powerupBeingUsed to true
-                Speed speed = this.gameObject.GetComponent<Speed>();
-                speed.activateNow();
-                Invoke("powerupInUse", speed.maxTimeToSpeed);
             }
         }else if (powerups.Count > 1 && !powerupBeingUsed){ //for every other powerup
             Powerup p = popPowerup();
             if (p.powerupType == "speed"){
-                powerupInUse(); //sets powerupBeingUsed to true
+                powerupInUse(); 
                 Speed speed = this.gameObject.GetComponent<Speed>();
                 speed.activateNow();
                 Invoke("powerupInUse", speed.maxTimeToSpeed);
